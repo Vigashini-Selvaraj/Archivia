@@ -1274,6 +1274,11 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
+/* Grid layout base rules for removed inline styles */
+.pricing-grid, .about-hero-grid {
+    grid-template-columns: 1fr 1fr;
+}
+
 /* Global Modal Mobile Fix */
 @media (max-width: 768px) {
     .modal-content {
@@ -1327,6 +1332,10 @@ h1, h2, h3, h4, h5, h6 {
     .hero-title, .h2-hero-title {
         font-size: 2.3rem !important;
     }
+    h1 { font-size: 2.3rem !important; }
+    h2 { font-size: 2rem !important; }
+    h3 { font-size: 1.5rem !important; }
+
     .hero-quick-links, .h2-hero-btns {
         flex-direction: column !important;
         width: 100% !important;
@@ -1341,8 +1350,8 @@ h1, h2, h3, h4, h5, h6 {
         padding-right: 1rem !important;
     }
     
-    /* Pricing Page Mobile Fix */
-    .pricing-grid {
+    /* Grid Mobile Fixes */
+    .pricing-grid, .about-hero-grid {
         grid-template-columns: 1fr !important;
         padding: 2rem !important;
         gap: 2rem !important;
