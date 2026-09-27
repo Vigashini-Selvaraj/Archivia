@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library | Archivia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .lib-card { background: var(--c-surface); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--c-border); box-shadow: var(--shadow-sm); transition: var(--transition); display: flex; flex-direction: column; }
+        .lib-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--c-accent); }
+        .lib-img-box { border-radius: 8px; overflow: hidden; position: relative; margin-bottom: 1rem; height: 250px; }
+        .lib-img-box img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+        .lib-card:hover .lib-img-box img { transform: scale(1.05); }
+        .lib-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+        .lib-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        
+        .filter-bar { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; align-items: center; justify-content: space-between; background: var(--c-surface); padding: 1rem; border-radius: 12px; border: 1px solid var(--c-border); }
+        .filter-select { padding: 0.8rem 1.2rem; border-radius: 50px; border: 1px solid var(--c-border); background: var(--c-bg); color: var(--c-text); font-family: var(--font-body); cursor: pointer; outline: none; }
+        .search-box { display: flex; align-items: center; background: var(--c-bg); border-radius: 50px; border: 1px solid var(--c-border); padding: 0.5rem 1.5rem; flex: 1; min-width: 300px; }
+        .search-box input { border: none; background: transparent; outline: none; flex: 1; padding: 0.5rem; color: var(--c-text); font-family: var(--font-body); }
+        
+        .pill-btn { padding: 0.8rem 2rem; border-radius: 50px; font-weight: 600; cursor: pointer; transition: var(--transition); text-align: center; border: 1px solid var(--c-border); background: var(--c-surface); color: var(--c-text); }
+        .pill-btn.active, .pill-btn:hover { background: var(--c-deep); color: var(--c-bg); border-color: var(--c-primary); }
+        
+        .author-card { text-align: center; }
+        .author-img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin: 0 auto 1rem; border: 2px solid var(--c-accent); padding: 5px; }
+        
+        @media(max-width: 900px) {
+            .lib-grid-4, .lib-grid-3 { grid-template-columns: 1fr 1fr; }
+        }
+        @media(max-width: 600px) {
+            .lib-grid-4, .lib-grid-3 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="about.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                    <i class="fa-solid fa-fire logo-flame"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Archivia</h1>
+                    <span>BOOKS &bull; NEWS &bull; IDEAS</span>
+                </div>
+            </a>
+            
+            <div class="nav-links desktop-only">
+                <a href="index.html" >Home</a>
+                <a href="home2.html">Home 2</a>
+                <a href="about.html">About Us</a>
+                <a href="library.html" class="active">Library</a>
+                <a href="services.html">Services</a>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact</a>
+            </div>
+
+                        <div class="nav-controls">
+                <button id="rtlToggle" class="nav-btn rtl-btn" style="width: 60px; justify-content: center;">
+                    <span class="dir-text fw-600">LTR</span>
+                </button>
+                <button id="themeToggle" class="nav-btn theme-btn">
+                    <i class="fa-solid fa-sun light-icon"></i>
+                    <i class="fa-solid fa-moon dark-icon" style="display:none;"></i>
+                </button>
+                <div class="profile-dropdown-wrap desktop-only">
+                    <button class="nav-btn profile-btn"><i class="fa-regular fa-user"></i> <i class="fa-solid fa-chevron-down small-chevron" style="font-size:0.7rem;"></i></button>
+                    <div class="profile-dropdown">
+                        <a href="login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
+                        <a href="register.html"><i class="fa-solid fa-user-plus"></i> Register</a>
+                    </div>
+                </div>
+                <button id="mobileMenuBtn" class="nav-btn mobile-only"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </nav>
+    <div id="mobileMenu" class="mobile-menu">
+        <button id="closeMobileMenu" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+        <div class="mobile-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="home2.html">Home 2</a>
+            <a href="about.html">About Us</a>
+            <a href="library.html">Library</a>
+            <a href="services.html">Services</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact</a>
+            <div style="width: 100%; height: 1px; background: var(--c-border); margin: 1rem 0;"></div>
+            <a href="login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
+            <a href="register.html"><i class="fa-solid fa-user-plus"></i> Register</a>
+        </div>
+    </div>
+
+    <main>
+        <!-- 01. LIBRARY HERO -->
+        <section class="section" style="height: 100vh; padding-top: 8rem; position: relative; overflow: hidden; text-align: center; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--c-border);">
+            <!-- Full Screen Background Image -->
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center; background-attachment: fixed; z-index: 0;"></div>
+            
+            <!-- Dark Overlay for Readability -->
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.85)); z-index: 1;"></div>
+            
+            <div class="container" style="max-width: 900px; position: relative; z-index: 10;">
+                <div class="eyebrow" style="color: var(--c-accent); margin-bottom: 1rem; letter-spacing: 2px; font-weight: 700;"><i class="fa-solid fa-book-open"></i> THE ARCHIVIA LIBRARY</div>
+                <h1 style="font-size: 5.5rem; font-family: var(--font-heading); line-height: 1.1; margin-bottom: 1.5rem; color: #fff;">
+                    A World <br>
+                    <span style="font-style: italic; color: var(--c-accent);">Between Pages.</span>
+                </h1>
+                <p style="font-size: 1.3rem; color: rgba(255,255,255,0.85); margin-bottom: 3rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    Explore thousands of curated books, scholarly archives, and modern narratives designed for deep reading and discovery.
+                </p>
+                <div style="display: flex; gap: 1.5rem; justify-content: center;">
+                    <a href="collection.html" class="btn-solid-cream" style="padding: 1.2rem 3rem; border-radius: 50px; font-weight: 600; background: var(--c-accent); color: var(--c-bg); text-decoration: none; font-size: 1.1rem; transition: 0.3s; display: flex; align-items: center; gap: 0.5rem;"><i class="fa-solid fa-compass"></i> Explore Collection</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 02. EXPLORE THE LIBRARY -->
+        <section id="explore" class="section">
+            <div class="container">
+                <div class="section-header" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin-bottom: 3rem; width: 100%;">
+                    <h2 style="font-size: 3rem; font-family: var(--font-heading);"><span style="color: var(--split-c1);">Explore the</span> <span style="color: var(--split-c2);">Library</span></h2>
+                </div>
+                
+                <div class="filter-bar">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass" style="color: var(--c-text-muted);"></i>
+                        <input type="text" id="searchInput" placeholder="Search books, authors, subjects..." onkeyup="filterBooks()">
+                    </div>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <select class="filter-select" id="genreFilter" onchange="filterBooks()">
+                            <option>All Genres</option>
+                            <option>Fiction</option>
+                            <option>Philosophy</option>
+                            <option>Science</option>
+                        </select>
+                        <select class="filter-select">
+                            <option>Any Year</option>
+                            <option>2020s</option>
+                            <option>Classic (Pre-1900)</option>
+                        </select>
+                        <select class="filter-select" style="border: 1px solid var(--c-accent);">
+                            <option>Sort: Popular</option>
+                            <option>Sort: Newest</option>
+                            <option>Sort: A-Z</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="lib-grid-4" id="book-catalog">
+
+                    <div class="lib-card book-item" data-title="the midnight library" data-author="matt haig" data-genre="Fiction">
+                        <div class="lib-img-box"><img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
+                        <div style="font-size: 0.8rem; color: var(--c-accent); margin-bottom: 0.5rem; font-weight: bold;">FICTION</div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">The Midnight Library</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Matt Haig &bull; 2020</p>
+                        <a href="book-details.html?title=The%20Midnight%20Library&author=Matt%20Haig&img=https%3A//images.unsplash.com/photo-1589829085413-56de8ae18c73%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" class="btn-outline-gold" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600;">View Book</a>
+                    </div>
+                    <div class="lib-card book-item" data-title="meditations" data-author="marcus aurelius" data-genre="Philosophy">
+                        <div class="lib-img-box"><img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
+                        <div style="font-size: 0.8rem; color: var(--c-accent); margin-bottom: 0.5rem; font-weight: bold;">PHILOSOPHY</div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">Meditations</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Marcus Aurelius &bull; 180 AD</p>
+                        <a href="book-details.html?title=Meditations&author=Marcus%20Aurelius&img=https%3A//images.unsplash.com/photo-1544947950-fa07a98d237f%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" class="btn-outline-gold" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600;">View Book</a>
+                    </div>
+                    <div class="lib-card book-item" data-title="a brief history of time" data-author="stephen hawking" data-genre="Science">
+                        <div class="lib-img-box"><img src="assets/brief_history.jpg" alt="Book"></div>
+                        <div style="font-size: 0.8rem; color: var(--c-accent); margin-bottom: 0.5rem; font-weight: bold;">SCIENCE</div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">A Brief History of Time</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Stephen Hawking &bull; 1988</p>
+                        <a href="book-details.html?title=A%20Brief%20History%20of%20Time&author=Stephen%20Hawking&img=assets%2Fbrief_history.jpg" class="btn-outline-gold" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600;">View Book</a>
+                    </div>
+                    <div class="lib-card book-item" data-title="sapiens" data-author="yuval noah harari" data-genre="History">
+                        <div class="lib-img-box"><img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
+                        <div style="font-size: 0.8rem; color: var(--c-accent); margin-bottom: 0.5rem; font-weight: bold;">HISTORY</div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">Sapiens</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Yuval Noah Harari &bull; 2011</p>
+                        <a href="book-details.html?title=Sapiens&author=Yuval%20Noah%20Harari&img=https%3A//images.unsplash.com/photo-1532012197267-da84d127e765%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" class="btn-outline-gold" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600;">View Book</a>
+                    </div>
+                    <div class="lib-card book-item" data-title="dune" data-author="frank herbert" data-genre="Fiction">
+                        <div class="lib-img-box"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
+                        <div style="font-size: 0.8rem; color: var(--c-accent); margin-bottom: 0.5rem; font-weight: bold;">FICTION</div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">Dune</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Frank Herbert &bull; 1965</p>
+                        <a href="book-details.html?title=Dune&author=Frank%20Herbert&img=https%3A//images.unsplash.com/photo-1518770660439-4636190af475%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" class="btn-outline-gold" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600;">View Book</a>
+                    </div>
+                    <div class="lib-card book-item" data-title="thinking, fast and slow" data-author="daniel kahneman" data-genre="Science">
+                        <div class="lib-img-box"><img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
+                        <div style="font-size: 0.8rem; color: var(--c-accent); margin-bottom: 0.5rem; font-weight: bold;">SCIENCE</div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">Thinking, Fast and Slow</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Daniel Kahneman &bull; 2011</p>
+                        <a href="book-details.html?title=Thinking%2C%20Fast%20and%20Slow&author=Daniel%20Kahneman&img=https%3A//images.unsplash.com/photo-1504711434969-e33886168f5c%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" class="btn-outline-gold" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600;">View Book</a>
+                    </div>
+                    <div class="lib-card book-item" data-title="1984" data-author="george orwell" data-genre="Fiction">
+                        <div class="lib-img-box"><img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
+                        <div style="font-size: 0.8rem; color: var(--c-accent); margin-bottom: 0.5rem; font-weight: bold;">FICTION</div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">1984</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">George Orwell &bull; 1949</p>
+                        <a href="book-details.html?title=1984&author=George%20Orwell&img=https%3A//images.unsplash.com/photo-1481627834876-b7833e8f5570%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" class="btn-outline-gold" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600;">View Book</a>
+                    </div>
+                    <div class="lib-card book-item" data-title="the art of war" data-author="sun tzu" data-genre="Philosophy">
+                        <div class="lib-img-box"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
+                        <div style="font-size: 0.8rem; color: var(--c-accent); margin-bottom: 0.5rem; font-weight: bold;">PHILOSOPHY</div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">The Art of War</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Sun Tzu &bull; 5th BC</p>
+                        <a href="book-details.html?title=The%20Art%20of%20War&author=Sun%20Tzu&img=https%3A//images.unsplash.com/photo-1534528741775-53994a69daeb%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" class="btn-outline-gold" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600;">View Book</a>
+                    </div>
+                    <div class="lib-card book-item" data-title="to kill a mockingbird" data-author="harper lee" data-genre="Fiction">
+                        <div class="lib-img-box"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
+                        <div style="font-size: 0.8rem; color: var(--c-accent); margin-bottom: 0.5rem; font-weight: bold;">FICTION</div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">To Kill a Mockingbird</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Harper Lee &bull; 1960</p>
+                        <a href="book-details.html?title=To%20Kill%20a%20Mockingbird&author=Harper%20Lee&img=https%3A//images.unsplash.com/photo-1472099645785-5658abf4ff4e%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" class="btn-outline-gold" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600;">View Book</a>
+                    </div>
+                    <div class="lib-card book-item" data-title="cosmos" data-author="carl sagan" data-genre="Science">
+                        <div class="lib-img-box"><img src="https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
+                        <div style="font-size: 0.8rem; color: var(--c-accent); margin-bottom: 0.5rem; font-weight: bold;">SCIENCE</div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">Cosmos</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Carl Sagan &bull; 1980</p>
+                        <a href="book-details.html?title=Cosmos&author=Carl%20Sagan&img=https%3A//images.unsplash.com/photo-1461360370896-922624d12aa1%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" class="btn-outline-gold" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600;">View Book</a>
+                    </div>
+                    <div class="lib-card book-item" data-title="the prince" data-author="niccolo machiavelli" data-genre="Philosophy">
+                        <div class="lib-img-box"><img src="https://images.unsplash.com/photo-1526243741027-444d633d7365?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
+                        <div style="font-size: 0.8rem; color: var(--c-accent); margin-bottom: 0.5rem; font-weight: bold;">PHILOSOPHY</div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">The Prince</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Niccolo Machiavelli &bull; 1532</p>
+                        <a href="book-details.html?title=The%20Prince&author=Niccolo%20Machiavelli&img=https%3A//images.unsplash.com/photo-1526243741027-444d633d7365%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" class="btn-outline-gold" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600;">View Book</a>
+                    </div>
+                    <div class="lib-card book-item" data-title="guns, germs, and steel" data-author="jared diamond" data-genre="History">
+                        <div class="lib-img-box"><img src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
+                        <div style="font-size: 0.8rem; color: var(--c-accent); margin-bottom: 0.5rem; font-weight: bold;">HISTORY</div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">Guns, Germs, and Steel</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Jared Diamond &bull; 1997</p>
+                        <a href="book-details.html?title=Guns%2C%20Germs%2C%20and%20Steel&author=Jared%20Diamond&img=https%3A//images.unsplash.com/photo-1506880018603-83d5b814b5a6%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" class="btn-outline-gold" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600;">View Book</a>
+                    </div>
+                    <div class="lib-card book-item" data-title="the great gatsby" data-author="f. scott fitzgerald" data-genre="Fiction">
+                        <div class="lib-img-box"><img src="https://images.unsplash.com/photo-1499540633125-484965b60031?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
+                        <div style="font-size: 0.8rem; color: var(--c-accent); margin-bottom: 0.5rem; font-weight: bold;">FICTION</div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">The Great Gatsby</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">F. Scott Fitzgerald &bull; 1925</p>
+                        <a href="book-details.html?title=The%20Great%20Gatsby&author=F.%20Scott%20Fitzgerald&img=https%3A//images.unsplash.com/photo-1499540633125-484965b60031%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" class="btn-outline-gold" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600;">View Book</a>
+                    </div>
+                    <div class="lib-card book-item" data-title="the selfish gene" data-author="richard dawkins" data-genre="Science">
+                        <div class="lib-img-box"><img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
+                        <div style="font-size: 0.8rem; color: var(--c-accent); margin-bottom: 0.5rem; font-weight: bold;">SCIENCE</div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">The Selfish Gene</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Richard Dawkins &bull; 1976</p>
+                        <a href="book-details.html?title=The%20Selfish%20Gene&author=Richard%20Dawkins&img=https%3A//images.unsplash.com/photo-1516979187457-637abb4f9353%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" class="btn-outline-gold" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600;">View Book</a>
+                    </div>
+                    <div class="lib-card book-item" data-title="beyond good and evil" data-author="friedrich nietzsche" data-genre="Philosophy">
+                        <div class="lib-img-box"><img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
+                        <div style="font-size: 0.8rem; color: var(--c-accent); margin-bottom: 0.5rem; font-weight: bold;">PHILOSOPHY</div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">Beyond Good and Evil</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Friedrich Nietzsche &bull; 1886</p>
+                        <a href="book-details.html?title=Beyond%20Good%20and%20Evil&author=Friedrich%20Nietzsche&img=https%3A//images.unsplash.com/photo-1524995997946-a1c2e315a42f%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" class="btn-outline-gold" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600;">View Book</a>
+                    </div>
+                    <div class="lib-card book-item" data-title="a people's history" data-author="howard zinn" data-genre="History">
+                        <div class="lib-img-box"><img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
+                        <div style="font-size: 0.8rem; color: var(--c-accent); margin-bottom: 0.5rem; font-weight: bold;">HISTORY</div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">A People's History</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Howard Zinn &bull; 1980</p>
+                        <a href="book-details.html?title=A%20People%27s%20History&author=Howard%20Zinn&img=https%3A//images.unsplash.com/photo-1541963463532-d68292c34b19%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" class="btn-outline-gold" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600;">View Book</a>
+                    </div>
+                    <div class="lib-card book-item" data-title="brave new world" data-author="aldous huxley" data-genre="Fiction">
+                        <div class="lib-img-box"><img src="https://images.unsplash.com/photo-1588666309990-d68f08e3d4a6?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
+                        <div style="font-size: 0.8rem; color: var(--c-accent); margin-bottom: 0.5rem; font-weight: bold;">FICTION</div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">Brave New World</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Aldous Huxley &bull; 1932</p>
+                        <a href="book-details.html?title=Brave%20New%20World&author=Aldous%20Huxley&img=https%3A//images.unsplash.com/photo-1588666309990-d68f08e3d4a6%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" class="btn-outline-gold" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600;">View Book</a>
+                    </div>
+                    <div class="lib-card book-item" data-title="the origin of species" data-author="charles darwin" data-genre="Science">
+                        <div class="lib-img-box"><img src="assets/origin_species.jpg" alt="Book"></div>
+                        <div style="font-size: 0.8rem; color: var(--c-accent); margin-bottom: 0.5rem; font-weight: bold;">SCIENCE</div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">The Origin of Species</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Charles Darwin &bull; 1859</p>
+                        <a href="book-details.html?title=The%20Origin%20of%20Species&author=Charles%20Darwin&img=assets%2Forigin_species.jpg" class="btn-outline-gold" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600;">View Book</a>
+                    </div>
+                    <div class="lib-card book-item" data-title="republic" data-author="plato" data-genre="Philosophy">
+                        <div class="lib-img-box"><img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
+                        <div style="font-size: 0.8rem; color: var(--c-accent); margin-bottom: 0.5rem; font-weight: bold;">PHILOSOPHY</div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">Republic</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Plato &bull; 375 BC</p>
+                        <a href="book-details.html?title=Republic&author=Plato&img=https%3A//images.unsplash.com/photo-1507842217343-583bb7270b66%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" class="btn-outline-gold" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600;">View Book</a>
+                    </div>
+                    <div class="lib-card book-item" data-title="the silk roads" data-author="peter frankopan" data-genre="History">
+                        <div class="lib-img-box"><img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
+                        <div style="font-size: 0.8rem; color: var(--c-accent); margin-bottom: 0.5rem; font-weight: bold;">HISTORY</div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">The Silk Roads</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Peter Frankopan &bull; 2015</p>
+                        <a href="book-details.html?title=The%20Silk%20Roads&author=Peter%20Frankopan&img=https%3A//images.unsplash.com/photo-1544947950-fa07a98d237f%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" class="btn-outline-gold" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600;">View Book</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03. FEATURED COLLECTIONS -->
+        <section class="section" style="background: var(--c-surface);">
+            <div class="container">
+                <div class="section-header" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin-bottom: 3rem; width: 100%;">
+                    <div>
+                        <div class="eyebrow" style="color: var(--c-accent);">CURATED SHELVES</div>
+                        <h2 style="font-size: 3rem; font-family: var(--font-heading);"><span style="color: var(--split-c1);">Featured</span> <span style="color: var(--split-c2);">Collections</span></h2>
+                    </div>
+                </div>
+                <div class="lib-grid-4">
+                    <div class="lib-card" style="padding: 0; overflow: hidden;">
+                        <div class="lib-img-box" style="height: 150px; border-radius: 0; margin-bottom: 0;"><img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=400&q=80" alt="Timeless Classics"></div>
+                        <div style="padding: 1.5rem;">
+                            <h3 style="font-family: var(--font-heading); font-size: 1.5rem;">Timeless Classics</h3>
+                            <p style="color: var(--c-text-muted); font-size: 0.9rem;">Literature that shaped the world.</p>
+                        </div>
+                    </div>
+                    <div class="lib-card" style="padding: 0; overflow: hidden;">
+                        <div class="lib-img-box" style="height: 150px; border-radius: 0; margin-bottom: 0;"><img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=400&q=80" alt="Curious Minds"></div>
+                        <div style="padding: 1.5rem;">
+                            <h3 style="font-family: var(--font-heading); font-size: 1.5rem;">Curious Minds</h3>
+                            <p style="color: var(--c-text-muted); font-size: 0.9rem;">Science, philosophy & deep ideas.</p>
+                        </div>
+                    </div>
+                    <div class="lib-card" style="padding: 0; overflow: hidden;">
+                        <div class="lib-img-box" style="height: 150px; border-radius: 0; margin-bottom: 0;"><img src="https://images.unsplash.com/photo-1499540633125-484965b60031?auto=format&fit=crop&w=400&q=80" alt="Modern Voices"></div>
+                        <div style="padding: 1.5rem;">
+                            <h3 style="font-family: var(--font-heading); font-size: 1.5rem;">Modern Voices</h3>
+                            <p style="color: var(--c-text-muted); font-size: 0.9rem;">Contemporary awards and narratives.</p>
+                        </div>
+                    </div>
+                    <div class="lib-card" style="padding: 0; overflow: hidden;">
+                        <div class="lib-img-box" style="height: 150px; border-radius: 0; margin-bottom: 0;"><img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?auto=format&fit=crop&w=400&q=80" alt="Hidden Gems"></div>
+                        <div style="padding: 1.5rem;">
+                            <h3 style="font-family: var(--font-heading); font-size: 1.5rem;">Hidden Gems</h3>
+                            <p style="color: var(--c-text-muted); font-size: 0.9rem;">Undiscovered masterpieces.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04. FIND YOUR NEXT BOOK -->
+        <section class="section">
+            <div class="container">
+                <div style="background: var(--c-deep); color: var(--c-bg); padding: 4rem 2rem; border-radius: 12px; text-align: center; display: flex; flex-direction: column; align-items: center; box-shadow: var(--shadow-md);">
+                    <div class="eyebrow" style="color: var(--c-accent); margin-bottom: 1rem;">INTERACTIVE DISCOVERY</div>
+                    <h2 style="font-size: 3rem; font-family: var(--font-heading); margin-bottom: 2rem;"><span style="color: var(--c-bg);">Find Your</span> <span style="color: var(--c-accent); font-style: italic;">Next Book</span></h2>
+                    
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem;">
+                        <select style="padding: 1rem 2rem; border-radius: 50px; background: var(--c-primary); color: var(--c-bg); border: 1px solid var(--c-accent); outline: none; font-size: 1.1rem; cursor: pointer;">
+                            <option style="background: var(--c-deep); color: #fff;">I want to read...</option>
+                            <option style="background: var(--c-deep); color: #fff;">Fiction</option>
+                            <option style="background: var(--c-deep); color: #fff;">Non-Fiction</option>
+                        </select>
+                        <select style="padding: 1rem 2rem; border-radius: 50px; background: var(--c-primary); color: var(--c-bg); border: 1px solid var(--c-accent); outline: none; font-size: 1.1rem; cursor: pointer;">
+                            <option style="background: var(--c-deep); color: #fff;">About...</option>
+                            <option style="background: var(--c-deep); color: #fff;">Space</option>
+                            <option style="background: var(--c-deep); color: #fff;">History</option>
+                            <option style="background: var(--c-deep); color: #fff;">Love</option>
+                        </select>
+                        <select style="padding: 1rem 2rem; border-radius: 50px; background: var(--c-primary); color: var(--c-bg); border: 1px solid var(--c-accent); outline: none; font-size: 1.1rem; cursor: pointer;">
+                            <option style="background: var(--c-deep); color: #fff;">To feel...</option>
+                            <option style="background: var(--c-deep); color: #fff;">Inspired</option>
+                            <option style="background: var(--c-deep); color: #fff;">Intrigued</option>
+                            <option style="background: var(--c-deep); color: #fff;">Relaxed</option>
+                        </select>
+                    </div>
+                    <button class="btn-solid-cream" onclick="showDiscoverMatch()" style="padding: 1rem 3rem; border-radius: 50px; font-weight: 600; background: var(--c-accent); color: var(--c-bg); border: none; font-size: 1.1rem; cursor: pointer;">Discover Match <i class="fa-solid fa-wand-magic-sparkles"></i></button>
+                    
+                    <div id="discover-results" style="display: none; margin-top: 3rem; text-align: center; width: 100%;">
+                        <h3 style="font-family: var(--font-heading); font-size: 2.5rem; margin-bottom: 2rem; padding-bottom: 1rem;"><span style="color: var(--c-bg);">Your Perfect</span> <span style="color: var(--c-accent); font-style: italic;">Matches</span></h3>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+                            <div class="lib-card" style="background: var(--c-surface); color: var(--c-text);">
+                                <div class="lib-img-box"><img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
+                                <h4 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">The Midnight Library</h4>
+                                <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Matt Haig</p>
+                                <a href="book-details.html?title=Timeless%20Classics&author=Author&img=https%3A//images.unsplash.com/photo-1481627834876-b7833e8f5570%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" style="color: var(--c-primary); font-weight: bold;">Read Now</a>
+                            </div>
+                            <div class="lib-card" style="background: var(--c-surface); color: var(--c-text);">
+                                <div class="lib-img-box"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
+                                <h4 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">Dune</h4>
+                                <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Frank Herbert</p>
+                                <a href="book-details.html?title=${encodeURIComponent(b.title)}&author=${encodeURIComponent(b.author)}&img=${encodeURIComponent(b.img)}" style="color: var(--c-primary); font-weight: bold;">Read Now</a>
+                            </div>
+                            <div class="lib-card" style="background: var(--c-surface); color: var(--c-text);">
+                                <div class="lib-img-box"><img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
+                                <h4 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">Sapiens</h4>
+                                <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Yuval Noah Harari</p>
+                                <a href="book-details.html?title=${encodeURIComponent(b.title)}&author=${encodeURIComponent(b.author)}&img=${encodeURIComponent(b.img)}" style="color: var(--c-primary); font-weight: bold;">Read Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05. BROWSE BY GENRE -->
+        <section class="section" style="background: var(--c-surface);">
+            <div class="container">
+                <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 3rem;">
+                    <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+                        <div class="eyebrow" style="color: var(--c-accent);">CATEGORIES</div>
+                        <h2 style="font-size: 3rem; font-family: var(--font-heading);"><span style="color: var(--split-c1);">Browse</span> <span style="color: var(--split-c2);">by Genre</span></h2>
+                    </div>
+                </div>
+                
+                <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;" id="genre-pill-container">
+                    <div class="pill-btn active" onclick="filterGenrePill('All')">All</div>
+                    <div class="pill-btn" onclick="filterGenrePill('Fiction')">Fiction</div>
+                    <div class="pill-btn" onclick="filterGenrePill('Science')">Science</div>
+                    <div class="pill-btn" onclick="filterGenrePill('History')">History</div>
+                    <div class="pill-btn" onclick="filterGenrePill('Philosophy')">Philosophy</div>
+                </div>
+                
+                <div class="lib-grid-4" style="margin-top: 4rem;" id="genre-books-display">
+                    <!-- Dynamic Books injected via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 06. NEW ARRIVALS -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin-bottom: 3rem; width: 100%;">
+                    <div>
+                        <div class="eyebrow" style="color: var(--c-accent);">FRESH OFF THE PRESS</div>
+                        <h2 style="font-size: 3rem; font-family: var(--font-heading);"><span style="color: var(--split-c1);">New</span> <span style="color: var(--split-c2);">Arrivals</span></h2>
+                    </div>
+                </div>
+                
+                <div class="lib-grid-4">
+                    <div class="lib-card">
+                        <div class="lib-img-box"><img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">Modern Horizons</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Elena Rostova &bull; 2026</p>
+                        <a href="book-details.html?title=Modern%20Horizons&author=Elena%20Rostova&img=https%3A//images.unsplash.com/photo-1524995997946-a1c2e315a42f%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" class="btn-outline-gold" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600;">View Book</a>
+                    </div>
+                    <div class="lib-card">
+                        <div class="lib-img-box"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">Echoes of Silence</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">James Arther &bull; 2026</p>
+                        <a href="book-details.html?title=Echoes%20of%20Silence&author=James%20Arther&img=https%3A//images.unsplash.com/photo-1472099645785-5658abf4ff4e%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" class="btn-outline-gold" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600;">View Book</a>
+                    </div>
+                    <div class="lib-card">
+                        <div class="lib-img-box"><img src="https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">Digital Minds</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Alan Turing Inst. &bull; 2026</p>
+                        <a href="book-details.html?title=Digital%20Minds&author=Alan%20Turing%20Inst.&img=https%3A//images.unsplash.com/photo-1461360370896-922624d12aa1%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" class="btn-outline-gold" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600;">View Book</a>
+                    </div>
+                    <div class="lib-card">
+                        <div class="lib-img-box"><img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">Beyond Mars</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">S. K. Nova &bull; 2026</p>
+                        <a href="book-details.html?title=Beyond%20Mars&author=S.%20K.%20Nova&img=https%3A//images.unsplash.com/photo-1541963463532-d68292c34b19%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" class="btn-outline-gold" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600;">View Book</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 07. MEET THE AUTHORS -->
+        <section class="section" style="background: var(--c-surface);">
+            <div class="container">
+                <div class="section-header" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin-bottom: 3rem; width: 100%;">
+                    <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+                        <div class="eyebrow" style="color: var(--c-accent);">THE VOICES</div>
+                        <h2 style="font-size: 3rem; font-family: var(--font-heading);"><span style="color: var(--split-c1);">Meet the</span> <span style="color: var(--split-c2);">Authors</span></h2>
+                    </div>
+                </div>
+                
+                <div class="lib-grid-3">
+                    <div class="lib-card author-card">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80" class="author-img" alt="Author">
+                        <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.2rem;">Elena Rostova</h3>
+                        <p style="color: var(--c-accent); font-size: 0.9rem; margin-bottom: 1rem; font-weight: bold;">Contemporary Fiction</p>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Award-winning novelist exploring human connection in the digital age.</p>
+                    </div>
+                    <div class="lib-card author-card">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80" class="author-img" alt="Author">
+                        <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.2rem;">James Arther</h3>
+                        <p style="color: var(--c-accent); font-size: 0.9rem; margin-bottom: 1rem; font-weight: bold;">Historical Fiction</p>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Bestselling author known for meticulous research and gripping narratives.</p>
+                    </div>
+                    <div class="lib-card author-card">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" class="author-img" alt="Author">
+                        <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.2rem;">S. K. Nova</h3>
+                        <p style="color: var(--c-accent); font-size: 0.9rem; margin-bottom: 1rem; font-weight: bold;">Science Fiction</p>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Visionary writer pushing the boundaries of speculative futures.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 08. THE ARCHIVE -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 4rem;">
+                    <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+                        <div class="eyebrow" style="color: var(--c-accent);">PRESERVING HISTORY</div>
+                        <h2 style="font-size: 3.5rem; font-family: var(--font-heading);"><span style="color: var(--split-c1);">The</span> <span style="color: var(--split-c2);">Archive</span></h2>
+                    </div>
+                </div>
+                
+                <div class="lib-grid-4">
+                    <div class="lib-card" style="padding: 0; overflow: hidden; border: none; box-shadow: var(--shadow-md);">
+                        <img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?auto=format&fit=crop&w=400&q=80" style="width: 100%; height: 250px; object-fit: cover; filter: sepia(0.4);">
+                        <div style="padding: 1.5rem; background: var(--c-surface);">
+                            <div style="font-size: 1.2rem; color: var(--c-accent); font-weight: bold; margin-bottom: 0.5rem; font-family: var(--font-heading);">1800s</div>
+                            <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.5rem;">Classic Literature</h3>
+                            <p style="color: var(--c-text-muted); font-size: 0.9rem;">The foundation of modern storytelling.</p>
+                        </div>
+                    </div>
+                    <div class="lib-card" style="padding: 0; overflow: hidden; border: none; box-shadow: var(--shadow-md);">
+                        <img src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=400&q=80" style="width: 100%; height: 250px; object-fit: cover; filter: sepia(0.4);">
+                        <div style="padding: 1.5rem; background: var(--c-surface);">
+                            <div style="font-size: 1.2rem; color: var(--c-accent); font-weight: bold; margin-bottom: 0.5rem; font-family: var(--font-heading);">1920s</div>
+                            <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.5rem;">The Lost Generation</h3>
+                            <p style="color: var(--c-text-muted); font-size: 0.9rem;">Post-war disillusionment & jazz.</p>
+                        </div>
+                    </div>
+                    <div class="lib-card" style="padding: 0; overflow: hidden; border: none; box-shadow: var(--shadow-md);">
+                        <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=400&q=80" style="width: 100%; height: 250px; object-fit: cover; filter: sepia(0.4);">
+                        <div style="padding: 1.5rem; background: var(--c-surface);">
+                            <div style="font-size: 1.2rem; color: var(--c-accent); font-weight: bold; margin-bottom: 0.5rem; font-family: var(--font-heading);">1960s</div>
+                            <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.5rem;">Post-Modernism</h3>
+                            <p style="color: var(--c-text-muted); font-size: 0.9rem;">Breaking all the narrative rules.</p>
+                        </div>
+                    </div>
+                    <div class="lib-card" style="padding: 0; overflow: hidden; border: none; box-shadow: var(--shadow-md);">
+                        <img src="https://images.unsplash.com/photo-1526243741027-444d633d7365?auto=format&fit=crop&w=400&q=80" style="width: 100%; height: 250px; object-fit: cover; filter: sepia(0.4);">
+                        <div style="padding: 1.5rem; background: var(--c-surface);">
+                            <div style="font-size: 1.2rem; color: var(--c-accent); font-weight: bold; margin-bottom: 0.5rem; font-family: var(--font-heading);">2000s</div>
+                            <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.5rem;">Digital Dawn</h3>
+                            <p style="color: var(--c-text-muted); font-size: 0.9rem;">The rise of e-books and the web.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 09. POPULAR AMONG READERS -->
+        <section class="section" style="background: var(--c-surface);">
+            <div class="container">
+                <div class="section-header" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin-bottom: 3rem; width: 100%;">
+                    <div>
+                        <div class="eyebrow" style="color: var(--c-accent);">TRENDING NOW</div>
+                        <h2 style="font-size: 3rem; font-family: var(--font-heading);"><span style="color: var(--split-c1);">Popular Among</span> <span style="color: var(--split-c2);">Readers</span></h2>
+                    </div>
+                </div>
+                
+                <div class="lib-grid-3">
+                    <div class="lib-card" style="flex-direction: row; gap: 1rem; padding: 1rem;">
+                        <div class="lib-img-box" style="height: 120px; width: 80px; margin: 0; flex-shrink: 0;"><img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
+                        <div style="display: flex; flex-direction: column; justify-content: center;">
+                            <h3 style="font-family: var(--font-heading); font-size: 1.2rem; margin-bottom: 0.2rem;">Design Patterns</h3>
+                            <p style="color: var(--c-text-muted); font-size: 0.8rem; margin-bottom: 0.5rem;">Erich Gamma</p>
+                            <div style="color: var(--c-accent); font-size: 0.8rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-fire"></i> 1.2k Reading</div>
+                            <a href="book-details.html?title=Classic%20Literature&author=Author&img=https%3A//images.unsplash.com/photo-1541963463532-d68292c34b19%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" style="color: var(--c-primary); font-size: 0.9rem; font-weight: bold; text-decoration: underline;">Read Book</a>
+                        </div>
+                    </div>
+                    <div class="lib-card" style="flex-direction: row; gap: 1rem; padding: 1rem;">
+                        <div class="lib-img-box" style="height: 120px; width: 80px; margin: 0; flex-shrink: 0;"><img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
+                        <div style="display: flex; flex-direction: column; justify-content: center;">
+                            <h3 style="font-family: var(--font-heading); font-size: 1.2rem; margin-bottom: 0.2rem;">Deep Work</h3>
+                            <p style="color: var(--c-text-muted); font-size: 0.8rem; margin-bottom: 0.5rem;">Cal Newport</p>
+                            <div style="color: var(--c-accent); font-size: 0.8rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-fire"></i> 950 Reading</div>
+                            <a href="book-details.html?title=Deep%20Work&author=Author&img=https%3A//images.unsplash.com/photo-1589829085413-56de8ae18c73%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" style="color: var(--c-primary); font-size: 0.9rem; font-weight: bold; text-decoration: underline;">Read Book</a>
+                        </div>
+                    </div>
+                    <div class="lib-card" style="flex-direction: row; gap: 1rem; padding: 1rem;">
+                        <div class="lib-img-box" style="height: 120px; width: 80px; margin: 0; flex-shrink: 0;"><img src="https://images.unsplash.com/photo-1629196914271-9c3f25608d27?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
+                        <div style="display: flex; flex-direction: column; justify-content: center;">
+                            <h3 style="font-family: var(--font-heading); font-size: 1.2rem; margin-bottom: 0.2rem;">Atomic Habits</h3>
+                            <p style="color: var(--c-text-muted); font-size: 0.8rem; margin-bottom: 0.5rem;">James Clear</p>
+                            <div style="color: var(--c-accent); font-size: 0.8rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-fire"></i> 2.1k Reading</div>
+                            <a href="book-details.html?title=Atomic%20Habits&author=Author&img=https%3A//images.unsplash.com/photo-1629196914271-9c3f25608d27%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" style="color: var(--c-primary); font-size: 0.9rem; font-weight: bold; text-decoration: underline;">Read Book</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. YOUR SHELF AWAITS -->
+        <section class="section" style="background: var(--c-surface); color: var(--c-text); position: relative; overflow: hidden;">
+            <div class="container" style="max-width: 1000px;">
+                <div style="background: var(--bg-main); border-radius: 20px; box-shadow: var(--shadow-lg); display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--c-border);">
+                    <div style="display: flex; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 300px; padding: 5rem 3rem; display: flex; flex-direction: column; justify-content: center; text-align: left;">
+                            <div class="eyebrow" style="color: var(--c-accent); margin-bottom: 1rem;">YOUR SHELF AWAITS</div>
+                            <h2 style="font-size: 3.5rem; font-family: var(--font-heading); margin-bottom: 1.5rem; color: var(--c-heading); line-height: 1.2;">
+                                <span style="color: var(--split-c1);">Find a book.</span><br>
+                                <span style="font-style: italic; color: var(--split-c2);">Open a world.</span>
+                            </h2>
+                            <p style="color: var(--c-text-muted); font-size: 1.1rem; margin-bottom: 2rem; max-width: 400px;">Join thousands of readers discovering their next great adventure through Archivia's curated collections.</p>
+                            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                                <a href="#explore" class="btn-solid-cream" style="padding: 1rem 2rem; border-radius: 50px; font-weight: 600; background: var(--c-deep); color: var(--c-bg); text-decoration: none;">Explore Library</a>
+                                <a href="collection.html" class="btn-outline-gold" style="padding: 1rem 2rem; border-radius: 50px; font-weight: 600; border: 2px solid var(--c-primary); color: var(--c-primary); text-decoration: none;">Build My Shelf</a>
+                            </div>
+                        </div>
+                        <div style="flex: 1; min-width: 300px; position: relative;">
+                            <img src="https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?auto=format&fit=crop&w=800&q=80" style="width: 100%; height: 100%; object-fit: cover;" alt="Reading a book">
+                            <div style="position: absolute; bottom: 2rem; right: 2rem; background: rgba(255,255,255,0.9); padding: 1rem; border-radius: 12px; box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 1rem;">
+                                <div style="font-size: 2rem; color: var(--c-accent);"><i class="fa-solid fa-quote-left"></i></div>
+                                <div style="font-size: 0.9rem; font-family: var(--font-heading); font-style: italic; color: var(--c-deep);">"The archive of the mind."</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-book-open"></i>
+                        <i class="fa-solid fa-fire logo-flame"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h2>Archivia</h2>
+                        <span>BOOKS &bull; NEWS &bull; IDEAS</span>
+                    </div>
+                </a>
+                <p class="footer-desc">A modern destination for discovering books, exploring ideas and staying informed.</p>
+                <div class="socials">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="home2.html">Home 2</a>
+                <a href="about.html">About Us</a>
+                <a href="library.html">Library</a>
+                <a href="services.html">Services</a>
+                <a href="blog.html">Blog</a>
+                <a href="pricing.html">Pricing</a>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Support</h4>
+                <a href="contact.html">Contact</a>
+                <a href="faq.html">FAQ</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+            
+            <div class="footer-contact">
+                <h4>Get in Touch</h4>
+                <p><i class="fa-regular fa-envelope"></i> hello@Archivia.com</p>
+                <p><i class="fa-solid fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fa-solid fa-location-dot"></i> 123 Literary Lane, NY</p>
+                <p><i class="fa-regular fa-clock"></i> Mon - Sat: 9AM - 6PM</p>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Archivia. All Rights Reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <script>
+        function filterBooks() {
+            let search = document.getElementById('searchInput').value.toLowerCase();
+            let genre = document.getElementById('genreFilter').value;
+            
+            let books = document.querySelectorAll('.book-item');
+            books.forEach(book => {
+                let title = book.getAttribute('data-title');
+                let author = book.getAttribute('data-author');
+                let bg = book.getAttribute('data-genre');
+                
+                let matchesSearch = title.includes(search) || author.includes(search);
+                let matchesGenre = genre === 'All Genres' || bg === genre;
+                
+                if(matchesSearch && matchesGenre) {
+                    book.style.display = 'flex';
+                } else {
+                    book.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
+
+    <script>
+        function showDiscoverMatch() {
+            const results = document.getElementById('discover-results');
+            if(results) {
+                results.style.display = 'block';
+                results.style.opacity = 0;
+                setTimeout(() => {
+                    results.style.transition = 'opacity 1s';
+                    results.style.opacity = 1;
+                }, 50);
+            }
+        }
+        
+        const genreData = {
+            'Fiction': [
+                { title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', img: 'https://images.unsplash.com/photo-1499540633125-484965b60031?auto=format&fit=crop&w=400&q=80' },
+                { title: '1984', author: 'George Orwell', img: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=400&q=80' },
+                { title: 'Dune', author: 'Frank Herbert', img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80' },
+                { title: 'The Midnight Library', author: 'Matt Haig', img: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=400&q=80' },
+                { title: 'To Kill a Mockingbird', author: 'Harper Lee', img: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80' },
+                { title: 'Brave New World', author: 'Aldous Huxley', img: 'https://images.unsplash.com/photo-1588666309990-d68f08e3d4a6?auto=format&fit=crop&w=400&q=80' },
+                { title: 'Fahrenheit 451', author: 'Ray Bradbury', img: 'https://images.unsplash.com/photo-1499540633125-484965b60031?auto=format&fit=crop&w=400&q=80' }
+            ],
+            'Science': [
+                { title: 'A Brief History of Time', author: 'Stephen Hawking', img: 'assets/brief_history.jpg' },
+                { title: 'Cosmos', author: 'Carl Sagan', img: 'https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=400&q=80' },
+                { title: 'The Selfish Gene', author: 'Richard Dawkins', img: 'https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=400&q=80' },
+                { title: 'The Origin of Species', author: 'Charles Darwin', img: 'assets/origin_species.jpg' },
+                { title: 'Thinking, Fast and Slow', author: 'Daniel Kahneman', img: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=400&q=80' },
+                { title: 'Silent Spring', author: 'Rachel Carson', img: 'https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=400&q=80' },
+                { title: 'Astrophysics for People in a Hurry', author: 'Neil deGrasse Tyson', img: 'https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=400&q=80' }
+            ],
+            'History': [
+                { title: 'Sapiens', author: 'Yuval Noah Harari', img: 'https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=400&q=80' },
+                { title: 'Guns, Germs, and Steel', author: 'Jared Diamond', img: 'https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=400&q=80' },
+                { title: 'A People\'s History', author: 'Howard Zinn', img: 'https://images.unsplash.com/photo-1541963463532-d68292c34b19?auto=format&fit=crop&w=400&q=80' },
+                { title: 'The Silk Roads', author: 'Peter Frankopan', img: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80' }
+            ],
+            'Philosophy': [
+                { title: 'Meditations', author: 'Marcus Aurelius', img: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80' },
+                { title: 'The Art of War', author: 'Sun Tzu', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80' },
+                { title: 'The Prince', author: 'Niccolo Machiavelli', img: 'https://images.unsplash.com/photo-1526243741027-444d633d7365?auto=format&fit=crop&w=400&q=80' },
+                { title: 'Beyond Good and Evil', author: 'Friedrich Nietzsche', img: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=400&q=80' }
+            ]
+        };
+        
+        function renderGenreBooks(genre) {
+            const display = document.getElementById('genre-books-display');
+            if(!display) return;
+            let booksToRender = [];
+            
+            if (genre === 'All') {
+                for (const key in genreData) {
+                    booksToRender = booksToRender.concat(genreData[key]);
+                }
+            } else {
+                booksToRender = genreData[genre];
+            }
+            
+            let html = '';
+            booksToRender.forEach(b => {
+                html += `
+                <div class="lib-card" style="padding:0; overflow:hidden; position:relative; box-shadow: var(--shadow-sm); animation: dropIn 0.4s ease;">
+                    <img src="${b.img}" style="width:100%; height:250px; object-fit:cover;">
+                    <div style="position:absolute; bottom:0; left:0; width:100%; background:rgba(0,0,0,0.8); padding:1rem; color:#fff; text-align:center;">
+                        <h4 style="font-family:var(--font-heading); font-size:1.2rem; margin-bottom:0.2rem;"><a href="book-details.html?title=${encodeURIComponent(b.title)}&author=${encodeURIComponent(b.author)}&img=${encodeURIComponent(b.img)}" style="color: #fff; text-decoration: none;">${b.title}</a></h4>
+                        <p style="font-size:0.8rem; color:#ccc;">${b.author}</p>
+                    </div>
+                </div>`;
+            });
+            display.innerHTML = html;
+        }
+
+        function filterGenrePill(genre) {
+            const pills = document.querySelectorAll('#genre-pill-container .pill-btn');
+            pills.forEach(p => {
+                if(p.innerText === genre) p.classList.add('active');
+                else p.classList.remove('active');
+            });
+            renderGenreBooks(genre);
+        }
+        
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', () => {
+            renderGenreBooks('All');
+        });
+    </script>
+
+</body>
+</html>

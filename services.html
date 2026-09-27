@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features & Services | Archivia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .grid-responsive-services { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4rem; align-items: center; }
+        .feedback-card-inner { text-align: left; padding: 4rem; background: var(--c-bg); border-radius: 20px; border: 2px solid var(--c-border); box-shadow: var(--shadow-lg); position: relative; }
+        @media(max-width: 900px) {
+            .grid-responsive-services { grid-template-columns: 1fr !important; gap: 2rem !important; }
+            .feedback-card-inner { padding: 2rem !important; text-align: center !important; }
+            #rating-stars { justify-content: center; flex-wrap: wrap; }
+            .svc-hero .btn-solid-cream, .svc-hero .btn-outline-gold { width: 100%; display: block; text-align: center; margin-bottom: 1rem; }
+            .svc-hero > div > div:first-child > div:last-child { flex-direction: column; }
+        }
+        .svc-hero { padding: 10rem 0 5rem; text-align: center; background: var(--c-surface); }
+        
+        .feat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-bottom: 6rem; }
+        .feat-row.reverse .feat-text { order: 1; }
+        .feat-row.reverse .feat-img { order: 0; }
+        .feat-img-box { border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-md); height: 400px; }
+        .feat-img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .feat-img-box:hover img { transform: scale(1.05); }
+        
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        
+        /* 8-Card Grid Styles added back in */
+        .svc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-top: 4rem; }
+        .svc-card { background: var(--c-bg); border: 1px solid var(--c-border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s, box-shadow 0.3s; }
+        .svc-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--c-primary); }
+        .svc-img-box { height: 200px; overflow: hidden; }
+        .svc-img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .svc-card:hover .svc-img-box img { transform: scale(1.05); }
+        .svc-content { padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1; }
+        .svc-title { font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--c-text); }
+        .svc-desc { color: var(--c-text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem; flex-grow: 1; }
+        
+        /* Interactive Walkthrough */
+        .journey-container { display: flex; align-items: center; justify-content: space-between; position: relative; max-width: 900px; margin: 4rem auto 0; }
+        .journey-line { position: absolute; top: 30px; left: 0; right: 0; height: 2px; background: var(--c-border); z-index: 0; }
+        .journey-step { position: relative; z-index: 1; text-align: center; width: 120px; cursor: pointer; }
+        .step-dot { width: 60px; height: 60px; background: var(--c-bg); border: 2px solid var(--c-border); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.2rem; color: var(--c-text-muted); transition: all 0.3s; }
+        .journey-step.active .step-dot { background: var(--c-primary); color: var(--c-bg); border-color: var(--c-primary); box-shadow: 0 0 15px rgba(45, 17, 56, 0.4); }
+        .step-label { font-family: var(--font-heading); font-size: 1.1rem; color: var(--c-text); font-weight: bold; transition: color 0.3s; }
+        .journey-step.active .step-label { color: var(--c-primary); }
+        
+        .journey-content { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 12px; padding: 3rem; margin-top: 3rem; max-width: 700px; margin-left: auto; margin-right: auto; text-align: center; min-height: 200px; display: flex; flex-direction: column; justify-content: center; transition: opacity 0.3s; }
+        
+        @media(max-width: 1100px) { .svc-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media(max-width: 900px) {
+            .feat-row, .feat-row.reverse { grid-template-columns: 1fr; }
+            .feat-row.reverse .feat-img, .feat-row .feat-text { order: unset; }
+            .grid-3 { grid-template-columns: 1fr; }
+            .journey-container { flex-direction: column; gap: 2rem; }
+            .journey-line { display: none; }
+        }
+        @media(max-width: 700px) { .svc-grid { grid-template-columns: 1fr; } }
+    
+        @media(max-width: 768px) {
+            .svc-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="about.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                    <i class="fa-solid fa-fire logo-flame"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Archivia</h1>
+                    <span>BOOKS &bull; NEWS &bull; IDEAS</span>
+                </div>
+            </a>
+            
+            <div class="nav-links desktop-only">
+                <a href="index.html" >Home</a>
+                <a href="home2.html">Home 2</a>
+                <a href="about.html">About Us</a>
+                <a href="library.html">Library</a>
+                <a href="services.html" class="active">Services</a>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact</a>
+            </div>
+
+                        <div class="nav-controls">
+                <button id="rtlToggle" class="nav-btn rtl-btn" style="width: 60px; justify-content: center;">
+                    <span class="dir-text fw-600">LTR</span>
+                </button>
+                <button id="themeToggle" class="nav-btn theme-btn">
+                    <i class="fa-solid fa-sun light-icon"></i>
+                    <i class="fa-solid fa-moon dark-icon" style="display:none;"></i>
+                </button>
+                <div class="profile-dropdown-wrap desktop-only">
+                    <button class="nav-btn profile-btn"><i class="fa-regular fa-user"></i> <i class="fa-solid fa-chevron-down small-chevron" style="font-size:0.7rem;"></i></button>
+                    <div class="profile-dropdown">
+                        <a href="login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
+                        <a href="register.html"><i class="fa-solid fa-user-plus"></i> Register</a>
+                    </div>
+                </div>
+                <button id="mobileMenuBtn" class="nav-btn mobile-only"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </nav>
+    <div id="mobileMenu" class="mobile-menu">
+        <button id="closeMobileMenu" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+        <div class="mobile-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="home2.html">Home 2</a>
+            <a href="about.html">About Us</a>
+            <a href="library.html">Library</a>
+            <a href="services.html" class="active">Services</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact</a>
+            <div style="width: 100%; height: 1px; background: var(--c-border); margin: 1rem 0;"></div>
+            <a href="login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
+            <a href="register.html"><i class="fa-solid fa-user-plus"></i> Register</a>
+        </div>
+    </div>
+
+    <main>
+        <!-- SERVICES HERO -->
+        <section class="svc-hero" style="background: linear-gradient(135deg, var(--c-surface), var(--c-bg)); padding: 10rem 0 5rem; text-align: left; overflow: hidden;">
+            <div class="container grid-responsive-services">
+                <div style="z-index: 1;">
+                    <style>
+                        @keyframes slideInItems { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+                    
+        @media(max-width: 768px) {
+            .svc-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+
+                    <div class="eyebrow" style="color: var(--c-accent); margin-bottom: 1.5rem; opacity: 0; animation: slideInItems 0.8s ease forwards;"><i class="fa-solid fa-layer-group"></i> OUR FEATURES</div>
+                    <h1 style="font-size: 4.5rem; font-family: var(--font-heading); line-height: 1.1; margin-bottom: 1.5rem; opacity: 0; animation: slideInItems 0.8s ease forwards; animation-delay: 0.1s;"><span style="color: var(--split-c1);">More Than</span> <span style="color: var(--split-c2);">a Library</span></h1>
+                    <p style="font-size: 1.3rem; color: var(--c-text-muted); margin-bottom: 2.5rem; opacity: 0; animation: slideInItems 0.8s ease forwards; animation-delay: 0.2s;">
+                        Archivia is a complete digital ecosystem designed for readers, researchers, and writers. Discover how our tools transform the way you read and explore knowledge.
+                    </p>
+                    <div style="display: flex; gap: 1rem; opacity: 0; animation: slideInItems 0.8s ease forwards; animation-delay: 0.3s;">
+                        <a href="pricing.html" class="btn-solid-cream" style="padding: 0.8rem 2rem; border-radius: 50px; font-weight: 600; background: var(--c-primary); color: var(--c-bg); border: none; text-decoration: none; cursor: pointer;">Pricing</a>
+                        <a href="contact.html" class="btn-outline-gold" style="padding: 0.8rem 2rem; border-radius: 50px; font-weight: 600; border: 2px solid var(--c-primary); color: var(--c-primary); background: transparent; text-decoration: none; cursor: pointer; transition: 0.3s;" onmouseover="this.style.background='var(--c-primary)'; this.style.color='var(--c-bg)';" onmouseout="this.style.background='transparent'; this.style.color='var(--c-primary)';">Contact</a>
+                    </div>
+                </div>
+                <div style="position: relative; animation: floatAnim 6s ease-in-out infinite;">
+                    <style>
+                        @keyframes floatAnim {
+                            0% { transform: translateY(0px); }
+                            50% { transform: translateY(-15px); }
+                            100% { transform: translateY(0px); }
+                        }
+                    
+        @media(max-width: 768px) {
+            .svc-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+
+                    <img src="girl_reading_ipad.jpg" alt="Student reading" style="width: 100%; border-radius: 20px; box-shadow: var(--shadow-lg);">
+                </div>
+            </div>
+        </section>
+
+        <!-- CORE FEATURES (Alternating Rows) -->
+        <section class="section">
+            <div class="container">
+                <div class="feat-row">
+                    <div class="feat-text">
+                        <div class="eyebrow" style="color: var(--c-accent); margin-bottom: 1rem;">01. IMMERSIVE EXPERIENCE</div>
+                        <h2 style="font-size: 3rem; font-family: var(--font-heading); margin-bottom: 1.5rem;"><span style="color: var(--split-c1);">Digital Reading,</span> <span style="color: var(--split-c2);">Elevated.</span></h2>
+                        <p style="color: var(--c-text-muted); font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+                            Read books directly online through our distraction-free, customizable reading interface. Control typography, adjust themes for day or night, track your exact progress, and place bookmarks effortlessly. 
+                        </p>
+                    </div>
+                    <div class="feat-img">
+                        <div class="feat-img-box"><img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=800&q=80" alt="Digital Reading"></div>
+                    </div>
+                </div>
+
+                <div class="feat-row reverse">
+                    <div class="feat-text">
+                        <div class="eyebrow" style="color: var(--c-accent); margin-bottom: 1rem;">02. ADVANCED SEARCH</div>
+                        <h2 style="font-size: 3rem; font-family: var(--font-heading); margin-bottom: 1.5rem;"><span style="color: var(--split-c1);">Smart Book</span> <span style="color: var(--split-c2);">Discovery</span></h2>
+                        <p style="color: var(--c-text-muted); font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+                            Finding your next favorite book has never been easier. Filter our vast catalogue by exact genres, authors, specific subjects, publication eras, language, and global popularity ratings.
+                        </p>
+                    </div>
+                    <div class="feat-img">
+                        <div class="feat-img-box"><img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=800&q=80" alt="Discovery"></div>
+                    </div>
+                </div>
+
+                <div class="feat-row">
+                    <div class="feat-text">
+                        <div class="eyebrow" style="color: var(--c-accent); margin-bottom: 1rem;">03. ORGANIZATION</div>
+                        <h2 style="font-size: 3rem; font-family: var(--font-heading); margin-bottom: 1.5rem;"><span style="color: var(--split-c1);">Your Personal</span> <span style="color: var(--split-c2);">Shelf</span></h2>
+                        <p style="color: var(--c-text-muted); font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+                            Build a digital library that reflects your literary journey. Bookmark titles for later, save all-time favorites, organize by custom categories, and track exactly how many pages you've conquered this year.
+                        </p>
+                    </div>
+                    <div class="feat-img">
+                        <div class="feat-img-box"><img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=800&q=80" alt="Reading Shelf"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- THE 8 CARD GRID (Replaces the 4-card grid from previous version) -->
+        <section class="section" style="background: var(--c-surface);">
+            <div class="container">
+                <div class="section-header" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin-bottom: 4rem;">
+                    <div class="eyebrow" style="color: var(--c-accent); justify-content: center;">THE PLATFORM</div>
+                    <h2 style="font-size: 3.5rem; font-family: var(--font-heading);"><span style="color: var(--split-c1);">Everything You</span> <span style="color: var(--split-c2);">Need</span></h2>
+                </div>
+                
+                <div class="svc-grid">
+                    <div class="svc-card">
+                        <div class="svc-img-box"><img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=600&q=80" alt="E-Reader"></div>
+                        <div class="svc-content">
+                            <h3 class="svc-title">Digital E-Reader</h3>
+                            <p class="svc-desc">An immersive, distraction-free online reading environment with customizable typography and themes.</p>
+                            <a href="service-details.html?svc=reader" style="font-weight: bold; color: var(--c-primary); text-decoration: none;">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="svc-card">
+                        <div class="svc-img-box"><img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80" alt="Discovery"></div>
+                        <div class="svc-content">
+                            <h3 class="svc-title">Smart Discovery</h3>
+                            <p class="svc-desc">Advanced catalog filtering and dynamic search tools to help you find your exact next favorite book.</p>
+                            <a href="service-details.html?svc=discovery" style="font-weight: bold; color: var(--c-primary); text-decoration: none;">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="svc-card">
+                        <div class="svc-img-box"><img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=600&q=80" alt="Shelves"></div>
+                        <div class="svc-content">
+                            <h3 class="svc-title">Virtual Shelves</h3>
+                            <p class="svc-desc">Organize your reading journey. Bookmark titles, track progress, and build custom literary collections.</p>
+                            <a href="service-details.html?svc=shelves" style="font-weight: bold; color: var(--c-primary); text-decoration: none;">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="svc-card">
+                        <div class="svc-img-box"><img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=600&q=80" alt="News"></div>
+                        <div class="svc-content">
+                            <h3 class="svc-title">Editorial News</h3>
+                            <p class="svc-desc">Stay informed with long-form journalism, cultural commentary, and daily literary news updates.</p>
+                            <a href="service-details.html?svc=news" style="font-weight: bold; color: var(--c-primary); text-decoration: none;">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="svc-card">
+                        <div class="svc-img-box"><img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=600&q=80" alt="Collections"></div>
+                        <div class="svc-content">
+                            <h3 class="svc-title">Curated Collections</h3>
+                            <p class="svc-desc">Expertly assembled book lists focused on historical eras, seasonal themes, and trending subjects.</p>
+                            <a href="service-details.html?svc=collections" style="font-weight: bold; color: var(--c-primary); text-decoration: none;">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="svc-card">
+                        <div class="svc-img-box"><img src="https://images.unsplash.com/photo-1456406644174-8ddd4cd52a06?auto=format&fit=crop&w=600&q=80" alt="Recommendations"></div>
+                        <div class="svc-content">
+                            <h3 class="svc-title">AI Recommendations</h3>
+                            <p class="svc-desc">Our smart engine analyzes your reading habits to deliver highly personalized literary suggestions.</p>
+                            <a href="service-details.html?svc=recommend" style="font-weight: bold; color: var(--c-primary); text-decoration: none;">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="svc-card">
+                        <div class="svc-img-box"><img src="https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=600&q=80" alt="Archives"></div>
+                        <div class="svc-content">
+                            <h3 class="svc-title">Historical Archives</h3>
+                            <p class="svc-desc">Access digitized manuscripts, rare first editions, and centuries of preserved human knowledge.</p>
+                            <a href="service-details.html?svc=archives" style="font-weight: bold; color: var(--c-primary); text-decoration: none;">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="svc-card">
+                        <div class="svc-img-box"><img src="https://images.unsplash.com/photo-1455849318743-b2233052fcff?auto=format&fit=crop&w=600&q=80" alt="Publishing"></div>
+                        <div class="svc-content">
+                            <h3 class="svc-title">Author Publishing</h3>
+                            <p class="svc-desc">A platform for independent authors and traditional publishers to distribute work to a global audience.</p>
+                            <a href="service-details.html?svc=publish" style="font-weight: bold; color: var(--c-primary); text-decoration: none;">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PREMIUM READING ACCESS -->
+        <section class="section">
+            <div class="container" style="max-width: 900px;">
+                <div style="background: var(--c-deep); color: var(--c-bg); padding: 4rem; border-radius: 16px; text-align: center; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1920&q=80'); background-size: cover; opacity: 0.1; mix-blend-mode: overlay;"></div>
+                    
+                    <div style="position: relative; z-index: 1;">
+                        <i class="fa-solid fa-crown" style="font-size: 3rem; color: var(--c-accent); margin-bottom: 1rem;"></i>
+                        <h2 style="font-size: 3rem; font-family: var(--font-heading); margin-bottom: 1.5rem; color: var(--c-bg);">Premium Access</h2>
+                        <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 2rem; color: #ccc;">
+                            Take the limits off your reading. Our Premium Plans unlock full-text access to every book in the library, ad-free environments, unlimited offline downloads, and exclusive entry into our rare Digital Archives.
+                        </p>
+                        <a href="pricing.html" class="btn-solid-cream" style="padding: 1rem 3rem; border-radius: 50px; font-weight: 600; background: #fff; color: var(--c-primary); border: none; text-decoration: none; display: inline-block;">View Plans</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW Archivia WORKS -->
+        <section class="section" style="background: var(--c-surface);">
+            <div class="container">
+                <div class="section-header" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin-bottom: 3rem;">
+                    <div class="eyebrow" style="color: var(--c-accent); justify-content: center;">USER JOURNEY</div>
+                    <h2 style="font-size: 3.5rem; font-family: var(--font-heading);"><span style="color: var(--split-c1);">How Archivia</span> <span style="color: var(--split-c2);">Works</span></h2>
+                    <style>
+                        .journey-step.active .step-label { font-weight: 800 !important; color: var(--c-primary) !important; }
+                        .journey-step.active .step-dot { transform: scale(1.2); box-shadow: 0 0 10px var(--c-accent); border: 2px solid var(--c-primary); background: var(--c-bg); color: var(--c-primary); }
+                    
+        @media(max-width: 768px) {
+            .svc-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+
+                </div>
+                
+                <div class="journey-container">
+                    <div class="journey-line"></div>
+                    
+                    <div class="journey-step active" onclick="showJourney(1)">
+                        <div class="step-dot"><i class="fa-solid fa-magnifying-glass"></i></div>
+                        <div class="step-label">Discover</div>
+                    </div>
+                    <div class="journey-step" onclick="showJourney(2)">
+                        <div class="step-dot"><i class="fa-solid fa-check-double"></i></div>
+                        <div class="step-label">Choose</div>
+                    </div>
+                    <div class="journey-step" onclick="showJourney(3)">
+                        <div class="step-dot"><i class="fa-solid fa-book-open"></i></div>
+                        <div class="step-label">Read</div>
+                    </div>
+                    <div class="journey-step" onclick="showJourney(4)">
+                        <div class="step-dot"><i class="fa-solid fa-bookmark"></i></div>
+                        <div class="step-label">Save</div>
+                    </div>
+                    <div class="journey-step" onclick="showJourney(5)">
+                        <div class="step-dot"><i class="fa-solid fa-compass"></i></div>
+                        <div class="step-label">Explore</div>
+                    </div>
+                </div>
+                
+                <div class="journey-content" id="journey-content" style="background: var(--c-primary); border: 1px solid var(--c-primary); border-radius: 20px; padding: 4rem; box-shadow: var(--shadow-md); margin-top: 3rem; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto; position: relative; color: #fff;">
+                    <h3 style="font-family: var(--font-heading); font-size: 2.5rem; margin-bottom: 1.5rem; color: #fff;">Discover Your Next Read</h3>
+                    <p style="color: rgba(255, 255, 255, 0.8); font-size: 1.2rem; margin-bottom: 3rem;">Use our powerful search tools, browse by genre, or let our smart recommendation engine find the perfect book based on your unique interests.</p>
+                    
+                    <div style="display: flex; gap: 1rem; justify-content: center;">
+                        <button onclick="prevJourney()" class="btn-outline-gold" style="padding: 0.8rem 2rem; border-radius: 50px; font-weight: 600; border: 2px solid #fff; color: #fff; background: transparent; cursor: pointer; transition: 0.3s;" onmouseover="this.style.background='#fff'; this.style.color='var(--c-primary)';" onmouseout="this.style.background='transparent'; this.style.color='#fff';"><i class="fa-solid fa-arrow-left"></i> Previous</button>
+                        <button onclick="nextJourney()" class="btn-solid-cream" style="padding: 0.8rem 2rem; border-radius: 50px; font-weight: 600; background: #fff; color: var(--c-primary); border: none; cursor: pointer; transition: 0.3s;">Next <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOR AUTHORS & PUBLISHERS -->
+        <section class="section">
+            <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+                <div style="border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-lg); height: 400px; order: 1;">
+                    <img src="https://images.unsplash.com/photo-1455849318743-b2233052fcff?auto=format&fit=crop&w=800&q=80" alt="Publishing" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div style="order: 0;">
+                    <div class="eyebrow" style="color: var(--c-accent); margin-bottom: 1rem;">PARTNERSHIPS</div>
+                    <h2 style="font-size: 3rem; font-family: var(--font-heading); margin-bottom: 1.5rem;"><span style="color: var(--split-c1);">For Authors &</span> <span style="color: var(--split-c2);">Publishers</span></h2>
+                    <p style="font-size: 1.1rem; color: var(--c-text-muted); line-height: 1.8; margin-bottom: 2rem;">
+                        Are you looking to expand your reach? Archivia offers a seamless platform for independent authors and traditional publishers to showcase their work to a dedicated, engaged audience of global readers.
+                    </p>
+                    <a href="contact.html" class="btn-solid-cream" style="padding: 1rem 2.5rem; border-radius: 50px; font-weight: 600; background: var(--c-primary); color: var(--c-bg); text-decoration: none; display: inline-block;">Publish with us</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- INTERACTIVE FEEDBACK -->
+        <section class="section" style="background: linear-gradient(135deg, var(--c-surface), var(--c-bg));">
+            <div class="container">
+                <div class="grid-responsive-services">
+                    <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.15); height: 450px; position: relative;">
+                        <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=800&q=80" alt="Feedback" style="width: 100%; height: 100%; object-fit: cover;">
+                        <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to right, rgba(0,0,0,0.3), transparent);"></div>
+                    </div>
+                    <div class="feedback-card-inner">
+                        <div class="eyebrow" style="color: var(--c-accent); margin-bottom: 1rem; font-weight: bold;">YOUR VOICE MATTERS</div>
+                        <h2 style="font-size: 3.5rem; font-family: var(--font-heading); margin-bottom: 1.5rem; line-height: 1.1;"><span style="color: var(--split-c1);">Rate Our</span> <span style="color: var(--split-c2);">Services</span></h2>
+                        <p style="color: var(--c-text-muted); font-size: 1.2rem; margin-bottom: 2.5rem;">Your feedback helps us curate a better library for everyone. How would you rate your Archivia experience today?</p>
+                        
+                        <div style="display: flex; gap: 1.5rem; margin-bottom: 2rem;" id="rating-stars">
+                            <i class="fa-solid fa-star star-btn" data-val="1" style="font-size: 3rem; color: #ddd; cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);"></i>
+                            <i class="fa-solid fa-star star-btn" data-val="2" style="font-size: 3rem; color: #ddd; cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);"></i>
+                            <i class="fa-solid fa-star star-btn" data-val="3" style="font-size: 3rem; color: #ddd; cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);"></i>
+                            <i class="fa-solid fa-star star-btn" data-val="4" style="font-size: 3rem; color: #ddd; cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);"></i>
+                            <i class="fa-solid fa-star star-btn" data-val="5" style="font-size: 3rem; color: #ddd; cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);"></i>
+                        </div>
+                        <div id="rating-msg" style="font-weight: bold; color: var(--c-primary); font-size: 1.4rem; height: 35px; opacity: 0; transition: opacity 0.3s;"></div>
+                    </div>
+                </div>
+                
+                <script>
+                    document.querySelectorAll('.star-btn').forEach(s => {
+                        // Add hover preview
+                        s.addEventListener('mouseover', () => {
+                            let val = parseInt(s.getAttribute('data-val'));
+                            document.querySelectorAll('.star-btn').forEach((ss, idx) => {
+                                if (!ss.hasAttribute('data-locked')) {
+                                    ss.style.color = idx < val ? 'rgba(255, 215, 0, 0.5)' : '#ddd';
+                                    ss.style.transform = idx < val ? 'scale(1.1)' : 'scale(1)';
+                                }
+                            });
+                        });
+                        
+                        // Reset hover
+                        s.addEventListener('mouseout', () => {
+                            document.querySelectorAll('.star-btn').forEach(ss => {
+                                if (!ss.hasAttribute('data-locked')) {
+                                    ss.style.color = '#ddd';
+                                    ss.style.transform = 'scale(1)';
+                                }
+                            });
+                        });
+
+                        s.addEventListener('click', () => {
+                            let val = parseInt(s.getAttribute('data-val'));
+                            document.querySelectorAll('.star-btn').forEach((ss, idx) => {
+                                ss.setAttribute('data-locked', 'true');
+                                ss.style.color = idx < val ? '#FFD700' : '#ddd';
+                                ss.style.textShadow = idx < val ? '0 0 15px rgba(255, 215, 0, 0.8)' : 'none';
+                                ss.style.transform = idx < val ? 'scale(1.2)' : 'scale(1)';
+                            });
+                            const msgs = ['We\\'ll try to improve!', 'Thanks for your feedback!', 'Good to know!', 'We are glad you liked it!', 'Thank you! We love you too!'];
+                            let msgEl = document.getElementById('rating-msg');
+                            msgEl.innerText = msgs[val - 1];
+                            msgEl.style.opacity = 1;
+                            msgEl.style.animation = 'none';
+                            msgEl.offsetHeight;
+                            msgEl.style.animation = 'floatAnim 0.5s ease';
+                        });
+                    });
+                </script>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="section" style="background: var(--c-deep); color: #fff; text-align: center;">
+            <div class="container">
+                <h2 style="font-size: 4rem; font-family: var(--font-heading); margin-bottom: 1.5rem; line-height: 1.1; color: #fff;">Start Your Reading Journey.</h2>
+                <p style="font-size: 1.2rem; color: #fff; margin-bottom: 3rem; opacity: 0.9;">Ready to dive in? Explore the library or choose a plan today.</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="library.html" class="btn-solid-cream" style="padding: 1rem 2.5rem; border-radius: 50px; font-weight: 600; background: var(--c-bg); color: var(--c-accent); text-decoration: none;">Explore Library</a>
+                    <a href="pricing.html" class="btn-outline-gold" style="padding: 1rem 2.5rem; border-radius: 50px; font-weight: 600; border: 2px solid #fff; color: #fff; text-decoration: none;">View Plans</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-book-open"></i>
+                        <i class="fa-solid fa-fire logo-flame"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h2>Archivia</h2>
+                        <span>BOOKS &bull; NEWS &bull; IDEAS</span>
+                    </div>
+                </a>
+                <p class="footer-desc">A modern destination for discovering books, exploring ideas and staying informed.</p>
+                <div class="socials">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="home2.html">Home 2</a>
+                <a href="about.html">About Us</a>
+                <a href="library.html">Library</a>
+                <a href="services.html">Services</a>
+                <a href="blog.html">Blog</a>
+                <a href="pricing.html">Pricing</a>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Support</h4>
+                <a href="contact.html">Contact</a>
+                <a href="faq.html">FAQ</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+            
+            <div class="footer-contact">
+                <h4>Get in Touch</h4>
+                <p><i class="fa-regular fa-envelope"></i> hello@Archivia.com</p>
+                <p><i class="fa-solid fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fa-solid fa-location-dot"></i> 123 Literary Lane, NY</p>
+                <p><i class="fa-regular fa-clock"></i> Mon - Sat: 9AM - 6PM</p>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Archivia. All Rights Reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Interactive Journey Logic
+        const journeyData = [
+            {
+                title: "Discover Your Next Read",
+                desc: "Use our powerful search tools, browse by genre, or let our smart recommendation engine find the perfect book based on your unique interests."
+            },
+            {
+                title: "Choose From Thousands",
+                desc: "Read summaries, check out community reviews, preview chapters, and select the exact book or article that matches your current mood."
+            },
+            {
+                title: "Immersive Reading",
+                desc: "Dive into the full text via our dedicated Online Reader. Adjust the typography, switch themes, and get lost in the story without distractions."
+            },
+            {
+                title: "Build Your Virtual Shelf",
+                desc: "Bookmark your progress automatically, save favorites for later, and organize your conquered reads into beautiful customized shelves."
+            },
+            {
+                title: "Explore Deeper",
+                desc: "Finished a book? Dive into related historical archives, read editorial articles on the same subject, or discover similar titles instantly."
+            }
+        ];
+
+        let currentJourney = 1;
+        function showJourney(index) {
+            currentJourney = index;
+            // update UI dots
+            document.querySelectorAll('.journey-step').forEach((step, idx) => {
+                if (idx === index - 1) {
+                    step.classList.add('active');
+                } else {
+                    step.classList.remove('active');
+                }
+            });
+            
+            // update content
+            const contentBox = document.getElementById('journey-content');
+            contentBox.style.opacity = 0;
+            
+            setTimeout(() => {
+                const data = journeyData[index - 1];
+                contentBox.innerHTML = `
+                    <h3 style="font-family: var(--font-heading); font-size: 2.5rem; margin-bottom: 1.5rem; color: #fff;">${data.title}</h3>
+                    <p style="color: rgba(255, 255, 255, 0.8); font-size: 1.2rem; margin-bottom: 3rem;">${data.desc}</p>
+                    <div style="display: flex; gap: 1rem; justify-content: center;">
+                        <button onclick="prevJourney()" class="btn-outline-gold" style="padding: 0.8rem 2rem; border-radius: 50px; font-weight: 600; border: 2px solid #fff; color: #fff; background: transparent; cursor: pointer; transition: 0.3s;" onmouseover="this.style.background='#fff'; this.style.color='var(--c-primary)';" onmouseout="this.style.background='transparent'; this.style.color='#fff';"><i class="fa-solid fa-arrow-left"></i> Previous</button>
+                        <button onclick="nextJourney()" class="btn-solid-cream" style="padding: 0.8rem 2rem; border-radius: 50px; font-weight: 600; background: #fff; color: var(--c-primary); border: none; cursor: pointer; transition: 0.3s;">Next <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                `;
+                contentBox.style.opacity = 1;
+            }, 300);
+        }
+
+        function nextJourney() {
+            if (currentJourney < journeyData.length) {
+                showJourney(currentJourney + 1);
+            }
+        }
+
+        function prevJourney() {
+            if (currentJourney > 1) {
+                showJourney(currentJourney - 1);
+            }
+        }
+    </script>
+</body>
+</html>

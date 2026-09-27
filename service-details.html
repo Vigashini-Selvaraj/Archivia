@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Details | Archivia</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 1. Hero */
+        .sd-hero {
+            padding: 12rem 0 6rem;
+            position: relative;
+            background: var(--c-deep);
+            color: #ffffff;
+            border-bottom: 1px solid var(--c-border);
+            overflow: hidden;
+        }
+
+        .sd-hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.15;
+            mix-blend-mode: multiply;
+            z-index: 0;
+        }
+
+        [data-theme="dark"] .sd-hero-bg {
+            mix-blend-mode: screen;
+            opacity: 0.05;
+        }
+
+        /* 2. Experience */
+        .sd-experience {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--c-text-muted);
+        }
+
+        .sd-experience p:first-letter {
+            font-size: 3rem;
+            float: left;
+            margin-right: 0.5rem;
+            line-height: 1;
+            color: var(--c-accent);
+            font-family: var(--font-heading);
+        }
+
+        /* 3. How It Works */
+        .flow-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            max-width: 1000px;
+            margin: 3rem auto;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .flow-line {
+            position: absolute;
+            top: 40px;
+            left: 50px;
+            right: 50px;
+            height: 2px;
+            background: var(--c-border);
+            z-index: 0;
+        }
+
+        .flow-step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            width: 150px;
+        }
+
+        .flow-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--c-bg);
+            border: 2px solid var(--c-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: var(--c-text-muted);
+            transition: all 0.3s;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .flow-step:hover .flow-icon {
+            border-color: var(--c-primary);
+            color: var(--c-primary);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .flow-title {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        /* 4. Inside Experience */
+        .preview-box {
+            background: var(--c-bg);
+            border-radius: 16px;
+            border: 1px solid var(--c-border);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .preview-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            min-height: 400px;
+        }
+
+        .preview-content {
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* 5. Explore Benefits */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .benefit-card {
+            background: var(--c-surface);
+            border: 1px solid var(--c-border);
+            padding: 2.5rem;
+            border-radius: 12px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--c-primary);
+            transform: scaleY(0);
+            transition: transform 0.3s;
+            transform-origin: bottom;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .benefit-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .benefit-icon {
+            font-size: 2rem;
+            color: var(--c-accent);
+            margin-bottom: 1.5rem;
+        }
+
+        /* 6. Closer Look */
+        .closer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .closer-item {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--c-border);
+        }
+
+        .closer-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .closer-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* 7. For Every Reader */
+        .reader-grid {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .reader-pill {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            border: 1px solid var(--c-border);
+            background: var(--c-surface);
+            color: var(--c-text);
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .reader-pill:hover,
+        .reader-pill.active {
+            background: var(--c-primary);
+            color: var(--c-bg);
+            border-color: var(--c-primary);
+        }
+
+        .reader-content {
+            max-width: 800px;
+            margin: 2rem auto 0;
+            text-align: center;
+            font-size: 1.2rem;
+            color: #ffffff;
+            min-height: 100px;
+        }
+
+        /* 8. Journey (Timeline) */
+        .journey-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            border-left: 2px solid var(--c-border);
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .journey-event {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .journey-event:last-child {
+            margin-bottom: 0;
+        }
+
+        .journey-dot {
+            position: absolute;
+            left: -39px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            background: var(--c-bg);
+            border: 4px solid var(--c-primary);
+            border-radius: 50%;
+        }
+
+        .journey-title {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--c-text);
+            margin-bottom: 0.5rem;
+        }
+
+        /* 9. FAQ */
+        .faq-item {
+            border-bottom: 1px solid var(--c-border);
+            padding: 1.5rem 0;
+            cursor: pointer;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.2rem;
+            font-family: var(--font-heading);
+            font-weight: bold;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: var(--c-text-muted);
+            line-height: 1.6;
+            margin-top: 0;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            margin-top: 1rem;
+        }
+
+        .faq-item.active .fa-chevron-down {
+            transform: rotate(180deg);
+        }
+
+        @media(max-width: 900px) {
+
+            .preview-box,
+            .closer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-line {
+                display: none;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="about.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                    <i class="fa-solid fa-fire logo-flame"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Archivia</h1>
+                    <span>BOOKS &bull; NEWS &bull; IDEAS</span>
+                </div>
+            </a>
+
+            <div class="nav-links desktop-only">
+                <a href="index.html">Home</a>
+                <a href="home2.html">Home 2</a>
+                <a href="about.html">About Us</a>
+                <a href="library.html">Library</a>
+                <a href="services.html" class="active">Services</a>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact</a>
+            </div>
+
+                        <div class="nav-controls">
+                <button id="rtlToggle" class="nav-btn rtl-btn" style="width: 60px; justify-content: center;">
+                    <span class="dir-text fw-600">LTR</span>
+                </button>
+                <button id="themeToggle" class="nav-btn theme-btn">
+                    <i class="fa-solid fa-sun light-icon"></i>
+                    <i class="fa-solid fa-moon dark-icon" style="display:none;"></i>
+                </button>
+                <div class="profile-dropdown-wrap desktop-only">
+                    <button class="nav-btn profile-btn"><i class="fa-regular fa-user"></i> <i class="fa-solid fa-chevron-down small-chevron" style="font-size:0.7rem;"></i></button>
+                    <div class="profile-dropdown">
+                        <a href="login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
+                        <a href="register.html"><i class="fa-solid fa-user-plus"></i> Register</a>
+                    </div>
+                </div>
+                <button id="mobileMenuBtn" class="nav-btn mobile-only"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </nav>
+    <div id="mobileMenu" class="mobile-menu">
+        <button id="closeMobileMenu" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+        <div class="mobile-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="home2.html">Home 2</a>
+            <a href="about.html">About Us</a>
+            <a href="library.html">Library</a>
+            <a href="services.html" class="active">Services</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact</a>
+            <div style="width: 100%; height: 1px; background: var(--c-border); margin: 1rem 0;"></div>
+            <a href="login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
+            <a href="register.html"><i class="fa-solid fa-user-plus"></i> Register</a>
+        </div>
+    </div>
+
+    <main>
+        <!-- 01. SERVICE HERO -->
+        <section class="sd-hero">
+            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=1920&q=80"
+                id="hero-img" class="sd-hero-bg" alt="Background">
+            <div class="container position-relative" style="z-index: 1; text-align: center; max-width: 800px;">
+                <div class="eyebrow" style="color: var(--c-accent); justify-content: center; margin-bottom: 1rem;"><i
+                        class="fa-solid fa-star-of-life"></i> <span id="hero-label">A BETTER WAY TO READ</span></div>
+                <h1 id="hero-title"
+                    style="font-size: 4.5rem; font-family: var(--font-heading); line-height: 1.1; margin-bottom: 1.5rem; color: #ffffff;">
+                    Digital E-Reader</h1>
+                <p id="hero-desc" style="font-size: 1.3rem; color: #ffffff; opacity: 0.9; margin-bottom: 2.5rem;">
+                    An immersive, distraction-free online reading environment designed for absolute comfort.
+                </p>
+                <a href="library.html" class="btn-solid-cream"
+                    style="padding: 1rem 3rem; border-radius: 50px; font-weight: 600; background: var(--c-primary); color: var(--c-bg); border: none; text-decoration: none; font-size: 1.1rem; display: inline-block;">Start
+                    Reading</a>
+            </div>
+        </section>
+
+        <!-- 02. THE EXPERIENCE -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 3rem;">
+                    <h2 style="font-size: 3rem; font-family: var(--font-heading);">The Experience</h2>
+                </div>
+                <div class="sd-experience">
+                    <p id="exp-text">
+                        We designed our interface to mimic the elegance of physical paper while providing the power of
+                        digital tools. This isn't just about rendering text on a screen; it's about crafting an
+                        environment where the interface fades away, leaving only you and the author's words. Every
+                        margin, typeface, and color scheme has been meticulously calculated to reduce eye strain during
+                        long sessions.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03. HOW IT WORKS -->
+        <section class="section" style="background: var(--c-surface);">
+            <div class="container">
+                <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 2rem;">
+                    <div class="eyebrow" style="color: var(--c-accent); justify-content: center;">FLOW</div>
+                    <h2 style="font-size: 3rem; font-family: var(--font-heading);">How It Works</h2>
+                </div>
+
+                <div class="flow-container">
+                    <div class="flow-line"></div>
+
+                    <div class="flow-step">
+                        <div class="flow-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                        <div class="flow-title">Discover</div>
+                        <div style="font-size: 0.9rem; color: var(--c-text-muted);">Find a book.</div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon"><i class="fa-solid fa-hand-pointer"></i></div>
+                        <div class="flow-title">Select</div>
+                        <div style="font-size: 0.9rem; color: var(--c-text-muted);">Open details.</div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon"><i class="fa-solid fa-unlock"></i></div>
+                        <div class="flow-title">Access</div>
+                        <div style="font-size: 0.9rem; color: var(--c-text-muted);">Launch reader.</div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon"><i class="fa-solid fa-book-open"></i></div>
+                        <div class="flow-title">Read</div>
+                        <div style="font-size: 0.9rem; color: var(--c-text-muted);">Enjoy the text.</div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon"><i class="fa-solid fa-bookmark"></i></div>
+                        <div class="flow-title">Save</div>
+                        <div style="font-size: 0.9rem; color: var(--c-text-muted);">Sync progress.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04. INSIDE THE EXPERIENCE -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 3rem;">
+                    <h2 style="font-size: 3rem; font-family: var(--font-heading);">Inside the Experience</h2>
+                </div>
+
+                <div class="preview-box">
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=800&q=80"
+                            class="preview-img" id="inside-img" alt="Interface">
+                    </div>
+                    <div class="preview-content">
+                        <i class="fa-solid fa-display"
+                            style="font-size: 2.5rem; color: var(--c-accent); margin-bottom: 1.5rem;"
+                            id="inside-icon"></i>
+                        <h3 style="font-family: var(--font-heading); font-size: 2rem; margin-bottom: 1rem;"
+                            id="inside-title">Distraction-Free Interface</h3>
+                        <p style="color: var(--c-text-muted); font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem;"
+                            id="inside-desc">
+                            The moment you open a book, menus and sidebars disappear. You're left with a clean canvas
+                            that prioritizes readability above all else.
+                        </p>
+                        <ul style="color: var(--c-text-muted); line-height: 1.8; margin-left: 1.5rem;">
+                            <li>Clean typography settings</li>
+                            <li>Fluid responsive resizing</li>
+                            <li>Instant dictionary lookups</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05. EXPLORE THE BENEFITS -->
+        <section class="section" style="background: var(--c-surface);">
+            <div class="container">
+                <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 4rem;">
+                    <h2 style="font-size: 3rem; font-family: var(--font-heading);">Explore the Benefits</h2>
+                </div>
+
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <i class="fa-solid fa-eye benefit-icon"></i>
+                        <h4 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.5rem;"
+                            id="ben1-title">Eye Comfort</h4>
+                        <p style="color: var(--c-text-muted); line-height: 1.6;" id="ben1-desc">Adjustable contrast and
+                            dark mode reduce strain during long reading sessions.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <i class="fa-solid fa-cloud-arrow-up benefit-icon"></i>
+                        <h4 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.5rem;"
+                            id="ben2-title">Cloud Sync</h4>
+                        <p style="color: var(--c-text-muted); line-height: 1.6;" id="ben2-desc">Never lose your place.
+                            Your exact reading position syncs across all devices.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <i class="fa-solid fa-highlighter benefit-icon"></i>
+                        <h4 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.5rem;"
+                            id="ben3-title">Annotation Tools</h4>
+                        <p style="color: var(--c-text-muted); line-height: 1.6;" id="ben3-desc">Highlight passages,
+                            leave margin notes, and export your thoughts easily.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <i class="fa-solid fa-mobile-screen-button benefit-icon"></i>
+                        <h4 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.5rem;"
+                            id="ben4-title">Mobile Ready</h4>
+                        <p style="color: var(--c-text-muted); line-height: 1.6;" id="ben4-desc">A flawless reading
+                            experience whether you are on a phone, tablet, or desktop.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 06. A CLOSER LOOK -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header" style="justify-content: center; text-align: center;">
+                    <h2 style="font-size: 3rem; font-family: var(--font-heading);">A Closer Look</h2>
+                </div>
+
+                <div class="closer-grid">
+                    <div class="closer-item" style="grid-column: 1 / 2; grid-row: 1 / 3;">
+                        <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=1200&q=80"
+                            id="closer-img1" alt="Detail 1">
+                    </div>
+                    <div class="closer-item">
+                        <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80"
+                            id="closer-img2" alt="Detail 2">
+                    </div>
+                    <div class="closer-item">
+                        <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=600&q=80"
+                            id="closer-img3" alt="Detail 3">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 07. FOR EVERY KIND OF READER -->
+        <section class="section" style="background: var(--c-deep); color: var(--c-bg);">
+            <div class="container">
+                <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 2rem;">
+                    <h2 style="font-size: 3rem; font-family: var(--font-heading); color: var(--c-bg);">For Every Kind of
+                        Reader</h2>
+                </div>
+
+                <div class="reader-grid">
+                    <div class="reader-pill active" onclick="showReader('casual', this)">Casual Readers</div>
+                    <div class="reader-pill" onclick="showReader('student', this)">Students</div>
+                    <div class="reader-pill" onclick="showReader('research', this)">Researchers</div>
+                    <div class="reader-pill" onclick="showReader('lover', this)">Book Lovers</div>
+                </div>
+
+                <div class="reader-content" id="reader-content">
+                    "I just want to get lost in a good story. Archivia's interface lets me relax completely without any
+                    pop-ups or complex menus getting in the way of the plot."
+                </div>
+            </div>
+        </section>
+
+        <!-- 08. YOUR READING JOURNEY -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 4rem;">
+                    <h2 style="font-size: 3rem; font-family: var(--font-heading);">Your Journey</h2>
+                </div>
+
+                <div class="journey-wrapper">
+                    <div class="journey-event">
+                        <div class="journey-dot"></div>
+                        <h4 class="journey-title">Initiation</h4>
+                        <p style="color: var(--c-text-muted); line-height: 1.6;">You select a book and the interface
+                            instantly optimizes itself for your specific screen size.</p>
+                    </div>
+                    <div class="journey-event">
+                        <div class="journey-dot"></div>
+                        <h4 class="journey-title">Immersion</h4>
+                        <p style="color: var(--c-text-muted); line-height: 1.6;">You customize the font and background
+                            color. The text becomes the only focus on the screen.</p>
+                    </div>
+                    <div class="journey-event">
+                        <div class="journey-dot"></div>
+                        <h4 class="journey-title">Retention</h4>
+                        <p style="color: var(--c-text-muted); line-height: 1.6;">You encounter a beautiful passage and
+                            highlight it, automatically saving it to your personal notes.</p>
+                    </div>
+                    <div class="journey-event">
+                        <div class="journey-dot"></div>
+                        <h4 class="journey-title">Completion</h4>
+                        <p style="color: var(--c-text-muted); line-height: 1.6;">You finish the book. Your progress is
+                            marked as completed on your virtual shelf, and new recommendations are generated.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 09. FAQ -->
+        <section class="section" style="background: var(--c-surface);">
+            <div class="container" style="max-width: 800px;">
+                <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 3rem;">
+                    <h2 style="font-size: 3rem; font-family: var(--font-heading);">Frequently Asked Questions</h2>
+                </div>
+
+                <div class="faq-container">
+                    <div class="faq-item" onclick="this.classList.toggle('active')">
+                        <div class="faq-question"><span id="faq1-q">Do I need to download an app?</span> <i
+                                class="fa-solid fa-chevron-down"></i></div>
+                        <div class="faq-answer" id="faq1-a">No, everything runs perfectly right inside your web browser.
+                        </div>
+                    </div>
+                    <div class="faq-item" onclick="this.classList.toggle('active')">
+                        <div class="faq-question"><span id="faq2-q">Can I read offline?</span> <i
+                                class="fa-solid fa-chevron-down"></i></div>
+                        <div class="faq-answer" id="faq2-a">Yes, with a premium subscription, you can cache books for
+                            offline reading.</div>
+                    </div>
+                    <div class="faq-item" onclick="this.classList.toggle('active')">
+                        <div class="faq-question"><span id="faq3-q">Are all books available?</span> <i
+                                class="fa-solid fa-chevron-down"></i></div>
+                        <div class="faq-answer" id="faq3-a">Free users have access to chapter previews, while Premium
+                            users unlock the entire library.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. FINAL CTA -->
+        <section class="section" style="text-align: center;">
+            <div class="container" style="max-width: 800px;">
+                <h2 style="font-size: 4rem; font-family: var(--font-heading); margin-bottom: 1.5rem; line-height: 1.1;">
+                    Start Using Archivia Today.</h2>
+                <p style="font-size: 1.2rem; color: var(--c-text-muted); margin-bottom: 3rem;">The ultimate digital
+                    library is waiting for you.</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="library.html" class="btn-solid-cream"
+                        style="padding: 1rem 3rem; border-radius: 50px; font-weight: 600; background: var(--c-primary); color: var(--c-bg); border: none; text-decoration: none; font-size: 1.1rem;">Explore
+                        Library</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-book-open"></i>
+                        <i class="fa-solid fa-fire logo-flame"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h2>Archivia</h2>
+                        <span>BOOKS &bull; NEWS &bull; IDEAS</span>
+                    </div>
+                </a>
+                <p class="footer-desc">A modern destination for discovering books, exploring ideas and staying informed.</p>
+                <div class="socials">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="home2.html">Home 2</a>
+                <a href="about.html">About Us</a>
+                <a href="library.html">Library</a>
+                <a href="services.html">Services</a>
+                <a href="blog.html">Blog</a>
+                <a href="pricing.html">Pricing</a>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Support</h4>
+                <a href="contact.html">Contact</a>
+                <a href="faq.html">FAQ</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+            
+            <div class="footer-contact">
+                <h4>Get in Touch</h4>
+                <p><i class="fa-regular fa-envelope"></i> hello@Archivia.com</p>
+                <p><i class="fa-solid fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fa-solid fa-location-dot"></i> 123 Literary Lane, NY</p>
+                <p><i class="fa-regular fa-clock"></i> Mon - Sat: 9AM - 6PM</p>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Archivia. All Rights Reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Reader Pill Logic
+        const readerData = {
+            'casual': '"I just want to get lost in a good story. Archivia\'s interface lets me relax completely without any pop-ups or complex menus getting in the way of the plot."',
+            'student': '"The ability to instantly highlight passages and have them saved directly to my digital notebook makes studying incredibly efficient."',
+            'research': '"Having access to deep historical archives alongside modern publications, all searchable with one engine, is a game-changer for my thesis work."',
+            'lover': '"I love keeping track of exactly what I\'ve read. The virtual shelves are beautiful, and the recommendations are surprisingly accurate."'
+        };
+
+        function showReader(type, element) {
+            document.querySelectorAll('.reader-pill').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+            document.getElementById('reader-content').innerText = readerData[type];
+        }
+
+        // Data population based on URL
+        const dataMap = {
+            'reader': {
+                title: 'Digital E-Reader', desc: 'An immersive, distraction-free online reading environment designed for absolute comfort.',
+                img1: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=1920&q=80',
+                img2: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=800&q=80',
+                icon: 'fa-display',
+                insideTitle: 'Distraction-Free Interface',
+                insideDesc: 'The moment you open a book, menus and sidebars disappear. You are left with a clean canvas that prioritizes readability above all else.',
+                b1t: 'Eye Comfort', b1d: 'Adjustable contrast and dark mode reduce strain.',
+                b2t: 'Cloud Sync', b2d: 'Your exact reading position syncs across devices.',
+                b3t: 'Annotation', b3d: 'Highlight passages and leave margin notes.',
+                b4t: 'Mobile Ready', b4d: 'Flawless reading on phones and tablets.'
+            },
+            'discovery': {
+                title: 'Smart Discovery', desc: 'Advanced catalog filtering and dynamic search tools to help you find your exact next favorite book.',
+                img1: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1920&q=80',
+                img2: 'https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?auto=format&fit=crop&w=800&q=80',
+                icon: 'fa-magnifying-glass-chart',
+                insideTitle: 'Granular Search',
+                insideDesc: 'Don\'t just search by title. Filter our massive database by nuanced genres, publication eras, availability, and community ratings.',
+                b1t: 'Lightning Fast', b1d: 'Results appear instantly as you type.',
+                b2t: 'Smart Filters', b2d: 'Combine multiple tags to find niche books.',
+                b3t: 'Author Pages', b3d: 'Deep dives into author bibliographies.',
+                b4t: 'Related Works', b4d: 'Instantly find books similar to your favorites.'
+            },
+            'shelves': { title: 'Virtual Shelves', desc: 'Organize your personal library with customizable digital shelves.', img1: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1920&q=80', img2: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=800&q=80', icon: 'fa-book-bookmark', insideTitle: 'Personal Organization', insideDesc: 'Keep your reading life perfectly organized.', b1t: 'Custom Shelves', b1d: 'Create unlimited categories.', b2t: 'Drag & Drop', b2d: 'Easy organization.', b3t: 'Privacy', b3d: 'Keep shelves public or private.', b4t: 'Export', b4d: 'Export your lists anytime.' },
+            'news': { title: 'Daily News & Editorials', desc: 'Stay updated with thoughtful, long-form editorial content.', img1: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1920&q=80', img2: 'https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=800&q=80', icon: 'fa-newspaper', insideTitle: 'Quality Journalism', insideDesc: 'No clickbait, just deep dives into current events.', b1t: 'Ad-Free', b1d: 'No annoying popups.', b2t: 'Offline Reading', b2d: 'Save articles for later.', b3t: 'Audio Versions', b3d: 'Listen on the go.', b4t: 'Curated', b4d: 'Only the best writing.' },
+            'collections': { title: 'Curated Collections', desc: 'Hand-picked selections of books grouped by mood, era, or theme.', img1: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=1920&q=80', img2: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=800&q=80', icon: 'fa-layer-group', insideTitle: 'Expert Selection', insideDesc: 'Our librarians create perfect reading paths.', b1t: 'Thematic', b1d: 'Explore by specific concepts.', b2t: 'Seasonal', b2d: 'Perfect reads for the time of year.', b3t: 'Award Winners', b3d: 'Access critically acclaimed works.', b4t: 'Community', b4d: 'User-created collections.' },
+            'recommend': { title: 'Algorithmic Recommendations', desc: 'Discover your next favorite book with our smart engine.', img1: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1920&q=80', img2: 'https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?auto=format&fit=crop&w=800&q=80', icon: 'fa-lightbulb', insideTitle: 'Personalized Discovery', insideDesc: 'We analyze your reading habits to find perfect matches.', b1t: 'Smart AI', b1d: 'Highly accurate suggestions.', b2t: 'Niche Finds', b2d: 'Discover hidden gems.', b3t: 'Mood Based', b3d: 'Recommendations based on how you feel.', b4t: 'Anti-Echo Chamber', b4d: 'Expand your horizons safely.' },
+            'archives': { title: 'Historical Archives', desc: 'Access rare, out-of-print, and historically significant texts.', img1: 'https://images.unsplash.com/photo-1455390582262-044cdead27d8?auto=format&fit=crop&w=1920&q=80', img2: 'https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=800&q=80', icon: 'fa-landmark', insideTitle: 'Preserving History', insideDesc: 'A massive digitization effort for public knowledge.', b1t: 'High Res', b1d: 'Crystal clear document scans.', b2t: 'Searchable', b2d: 'OCR applied to vintage texts.', b3t: 'Primary Sources', b3d: 'Essential for research.', b4t: 'Translation', b4d: 'Built-in tools for older languages.' },
+            'publish': { title: 'Self-Publishing Platform', desc: 'Share your own stories directly with the Archivia community.', img1: 'https://images.unsplash.com/photo-1455390582262-044cdead27d8?auto=format&fit=crop&w=1920&q=80', img2: 'https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=800&q=80', icon: 'fa-pen-nib', insideTitle: 'Empowering Creators', insideDesc: 'All the tools you need to publish and monetize.', b1t: 'Fair Revenue', b1d: 'Keep most of what you earn.', b2t: 'Formatting Tools', b2d: 'Easy formatting for digital reading.', b3t: 'Analytics', b3d: 'See how readers engage.', b4t: 'Community', b4d: 'Build your audience directly.' }
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('svc')) {
+                const svc = urlParams.get('svc');
+                if (dataMap[svc]) {
+                    const d = dataMap[svc];
+                    document.getElementById('hero-title').innerText = d.title;
+                    document.title = d.title + ' | Archivia Services';
+                    document.getElementById('hero-desc').innerText = d.desc;
+                    document.getElementById('hero-img').src = d.img1;
+                    document.getElementById('inside-img').src = d.img2;
+                    document.getElementById('closer-img1').src = d.img1;
+                    document.getElementById('closer-img2').src = d.img2;
+
+                    document.getElementById('inside-icon').className = `fa-solid ${d.icon}`;
+                    document.getElementById('inside-title').innerText = d.insideTitle;
+                    document.getElementById('inside-desc').innerText = d.insideDesc;
+
+                    document.getElementById('ben1-title').innerText = d.b1t; document.getElementById('ben1-desc').innerText = d.b1d;
+                    document.getElementById('ben2-title').innerText = d.b2t; document.getElementById('ben2-desc').innerText = d.b2d;
+                    document.getElementById('ben3-title').innerText = d.b3t; document.getElementById('ben3-desc').innerText = d.b3d;
+                    document.getElementById('ben4-title').innerText = d.b4t; document.getElementById('ben4-desc').innerText = d.b4d;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

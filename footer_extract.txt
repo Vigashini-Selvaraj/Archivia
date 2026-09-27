@@ -1,0 +1,66 @@
+<footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h2>Pagesia</h2>
+                        <span>BOOKS &bull; NEWS &bull; IDEAS</span>
+                    </div>
+                </a>
+                <p class="footer-desc">A modern destination for discovering books, exploring ideas and staying informed.</p>
+                <div class="socials">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Explore</h4>
+                <a href="#">Home</a>
+                <a href="#">About Us</a>
+                <a href="#">Library</a>
+                <a href="#">Services</a>
+                <a href="#">Blog</a>
+                <a href="#">Contact</a>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="#">Popular Books</a>
+                <a href="#">Latest News</a>
+                <a href="#">Reading Guides</a>
+                <a href="#">Authors</a>
+                <a href="#">Categories</a>
+                <a href="#">Bookmarks</a>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Support</h4>
+                <a href="#">Contact</a>
+                <a href="#">FAQ</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+                <a href="#">Help Center</a>
+            </div>
+            
+            <div class="footer-contact">
+                <h4>Get in Touch</h4>
+                <p><i class="fa-regular fa-envelope"></i> hello@pagesia.com</p>
+                <p><i class="fa-solid fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fa-solid fa-location-dot"></i> 123 Literary Lane, NY</p>
+                <p><i class="fa-regular fa-clock"></i> Mon - Sat: 9AM - 6PM</p>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Pagesia. All Rights Reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archivia | FAQ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: var(--c-surface);
+            color: var(--c-text);
+            padding: 0;
+            margin: 0;
+            line-height: 1.6;
+        }
+        .doc-header {
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--c-bg);
+            border-bottom: 1px solid var(--c-border);
+        }
+        .back-btn {
+            color: var(--c-text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.3s;
+        }
+        .back-btn:hover {
+            color: var(--c-primary);
+        }
+        .doc-container {
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 3rem;
+            background: var(--c-bg);
+            border-radius: 12px;
+            border: 1px solid var(--c-border);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.02);
+        }
+        .doc-title {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            color: var(--c-primary);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .doc-content h3 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--c-text);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .doc-content p {
+            color: var(--c-text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        .theme-toggle-fixed {
+            background: var(--c-surface);
+            border: 1px solid var(--c-border);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--c-text);
+            transition: 0.3s;
+        }
+        .theme-toggle-fixed:hover {
+            background: var(--c-border);
+        }
+    </style>
+</head>
+<body>
+    <header class="doc-header">
+        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+        <a href="index.html" class="logo">
+            <div class="logo-icon">
+                <i class="fa-solid fa-book-open"></i>
+                <i class="fa-solid fa-fire logo-flame"></i>
+            </div>
+            <div class="logo-text">
+                <h1>Archivia</h1>
+                <span>BOOKS &bull; NEWS &bull; IDEAS</span>
+            </div>
+        </a>
+        <button id="themeToggle" class="theme-toggle-fixed">
+            <i class="fa-solid fa-sun light-icon"></i>
+            <i class="fa-solid fa-moon dark-icon" style="display:none;"></i>
+        </button>
+    </header>
+
+    <main class="doc-container">
+        <h1 class="doc-title">Frequently Asked Questions</h1>
+        <div class="doc-content">
+            
+<h3>How does Archivia work?</h3>
+<p>Archivia provides an extensive collection of digitized texts, historical archives, and contemporary articles. Users can browse the library freely, while registered members can create virtual shelves, annotate texts, and save articles.</p>
+
+<h3>Is registration free?</h3>
+<p>Yes, creating a standard account is completely free and allows you to curate your reading lists and save bookmarks.</p>
+
+<h3>Can I download books for offline reading?</h3>
+<p>Premium members can download most texts for offline reading via our mobile application. Standard members can read all texts through our online distraction-free reader.</p>
+
+<h3>How do you source your historical archives?</h3>
+<p>We partner with universities, museums, and national libraries worldwide to digitize and preserve rare and historically significant documents.</p>
+
+        </div>
+    </main>
+
+    <script>
+        const themeBtn = document.getElementById('themeToggle');
+        if (themeBtn) {
+            themeBtn.addEventListener('click', () => {
+                const html = document.documentElement;
+                const currentTheme = html.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                html.setAttribute('data-theme', newTheme);
+                
+                const lightIcon = themeBtn.querySelector('.light-icon');
+                const darkIcon = themeBtn.querySelector('.dark-icon');
+                
+                if(newTheme === 'dark') {
+                    lightIcon.style.display = 'none';
+                    darkIcon.style.display = 'block';
+                } else {
+                    lightIcon.style.display = 'block';
+                    darkIcon.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editorial News | Archivia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { background-color: var(--c-bg); color: var(--c-text); padding-top: 80px; }
+        
+        /* Editorial Masthead */
+        .masthead {
+            text-align: center;
+            padding: 3rem 5%;
+            border-bottom: 2px solid var(--c-text);
+            border-top: 1px solid var(--c-border);
+            background: var(--c-surface);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        .masthead-date {
+            position: absolute;
+            left: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--c-text-muted);
+        }
+        .masthead-edition {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--c-text-muted);
+        }
+        .masthead h1 {
+            font-family: var(--font-heading);
+            font-size: 4.5rem;
+            font-weight: 400;
+            margin: 0;
+            line-height: 1;
+            letter-spacing: -1px;
+        }
+        .masthead h1 span { color: var(--c-primary); font-style: italic; }
+
+        /* Secondary Nav */
+        .editorial-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 3rem;
+            padding: 1rem 5%;
+            border-bottom: 1px solid var(--c-border);
+            margin-top: -3rem;
+            margin-bottom: 4rem;
+            background: var(--c-bg);
+            position: relative;
+            z-index: 10;
+        }
+        .editorial-nav a {
+            text-decoration: none;
+            color: var(--c-text);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+        .editorial-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--c-primary);
+            transition: width 0.3s ease;
+        }
+        .editorial-nav a:hover::after { width: 100%; }
+
+        /* Main Grid */
+        .editorial-grid {
+            display: grid;
+            grid-template-columns: 2.5fr 1fr;
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5% 5rem;
+        }
+        
+        /* Featured Story */
+        .featured-story {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            border-bottom: 1px solid var(--c-border);
+            padding-bottom: 4rem;
+            margin-bottom: 4rem;
+        }
+        .featured-img-wrap {
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+        .featured-img-wrap img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+        .featured-story:hover .featured-img-wrap img {
+            transform: scale(1.05);
+        }
+        .featured-content { padding-right: 2rem; }
+        .article-cat {
+            font-family: var(--font-body);
+            color: var(--c-primary);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        .featured-content h2 {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--c-text);
+        }
+        .featured-content p {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            line-height: 1.6;
+            color: var(--c-text-muted);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+        .read-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-body);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--c-text);
+            text-decoration: none;
+            border-bottom: 1px solid var(--c-text);
+            padding-bottom: 0.2rem;
+            transition: color 0.3s, border-color 0.3s;
+        }
+        .read-more-btn:hover {
+            color: var(--c-primary);
+            border-color: var(--c-primary);
+        }
+
+        /* Sub Features Grid */
+        .sub-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        .sub-article img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            filter: grayscale(20%);
+            transition: filter 0.3s ease;
+        }
+        .sub-article:hover img { filter: grayscale(0%); }
+        .sub-article h3 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        .sub-article p {
+            color: var(--c-text-muted);
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            border-left: 1px solid var(--c-border);
+            padding-left: 4rem;
+        }
+        .sidebar-title {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--c-text);
+            border-bottom: 2px solid var(--c-text);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+        .briefing-item {
+            margin-bottom: 2.5rem;
+            border-bottom: 1px dotted var(--c-border);
+            padding-bottom: 2.5rem;
+        }
+        .briefing-item:last-child { border-bottom: none; }
+        .briefing-item h4 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+        .briefing-item p {
+            color: var(--c-text-muted);
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        .briefing-time {
+            font-size: 0.8rem;
+            color: var(--c-primary);
+            font-weight: 600;
+            display: block;
+            margin-top: 1rem;
+        }
+        
+        .newsletter-box {
+            background: var(--c-surface);
+            padding: 2.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            border: 1px solid var(--c-border);
+        }
+        .newsletter-box i { font-size: 2rem; color: var(--c-primary); margin-bottom: 1rem; }
+        .newsletter-box h3 { font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 1rem; }
+        .newsletter-box input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--c-border);
+            background: var(--c-bg);
+            margin-bottom: 1rem;
+            font-family: var(--font-body);
+        }
+        .newsletter-box button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--c-text);
+            color: var(--c-bg);
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background 0.3s;
+        }
+        .newsletter-box button:hover { background: var(--c-primary); }
+
+        @media(max-width: 1200px) {
+            .editorial-grid { grid-template-columns: 1fr; }
+            .sidebar { border-left: none; padding-left: 0; border-top: 1px solid var(--c-border); padding-top: 4rem; }
+            .featured-story { grid-template-columns: 1fr; }
+            .featured-img-wrap img { height: 400px; }
+            .masthead-date, .masthead-edition { display: none; }
+        }
+        @media(max-width: 768px) {
+            .editorial-nav { gap: 1.5rem; justify-content: center; }
+            .sub-features { grid-template-columns: 1fr; }
+            .masthead h1 { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="about.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                    <i class="fa-solid fa-fire logo-flame"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Archivia</h1>
+                    <span>BOOKS &bull; NEWS &bull; IDEAS</span>
+                </div>
+            </a>
+            
+            <div class="nav-links desktop-only">
+                <a href="index.html">Home</a>
+                <a href="home2.html">Home 2</a>
+                <a href="about.html">About Us</a>
+                <a href="library.html">Library</a>
+                <a href="services.html">Services</a>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact</a>
+            </div>
+
+                        <div class="nav-controls">
+                <button id="rtlToggle" class="nav-btn rtl-btn" style="width: 60px; justify-content: center;">
+                    <span class="dir-text fw-600">LTR</span>
+                </button>
+                <button id="themeToggle" class="nav-btn theme-btn">
+                    <i class="fa-solid fa-sun light-icon"></i>
+                    <i class="fa-solid fa-moon dark-icon" style="display:none;"></i>
+                </button>
+                <div class="profile-dropdown-wrap desktop-only">
+                    <button class="nav-btn profile-btn"><i class="fa-regular fa-user"></i> <i class="fa-solid fa-chevron-down small-chevron" style="font-size:0.7rem;"></i></button>
+                    <div class="profile-dropdown">
+                        <a href="login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
+                        <a href="register.html"><i class="fa-solid fa-user-plus"></i> Register</a>
+                    </div>
+                </div>
+                <button id="mobileMenuBtn" class="nav-btn mobile-only"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </nav>
+    <div id="mobileMenu" class="mobile-menu">
+        <button id="closeMobileMenu" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+        <div class="mobile-links">
+            <a href="index.html">Home</a>
+            <a href="home2.html">Home 2</a>
+            <a href="about.html">About Us</a>
+            <a href="library.html">Library</a>
+            <a href="services.html">Services</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact</a>
+            <div style="width: 100%; height: 1px; background: var(--c-border); margin: 1rem 0;"></div>
+            <a href="login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
+            <a href="register.html"><i class="fa-solid fa-user-plus"></i> Register</a>
+        </div>
+    </div>
+
+    <!-- MASTHEAD -->
+    <header class="masthead">
+        <div class="masthead-date">September 26, 2026</div>
+        <h1>The <span>Archivia</span> Gazette</h1>
+        <div class="masthead-edition">Global Edition</div>
+    </header>
+
+    <div class="editorial-nav">
+        <a href="#" data-filter="all" class="active" style="color: var(--c-primary);">All</a>
+        <a href="#" data-filter="world">World</a>
+        <a href="#" data-filter="politics">Politics</a>
+        <a href="#" data-filter="business">Business</a>
+        <a href="#" data-filter="culture">Culture</a>
+        <a href="#" data-filter="science">Science</a>
+        <a href="#" data-filter="opinion">Opinion</a>
+    </div>
+
+    <main class="editorial-grid">
+        
+        <!-- LEFT COLUMN: MAIN FEATURES -->
+        <div>
+            
+            <!-- FEATURED ARTICLE -->
+            <article class="featured-story filter-item" data-category="business">
+                <div class="featured-content">
+                    <span class="article-cat">Business</span>
+                    <h2>A New Era of Global Markets as Interest Rates Plunge</h2>
+                    <p>In a surprising turn of events, the latest economic data shows a sharper decline in inflation than analysts predicted, sending stock indices to record highs across Wall Street, London, and Tokyo. Central banks are now signaling a major paradigm shift.</p>
+                    <a href="#" class="read-more-btn">Read Full Story <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div class="featured-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1200&q=80" alt="Finance">
+                </div>
+            </article>
+
+            <!-- SUB FEATURES -->
+            <div class="sub-features">
+                <article class="sub-article filter-item" data-category="science">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Science">
+                    <span class="article-cat">Science</span>
+                    <h3>The Generative Age: Silicon Valley's Next Big Pivot</h3>
+                    <p>Major tech firms are restructuring entirely around advanced neural networks, promising to reshape how we interact with the digital world on a fundamental level.</p>
+                </article>
+                
+                <article class="sub-article filter-item" data-category="world">
+                    <img src="travel_blog_1790333327544.jpg" alt="World">
+                    <span class="article-cat">World</span>
+                    <h3>Historic Treaty Signed on Ocean Conservation</h3>
+                    <p>Over 100 nations have agreed to a legally binding treaty to protect marine biodiversity in international waters.</p>
+                </article>
+
+                <article class="sub-article filter-item" data-category="politics">
+                    <img src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=800&q=80" alt="Politics">
+                    <span class="article-cat">Politics</span>
+                    <h3>New Global Summit Addresses Digital Infrastructure</h3>
+                    <p>Leaders from 40 nations gather to debate the future of internet sovereignty and cross-border digital taxation frameworks.</p>
+                </article>
+                
+                <article class="sub-article filter-item" data-category="culture">
+                    <img src="archived_newspapers_1790311793944.jpg" alt="Culture">
+                    <span class="article-cat">Culture</span>
+                    <h3>The Surprising Resurgence of Vintage Analog Photography</h3>
+                    <p>Younger generations are pushing back against digital perfection, embracing the beautiful flaws and patience required for film.</p>
+                </article>
+
+                <article class="sub-article filter-item" data-category="opinion">
+                    <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80" alt="Opinion">
+                    <span class="article-cat">Opinion</span>
+                    <h3>Why the Push for Universal Basic Income is Gaining Traction</h3>
+                    <p>As automation continues to reshape the labor market, politicians and economists are finding rare common ground.</p>
+                </article>
+            </div>
+            
+        </div>
+
+        <!-- RIGHT COLUMN: THE DESK -->
+        <aside class="sidebar">
+            <h3 class="sidebar-title">The Editor's Desk</h3>
+            
+            <div class="briefing-item">
+                <h4>Diplomatic Breakthrough in Geneva</h4>
+                <p>After weeks of tense negotiations, a historic treaty has been signed addressing global supply chain security.</p>
+                <span class="briefing-time">2 Hours Ago</span>
+            </div>
+            
+            <div class="briefing-item">
+                <h4>Art World Shaken by Masterpiece Discovery</h4>
+                <p>A previously unknown Renaissance painting was discovered in a private cellar in Florence, valued at over $200 million.</p>
+                <span class="briefing-time">4 Hours Ago</span>
+            </div>
+            
+            <div class="briefing-item">
+                <h4>Climate Summit Reaches Critical Milestone</h4>
+                <p>Nations have finally agreed on a binding resolution to phase out deep-sea mining by the end of the decade.</p>
+                <span class="briefing-time">5 Hours Ago</span>
+            </div>
+            
+            <div class="newsletter-box" style="margin-bottom: 2rem; background: var(--c-bg); border-color: var(--c-primary);">
+                <i class="fa-solid fa-comment-dots" style="color: var(--c-primary);"></i>
+                <h3 style="font-size: 1.5rem;">What's your favorite news today?</h3>
+                <p style="color: var(--c-text-muted); margin-bottom: 1.5rem; font-size: 0.9rem;">Share your perspective on today's headlines. We read every response.</p>
+                <form onsubmit="event.preventDefault(); alert('Thank you for sharing your thoughts!'); this.reset();">
+                    <textarea placeholder="I found the article on..." required style="width: 100%; padding: 1rem; border: 1px solid var(--c-border); background: var(--c-surface); font-family: var(--font-body); margin-bottom: 1rem; resize: vertical; min-height: 80px;"></textarea>
+                    <button type="submit" style="background: var(--c-primary);">Submit Response</button>
+                </form>
+            </div>
+            
+            <div class="newsletter-box">
+                <i class="fa-solid fa-envelope-open-text"></i>
+                <h3>The Morning Briefing</h3>
+                <p style="color: var(--c-text-muted); margin-bottom: 1.5rem; font-size: 0.9rem;">Start your day with the stories you need to know. Curated by our editors.</p>
+                <form onsubmit="event.preventDefault(); alert('Subscribed to the Morning Briefing.'); this.reset();">
+                    <input type="email" placeholder="Email Address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </aside>
+
+    </main>
+
+        <!-- CTA SECTION -->
+        <section class="cta section">
+            <div class="cta-banner">
+                <div class="container cta-content">
+                    <div class="cta-text">
+                        <h2>Join a community of curious minds.</h2>
+                        <p>Read. Learn. Grow. Together.</p>
+                    </div>
+                    <button class="btn-solid-cream">Explore Library <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+                <div class="cta-bg-elements">
+                    <i class="fa-solid fa-feather-pointed cta-feather"></i>
+                </div>
+            </div>
+        </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-book-open"></i>
+                        <i class="fa-solid fa-fire logo-flame"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h2>Archivia</h2>
+                        <span>BOOKS &bull; NEWS &bull; IDEAS</span>
+                    </div>
+                </a>
+                <p class="footer-desc">A modern destination for discovering books, exploring ideas and staying informed.</p>
+                <div class="socials">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="home2.html">Home 2</a>
+                <a href="about.html">About Us</a>
+                <a href="library.html">Library</a>
+                <a href="services.html">Services</a>
+                <a href="blog.html">Blog</a>
+                <a href="pricing.html">Pricing</a>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Support</h4>
+                <a href="contact.html">Contact</a>
+                <a href="faq.html">FAQ</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+            
+            <div class="footer-contact">
+                <h4>Get in Touch</h4>
+                <p><i class="fa-regular fa-envelope"></i> hello@Archivia.com</p>
+                <p><i class="fa-solid fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fa-solid fa-location-dot"></i> 123 Literary Lane, NY</p>
+                <p><i class="fa-regular fa-clock"></i> Mon - Sat: 9AM - 6PM</p>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Archivia. All Rights Reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // News Filter Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterLinks = document.querySelectorAll('.editorial-nav a');
+            const articles = document.querySelectorAll('.filter-item');
+            
+            filterLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Update active state
+                    filterLinks.forEach(l => {
+                        l.classList.remove('active');
+                        l.style.color = 'var(--c-text)';
+                    });
+                    link.classList.add('active');
+                    link.style.color = 'var(--c-primary)';
+                    
+                    const filterValue = link.getAttribute('data-filter');
+                    
+                    articles.forEach(article => {
+                        if (filterValue === 'all' || article.getAttribute('data-category') === filterValue) {
+                            article.style.display = article.classList.contains('featured-story') ? 'grid' : 'block';
+                        } else {
+                            article.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

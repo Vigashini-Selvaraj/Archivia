@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Detail | Archivia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 06. Interactive Reading Progress */
+        .progress-container { position: fixed; top: 76px; left: 0; width: 100%; height: 4px; background: rgba(0,0,0,0.05); z-index: 999; }
+        [data-theme="dark"] .progress-container { background: rgba(255,255,255,0.05); }
+        .progress-bar { height: 100%; background: var(--c-primary); width: 0%; transition: width 0.1s; }
+        
+        .article-wrapper { max-width: 800px; margin: 0 auto; padding: 4rem 2rem; }
+        
+        /* 01. Article Header */
+        .bd-header { text-align: center; margin-bottom: 3rem; margin-top: 2rem; }
+        .bd-tag { display: inline-block; padding: 0.3rem 1rem; border-radius: 50px; background: var(--c-primary); color: var(--c-bg); font-weight: bold; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; margin-bottom: 1.5rem; }
+        .bd-meta { color: var(--c-text-muted); font-size: 1rem; margin-top: 1.5rem; display: flex; justify-content: center; align-items: center; gap: 1rem; flex-wrap: wrap; }
+        .bd-meta img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+        .bd-hero-img { width: 100%; height: 500px; object-fit: cover; border-radius: 12px; margin-bottom: 3rem; box-shadow: var(--shadow-md); }
+        
+        /* 02. Introduction */
+        .bd-intro { font-family: 'Newsreader', serif; font-size: 1.5rem; line-height: 1.8; font-style: italic; color: var(--c-text-muted); margin-bottom: 3rem; border-left: 4px solid var(--c-accent); padding-left: 2rem; }
+        
+        /* 03. Main Content */
+        .bd-content p { font-family: 'Newsreader', serif; font-size: 1.25rem; line-height: 1.8; margin-bottom: 2rem; color: var(--c-text); }
+        .bd-content p:first-of-type::first-letter { float: left; font-size: 4rem; line-height: 0.8; margin-right: 0.8rem; font-family: var(--font-heading); color: var(--c-primary); padding-top: 0.5rem; }
+        .bd-content h2 { font-family: var(--font-heading); font-size: 2.2rem; margin: 3rem 0 1.5rem; color: var(--c-text); }
+        .bd-content h3 { font-family: var(--font-heading); font-size: 1.8rem; margin: 2rem 0 1rem; color: var(--c-text); }
+        .bd-content blockquote { background: var(--c-surface); padding: 2rem 3rem; border-radius: 12px; font-family: var(--font-heading); font-size: 1.5rem; text-align: center; margin: 3rem 0; position: relative; }
+        .bd-content blockquote i { position: absolute; top: 1rem; left: 1rem; font-size: 2rem; color: var(--c-accent); opacity: 0.2; }
+        
+        /* 04. Key Takeaways */
+        .takeaway-box { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 12px; padding: 2rem; margin: 3rem 0; box-shadow: var(--shadow-sm); }
+        .takeaway-box h3 { margin-top: 0; font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .takeaway-item { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1rem; cursor: pointer; padding: 1rem; border-radius: 8px; transition: background 0.2s; }
+        .takeaway-item:hover { background: rgba(0,0,0,0.05); }
+        [data-theme="dark"] .takeaway-item:hover { background: rgba(255,255,255,0.05); }
+        .takeaway-icon { color: var(--c-accent); font-size: 1.2rem; margin-top: 0.2rem; }
+        
+        /* 05. In-Article Media */
+        .media-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 3rem 0; }
+        .media-grid img { width: 100%; height: 300px; object-fit: cover; border-radius: 8px; cursor: pointer; transition: transform 0.3s; }
+        .media-grid img:hover { transform: scale(1.02); box-shadow: var(--shadow-md); }
+        .media-caption { text-align: center; font-size: 0.9rem; color: var(--c-text-muted); margin-top: 0.5rem; font-style: italic; }
+        
+        /* 07. Author Profile */
+        .author-box { display: flex; gap: 2rem; align-items: center; padding: 3rem 0; border-top: 1px solid var(--c-border); border-bottom: 1px solid var(--c-border); margin: 4rem 0; }
+        .author-box img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 4px solid var(--c-surface); }
+        
+        /* 08. Related Articles */
+        .related-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 2rem; }
+        
+        /* 09. Comments */
+        .comments-section { background: var(--c-surface); border-radius: 12px; padding: 3rem; margin-top: 4rem; border: 1px solid var(--c-border); }
+        .comment-input { width: 100%; background: var(--c-bg); border: 1px solid var(--c-border); padding: 1rem; border-radius: 8px; font-family: var(--font-body); color: var(--c-text); margin-bottom: 1rem; resize: vertical; min-height: 100px; }
+        .comment-item { display: flex; gap: 1.5rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--c-border); }
+        
+        /* 10. Premium Content */
+        .premium-lock { position: relative; padding: 4rem 0; text-align: center; border-top: 1px solid var(--c-border); margin-top: 2rem; }
+        .premium-lock::before { content: ''; position: absolute; top: -150px; left: 0; width: 100%; height: 150px; background: linear-gradient(to top, var(--c-bg), transparent); z-index: 1; pointer-events: none; }
+        .lock-box { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 12px; padding: 3rem; max-width: 600px; margin: 0 auto; position: relative; z-index: 2; box-shadow: var(--shadow-md); }
+        
+        @media(max-width: 800px) {
+            .media-grid, .related-grid { grid-template-columns: 1fr; }
+            .author-box { flex-direction: column; text-align: center; }
+            .bd-hero-img { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="about.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                    <i class="fa-solid fa-fire logo-flame"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Archivia</h1>
+                    <span>BOOKS &bull; NEWS &bull; IDEAS</span>
+                </div>
+            </a>
+            
+            <div class="nav-links desktop-only">
+                <a href="index.html" >Home</a>
+                <a href="home2.html">Home 2</a>
+                <a href="about.html">About Us</a>
+                <a href="library.html">Library</a>
+                <a href="services.html">Services</a>
+                <a href="blog.html" class="active">Blog</a>
+                <a href="contact.html">Contact</a>
+            </div>
+
+                        <div class="nav-controls">
+                <button id="rtlToggle" class="nav-btn rtl-btn" style="width: 60px; justify-content: center;">
+                    <span class="dir-text fw-600">LTR</span>
+                </button>
+                <button id="themeToggle" class="nav-btn theme-btn">
+                    <i class="fa-solid fa-sun light-icon"></i>
+                    <i class="fa-solid fa-moon dark-icon" style="display:none;"></i>
+                </button>
+                <div class="profile-dropdown-wrap desktop-only">
+                    <button class="nav-btn profile-btn"><i class="fa-regular fa-user"></i> <i class="fa-solid fa-chevron-down small-chevron" style="font-size:0.7rem;"></i></button>
+                    <div class="profile-dropdown">
+                        <a href="login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
+                        <a href="register.html"><i class="fa-solid fa-user-plus"></i> Register</a>
+                    </div>
+                </div>
+                <button id="mobileMenuBtn" class="nav-btn mobile-only"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </nav>
+    <div id="mobileMenu" class="mobile-menu">
+        <button id="closeMobileMenu" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+        <div class="mobile-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="home2.html">Home 2</a>
+            <a href="about.html">About Us</a>
+            <a href="library.html">Library</a>
+            <a href="services.html">Services</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact</a>
+            <div style="width: 100%; height: 1px; background: var(--c-border); margin: 1rem 0;"></div>
+            <a href="login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
+            <a href="register.html"><i class="fa-solid fa-user-plus"></i> Register</a>
+        </div>
+    </div>
+
+    <div class="progress-container">
+        <div class="progress-bar" id="reading-progress"></div>
+    </div>
+
+    <main class="article-wrapper">
+        <!-- 01. ARTICLE HEADER -->
+        <a href="blog.html" style="color: var(--c-text-muted); text-decoration: none; font-weight: bold;"><i class="fa-solid fa-arrow-left"></i> Back to Blog</a>
+        
+        <header class="bd-header">
+            <span class="bd-tag" id="dynamic-cat">Culture</span>
+            <h1 id="dynamic-title" style="font-size: 4rem; font-family: var(--font-heading); line-height: 1.1; margin-bottom: 1rem;">The Renaissance of Independent Bookstores</h1>
+            <p style="font-size: 1.2rem; color: var(--c-text-muted);">Why physical community spaces are thriving in an increasingly digital world.</p>
+            
+            <div class="bd-meta">
+                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80" alt="Author">
+                <div>By <strong>Sarah Jenkins</strong></div>
+                <div>&bull;</div>
+                <div id="dynamic-date">Oct 12, 2026</div>
+                <div>&bull;</div>
+                <div><i class="fa-regular fa-clock"></i> 5 min read</div>
+                <div>&bull;</div>
+                <div><i class="fa-regular fa-eye"></i> 12.4k views</div>
+            </div>
+        </header>
+
+        <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1200&q=80" class="bd-hero-img" id="dynamic-img" alt="Bookstore">
+
+        <!-- 02. ARTICLE INTRODUCTION -->
+        <div class="bd-intro">
+            A decade ago, analysts predicted the complete collapse of the brick-and-mortar bookstore. E-readers and massive online retailers were supposed to render physical browsing obsolete. Yet today, independent bookstores are experiencing an unexpected and vibrant renaissance.
+        </div>
+
+        <!-- 03. MAIN ARTICLE CONTENT -->
+        <article class="bd-content">
+            <p>The smell of aged paper, the quiet hum of whispered conversations, and the thrill of stumbling upon a spine you weren't actively looking for. These are sensory experiences that an algorithm, no matter how sophisticated, cannot replicate. In an era where our digital feeds are meticulously curated to show us exactly what we already know we like, the independent bookstore remains one of the last bastions of true, unadulterated discovery.</p>
+            
+            <h2 id="section-community">The Community Hub</h2>
+            <p>Modern independent bookstores have realized that they cannot compete with online retailers on inventory size or shipping speed. Instead, they have pivoted to compete on something far more valuable: community. Stores like <em>The Broken Binding</em> and <em>Daunt Books</em> operate less like retail spaces and more like community centers.</p>
+            
+            <blockquote>
+                <i class="fa-solid fa-quote-left"></i>
+                "We don't just sell books. We sell the conversation that happens after you finish the book."
+            </blockquote>
+            
+            <p>They host local author readings, philosophical debate clubs, children's storytelling hours, and even wine-tasting nights. The physical space is designed not just for transaction, but for lingering. Comfortable armchairs, in-house cafes, and curated staff recommendation shelves all signal to the customer that they are welcome to stay.</p>
+
+            <!-- 04. KEY TAKEAWAYS -->
+            <div class="takeaway-box">
+                <h3><i class="fa-solid fa-lightbulb" style="color: var(--c-accent);"></i> Key Takeaways</h3>
+                <div class="takeaway-item" onclick="document.getElementById('section-community').scrollIntoView({behavior: 'smooth'});">
+                    <i class="fa-solid fa-arrow-right takeaway-icon"></i>
+                    <div>
+                        <strong>Shift from Retail to Community</strong>
+                        <div style="font-size: 0.9rem; color: var(--c-text-muted);">Bookstores are surviving by hosting events and creating lingering spaces.</div>
+                    </div>
+                </div>
+                <div class="takeaway-item" onclick="document.getElementById('section-curation').scrollIntoView({behavior: 'smooth'});">
+                    <i class="fa-solid fa-arrow-right takeaway-icon"></i>
+                    <div>
+                        <strong>The Value of Human Curation</strong>
+                        <div style="font-size: 0.9rem; color: var(--c-text-muted);">Staff picks offer a serendipitous discovery that algorithms lack.</div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 id="section-curation">The Power of Human Curation</h2>
+            <p>There is a profound difference between an algorithm recommending a book based on your purchase history, and an impassioned bookseller pressing a novel into your hands because they believe it will change your life. The handwritten "Staff Pick" cards that adorn the shelves of independent stores serve as a silent dialogue between the reader and the curator.</p>
+            
+            <!-- 05. IN-ARTICLE MEDIA -->
+            <div class="media-grid">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=600&q=80" alt="Staff Picks Shelf" onclick="window.open(this.src, '_blank')">
+                    <div class="media-caption">Staff recommendation shelves at a local shop.</div>
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80" alt="Reading Corner" onclick="window.open(this.src, '_blank')">
+                    <div class="media-caption">A dedicated reading and community space.</div>
+                </div>
+            </div>
+
+            <p>This human element introduces the beauty of serendipity. You walk in looking for a biography and walk out with a collection of translated poetry simply because the bookseller's note was too compelling to ignore.</p>
+
+            <!-- 10. PREMIUM CONTENT / UNLOCK -->
+            <div class="premium-lock">
+                <div class="lock-box">
+                    <i class="fa-solid fa-gem" style="font-size: 3rem; color: var(--c-accent); margin-bottom: 1rem;"></i>
+                    <h3 style="font-family: var(--font-heading); font-size: 2rem; margin-bottom: 1rem;">Unlock the Rest of the Story</h3>
+                    <p style="color: var(--c-text-muted); margin-bottom: 2rem;">Continue reading about the economic model of modern bookstores and interviews with shop owners by upgrading to a Archivia Premium account.</p>
+                    <a href="pricing.html" class="btn-solid-cream" style="padding: 1rem 3rem; border-radius: 50px; font-weight: 600; background: var(--c-primary); color: var(--c-bg); border: none; text-decoration: none; display: inline-block;">View Plans</a>
+                </div>
+            </div>
+
+        </article>
+
+        <!-- 07. AUTHOR PROFILE -->
+        <div class="author-box">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80" alt="Sarah Jenkins">
+            <div>
+                <div class="eyebrow" style="color: var(--c-accent); margin-bottom: 0.5rem;">ABOUT THE AUTHOR</div>
+                <h3 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 0.5rem;">Sarah Jenkins</h3>
+                <p style="color: var(--c-text-muted); line-height: 1.6; margin-bottom: 1rem;">Sarah is a cultural critic and essayist based in London. She writes extensively on the intersection of physical spaces, literature, and digital culture.</p>
+                <a href="blog.html" style="color: var(--c-primary); font-weight: bold; text-decoration: none;"><i class="fa-solid fa-arrow-right"></i> View all articles by Sarah</a>
+            </div>
+        </div>
+
+        <!-- 08. RELATED ARTICLES -->
+        <div>
+            <h2 style="font-size: 2.5rem; font-family: var(--font-heading); margin-bottom: 2rem;">Read Next</h2>
+            <div class="related-grid">
+                <div class="article-card" style="border: 1px solid var(--c-border); border-radius: 12px; overflow: hidden; background: var(--c-surface);">
+                    <img src="https://images.unsplash.com/photo-1455390582262-044cdead27d8?auto=format&fit=crop&w=600&q=80" style="width: 100%; height: 200px; object-fit: cover;" alt="Related">
+                    <div style="padding: 1.5rem;">
+                        <span style="font-size: 0.8rem; font-weight: bold; color: var(--c-accent); text-transform: uppercase;">Architecture</span>
+                        <h4 style="font-family: var(--font-heading); font-size: 1.3rem; margin: 0.5rem 0;">The Psychology of Library Layouts</h4>
+                        <a href="#" style="color: var(--c-primary); font-weight: bold; text-decoration: none; font-size: 0.9rem;">Read More</a>
+                    </div>
+                </div>
+                <div class="article-card" style="border: 1px solid var(--c-border); border-radius: 12px; overflow: hidden; background: var(--c-surface);">
+                    <img src="https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=600&q=80" style="width: 100%; height: 200px; object-fit: cover;" alt="Related">
+                    <div style="padding: 1.5rem;">
+                        <span style="font-size: 0.8rem; font-weight: bold; color: var(--c-accent); text-transform: uppercase;">History</span>
+                        <h4 style="font-family: var(--font-heading); font-size: 1.3rem; margin: 0.5rem 0;">Uncovering the Lost Library of Alexandria</h4>
+                        <a href="#" style="color: var(--c-primary); font-weight: bold; text-decoration: none; font-size: 0.9rem;">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 09. COMMENTS / READER INTERACTION -->
+        <div class="comments-section">
+            <h2 style="font-size: 2rem; font-family: var(--font-heading); margin-bottom: 2rem;">Reader Responses (24)</h2>
+            
+            <form onsubmit="event.preventDefault(); alert('Comment submitted for review!');">
+                <textarea class="comment-input" placeholder="Share your thoughts on this article..." required></textarea>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; gap: 1rem; color: var(--c-text-muted); font-size: 1.2rem;">
+                        <i class="fa-regular fa-heart" style="cursor: pointer;" onclick="this.classList.toggle('fa-solid'); this.style.color = 'var(--c-accent)';"></i>
+                        <i class="fa-regular fa-bookmark" style="cursor: pointer;" onclick="this.classList.toggle('fa-solid'); this.style.color = 'var(--c-primary)';"></i>
+                        <i class="fa-solid fa-share-nodes" style="cursor: pointer;"></i>
+                    </div>
+                    <button type="submit" class="btn-solid-cream" style="padding: 0.8rem 2rem; border-radius: 50px; font-weight: 600; background: var(--c-primary); color: var(--c-bg); border: none; cursor: pointer;">Post Comment</button>
+                </div>
+            </form>
+
+            <div class="comment-item">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="User" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                <div>
+                    <h4 style="margin: 0; font-family: var(--font-heading); font-size: 1.1rem;">David Chen <span style="font-size: 0.8rem; color: var(--c-text-muted); font-family: var(--font-body); font-weight: normal;">â€¢ 2 hours ago</span></h4>
+                    <p style="color: var(--c-text); line-height: 1.6; margin-top: 0.5rem;">I completely agree with the point about human curation. I visited a local shop last week and the owner recommended a sci-fi novel I never would have picked up otherwise. It ended up being my favorite read of the year!</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-book-open"></i>
+                        <i class="fa-solid fa-fire logo-flame"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h2>Archivia</h2>
+                        <span>BOOKS &bull; NEWS &bull; IDEAS</span>
+                    </div>
+                </a>
+                <p class="footer-desc">A modern destination for discovering books, exploring ideas and staying informed.</p>
+                <div class="socials">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="home2.html">Home 2</a>
+                <a href="about.html">About Us</a>
+                <a href="library.html">Library</a>
+                <a href="services.html">Services</a>
+                <a href="blog.html">Blog</a>
+                <a href="pricing.html">Pricing</a>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Support</h4>
+                <a href="contact.html">Contact</a>
+                <a href="faq.html">FAQ</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+            
+            <div class="footer-contact">
+                <h4>Get in Touch</h4>
+                <p><i class="fa-regular fa-envelope"></i> hello@Archivia.com</p>
+                <p><i class="fa-solid fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fa-solid fa-location-dot"></i> 123 Literary Lane, NY</p>
+                <p><i class="fa-regular fa-clock"></i> Mon - Sat: 9AM - 6PM</p>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Archivia. All Rights Reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Interactive Reading Progress
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('reading-progress').style.width = scrolled + "%";
+        });
+    
+        // Dynamic Content Logic
+        const articleData = {
+            'hero': { title: 'The Future of Digital Typography and the Art of Reading', cat: 'Technology', date: 'Oct 24, 2026', img: 'https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?auto=format&fit=crop&w=1920&q=80' },
+            'editor': { title: 'The Psychology of Rereading', cat: 'Culture', date: 'Oct 22, 2026', img: 'https://images.unsplash.com/photo-1455390582262-044cdead27d8?auto=format&fit=crop&w=1200&q=80' },
+            'trend': { title: 'Trending Article', cat: 'Popular', date: 'Oct 20, 2026', img: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1200&q=80' },
+            'article0': { title: 'The Renaissance of Independent Bookstores', cat: 'Culture', date: 'Oct 12, 2026', img: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1200&q=80' },
+            'article1': { title: 'Uncovering the Lost Library of Alexandria', cat: 'History', date: 'Oct 10, 2026', img: 'https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=1200&q=80' },
+            'article2': { title: "E-Ink Revolution: What's Next?", cat: 'Tech', date: 'Oct 08, 2026', img: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1200&q=80' },
+            'article3': { title: 'Stoicism in Modern Leadership', cat: 'Philosophy', date: 'Oct 05, 2026', img: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=1200&q=80' },
+            'article4': { title: 'Interview with Margaret Atwood', cat: 'Interviews', date: 'Oct 02, 2026', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80' },
+            'article5': { title: 'The Evolution of Science Fiction', cat: 'Fiction', date: 'Sep 28, 2026', img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80' }
+        };
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const articleId = urlParams.get('id');
+            if (articleId && articleData[articleId]) {
+                const data = articleData[articleId];
+                document.getElementById('dynamic-title').innerText = data.title;
+                document.title = data.title + ' | Archivia';
+                document.getElementById('dynamic-cat').innerText = data.cat;
+                document.getElementById('dynamic-date').innerText = data.date;
+                document.getElementById('dynamic-img').src = data.img;
+            }
+        });
+</script>
+</body>
+</html>

@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archivia | Books â€¢ News â€¢ Ideas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="about.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                    <i class="fa-solid fa-fire logo-flame"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Archivia</h1>
+                    <span>BOOKS &bull; NEWS &bull; IDEAS</span>
+                </div>
+            </a>
+            
+            <div class="nav-links desktop-only">
+                <a href="index.html" class="active">Home</a>
+                <a href="home2.html">Home 2</a>
+                <a href="about.html">About Us</a>
+                <a href="library.html">Library</a>
+                <a href="services.html">Services</a>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact</a>
+            </div>
+
+                        <div class="nav-controls">
+                <button id="rtlToggle" class="nav-btn rtl-btn" style="width: 60px; justify-content: center;">
+                    <span class="dir-text fw-600">LTR</span>
+                </button>
+                <button id="themeToggle" class="nav-btn theme-btn">
+                    <i class="fa-solid fa-sun light-icon"></i>
+                    <i class="fa-solid fa-moon dark-icon" style="display:none;"></i>
+                </button>
+                <div class="profile-dropdown-wrap desktop-only">
+                    <button class="nav-btn profile-btn"><i class="fa-regular fa-user"></i> <i class="fa-solid fa-chevron-down small-chevron" style="font-size:0.7rem;"></i></button>
+                    <div class="profile-dropdown">
+                        <a href="login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
+                        <a href="register.html"><i class="fa-solid fa-user-plus"></i> Register</a>
+                    </div>
+                </div>
+                <button id="mobileMenuBtn" class="nav-btn mobile-only"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div id="mobileMenu" class="mobile-menu">
+        <button id="closeMobileMenu" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+        <div class="mobile-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="home2.html">Home 2</a>
+            <a href="about.html">About Us</a>
+            <a href="library.html">Library</a>
+            <a href="services.html">Services</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact</a>
+            <div style="width: 100%; height: 1px; background: var(--c-border); margin: 1rem 0;"></div>
+            <a href="login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
+            <a href="register.html"><i class="fa-solid fa-user-plus"></i> Register</a>
+        </div>
+    </div>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section class="hero section">
+            <div class="hero-bg-texture"></div>
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <div class="eyebrow">
+                        <i class="fa-solid fa-star-of-life"></i> DISCOVER &bull; READ &bull; EXPLORE
+                    </div>
+                    <h1 class="hero-title">
+                        <span style="color: var(--split-c1);">Where Every Page<br>Has</span> <span style="color: var(--split-c2);">Something to Say.</span>
+                    </h1>
+                    <p class="hero-desc" style="max-width: 250px;">
+                        A digital world where books, ideas, and current stories come alive.
+                    </p>
+                    
+                    <div class="hero-quick-links" style="display: flex; gap: 1.5rem; margin-top: 2rem;">
+                        <a href="collection.html" class="btn-solid-cream" style="padding: 0.8rem 2rem; border-radius: 50px; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem; background: var(--c-primary); color: var(--c-bg); text-decoration: none;">View Collections <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="library.html" class="btn-outline-gold" style="padding: 0.8rem 2rem; border-radius: 50px; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; border: 1px solid var(--c-primary); color: var(--c-primary);">View Libraries</a>
+                    </div>
+                </div>
+                
+                <div class="hero-visual">
+                    <!-- Interactive Magical Book -->
+                    <div class="magical-book-wrapper" id="magicalBookWrapper">
+                        <div class="magical-book" id="magicalBook">
+                            <div class="book-glow"></div>
+                            
+                            <!-- Book Structure -->
+                            <div class="book-cover-back"></div>
+                            <div class="book-pages">
+                                <div class="page p5"></div>
+                                <div class="page p4"></div>
+                                <div class="page p3"></div>
+                                <div class="page p2"></div>
+                                <div class="page p1">
+                                    <div class="page-content left-page">
+                                        <h4 class="page-title">CHAPTER I</h4>
+                                        <div class="page-image"><img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=300&q=80" alt="Vintage"></div>
+                                        <p>The dawn of a new era in publishing.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="book-cover-front">
+                                <div class="cover-design">
+                                    <i class="fa-solid fa-book-open cover-logo"></i>
+                                    <h3>Archivia</h3>
+                                </div>
+                            </div>
+                            
+                            <!-- Floating Elements (Appear on open) -->
+                            <div class="floating-elements">
+                                <div class="float-item f-books">BOOKS</div>
+                                <div class="float-item f-news">NEWS</div>
+                                <div class="float-item f-ideas">IDEAS</div>
+                                <div class="float-item f-articles">ARTICLES</div>
+                                <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=100&q=80" class="float-img img1">
+                                <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=100&q=80" class="float-img img2">
+                                <div class="float-feather"><i class="fa-solid fa-feather-pointed"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="scroll-indicator">
+                <i class="fa-solid fa-arrow-down"></i>
+                <span>Scroll to explore</span>
+            </div>
+        </section>
+
+        <!-- CATEGORIES SECTION -->
+        <section class="categories section">
+            <div class="container">
+                <div class="section-header categories-header" style="justify-content: center; text-align: center; margin-bottom: 4rem; position: relative;">
+    <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+        <div class="eyebrow" style="justify-content: center;">BROWSE BY CATEGORY</div>
+        <h2 style="font-size: 3.5rem; font-family: var(--font-heading); font-style: italic;"><span style="color: var(--split-c1);">Explore</span> <span style="color: var(--split-c2);">Categories</span></h2>
+        <p class="subtitle" style="margin: 1rem auto 0;">Find your next read, discover latest news, explore by topic and more.</p>
+    </div>
+    <a href="library.html" class="view-all" style="position: absolute; right: 0; bottom: 0;">View All <i class="fa-solid fa-arrow-right"></i></a>
+</div>
+                
+                <div class="category-grid" style="gap: 2rem;">
+                    <!-- Cat 1 -->
+                    <div class="cat-wrapper" style="text-align: center; cursor: pointer;" onclick="window.location.href='library.html'">
+                        <div class="cat-image-box" style="height: 200px; border-radius: 12px; overflow: hidden; margin-bottom: 1rem; position: relative; box-shadow: var(--shadow-sm); transition: var(--transition);">
+                            <img src="assets/books_category_1790357064148.jpg" style="width: 100%; height: 100%; object-fit: cover; transition: 0.5s;">
+                        </div>
+                        <h4 style="font-size: 1.2rem; font-family: var(--font-heading); color: var(--c-primary);">Books</h4>
+                    </div>
+                    <!-- Cat 2 -->
+                    <div class="cat-wrapper" style="text-align: center; cursor: pointer;" onclick="window.location.href='library.html'">
+                        <div class="cat-image-box" style="height: 200px; border-radius: 12px; overflow: hidden; margin-bottom: 1rem; position: relative; box-shadow: var(--shadow-sm); transition: var(--transition);">
+                            <img src="assets/news_category_1790357076407.jpg" style="width: 100%; height: 100%; object-fit: cover; transition: 0.5s;">
+                        </div>
+                        <h4 style="font-size: 1.2rem; font-family: var(--font-heading); color: var(--c-primary);">News</h4>
+                    </div>
+                    <!-- Cat 3 -->
+                    <div class="cat-wrapper" style="text-align: center; cursor: pointer;" onclick="window.location.href='library.html'">
+                        <div class="cat-image-box" style="height: 200px; border-radius: 12px; overflow: hidden; margin-bottom: 1rem; position: relative; box-shadow: var(--shadow-sm); transition: var(--transition);">
+                            <img src="assets/science_category_1790357088363.jpg" style="width: 100%; height: 100%; object-fit: cover; transition: 0.5s;">
+                        </div>
+                        <h4 style="font-size: 1.2rem; font-family: var(--font-heading); color: var(--c-primary);">Science</h4>
+                    </div>
+                    <!-- Cat 4 -->
+                    <div class="cat-wrapper" style="text-align: center; cursor: pointer;" onclick="window.location.href='library.html'">
+                        <div class="cat-image-box" style="height: 200px; border-radius: 12px; overflow: hidden; margin-bottom: 1rem; position: relative; box-shadow: var(--shadow-sm); transition: var(--transition);">
+                            <img src="assets/tech_category_1790357123734.jpg" style="width: 100%; height: 100%; object-fit: cover; transition: 0.5s;">
+                        </div>
+                        <h4 style="font-size: 1.2rem; font-family: var(--font-heading); color: var(--c-primary);">Technology</h4>
+                    </div>
+                    <!-- Cat 5 -->
+                    <div class="cat-wrapper" style="text-align: center; cursor: pointer;" onclick="window.location.href='library.html'">
+                        <div class="cat-image-box" style="height: 200px; border-radius: 12px; overflow: hidden; margin-bottom: 1rem; position: relative; box-shadow: var(--shadow-sm); transition: var(--transition);">
+                            <img src="education_category_1790333272540.jpg" style="width: 100%; height: 100%; object-fit: cover; transition: 0.5s;">
+                        </div>
+                        <h4 style="font-size: 1.2rem; font-family: var(--font-heading); color: var(--c-primary);">Education</h4>
+                    </div>
+                    <!-- Cat 6 -->
+                    <div class="cat-wrapper" style="text-align: center; cursor: pointer;" onclick="window.location.href='library.html'">
+                        <div class="cat-image-box" style="height: 200px; border-radius: 12px; overflow: hidden; margin-bottom: 1rem; position: relative; box-shadow: var(--shadow-sm); transition: var(--transition);">
+                            <img src="https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=400&q=80" style="width: 100%; height: 100%; object-fit: cover; transition: 0.5s;">
+                        </div>
+                        <h4 style="font-size: 1.2rem; font-family: var(--font-heading); color: var(--c-primary);">Culture</h4>
+                    </div>
+                    <!-- Cat 7 -->
+                    <div class="cat-wrapper" style="text-align: center; cursor: pointer;" onclick="window.location.href='library.html'">
+                        <div class="cat-image-box" style="height: 200px; border-radius: 12px; overflow: hidden; margin-bottom: 1rem; position: relative; box-shadow: var(--shadow-sm); transition: var(--transition);">
+                            <img src="https://images.unsplash.com/photo-1447069387593-a5de0862481e?auto=format&fit=crop&w=400&q=80" style="width: 100%; height: 100%; object-fit: cover; transition: 0.5s;">
+                        </div>
+                        <h4 style="font-size: 1.2rem; font-family: var(--font-heading); color: var(--c-primary);">History</h4>
+                    </div>
+                    <!-- Cat 8 -->
+                    <div class="cat-wrapper" style="text-align: center; cursor: pointer;" onclick="window.location.href='library.html'">
+                        <div class="cat-image-box" style="height: 200px; border-radius: 12px; overflow: hidden; margin-bottom: 1rem; position: relative; box-shadow: var(--shadow-sm); transition: var(--transition);">
+                            <img src="arts_category_1790333299814.jpg" style="width: 100%; height: 100%; object-fit: cover; transition: 0.5s;">
+                        </div>
+                        <h4 style="font-size: 1.2rem; font-family: var(--font-heading); color: var(--c-primary);">Arts</h4>
+                    </div>
+                </div>
+            </div>
+</section>
+
+        <!-- TRENDING NOW SECTION -->
+        <section class="trending section">
+            <div class="container">
+                <div class="section-header trending-header" style="justify-content: center; text-align: center; margin-bottom: 4rem;">
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <div class="eyebrow" style="justify-content: center;">WHAT'S HOT RIGHT NOW</div>
+                        <h2 style="font-size: 3.5rem; font-family: var(--font-heading); font-style: italic;"><span style="color: var(--split-c1);">Trending</span> <span style="color: var(--split-c2);">Now</span></h2>
+                        <p class="subtitle" style="margin: 1rem auto 0;">Explore the most read, watched and loved content.</p>
+                    </div>
+                </div>
+                
+                <div class="trending-carousel">
+                    <!-- Card 1 -->
+                    <div class="trend-card" onclick="openTrendingModal('The Midnight Library', 'Matt Haig', 'assets/midnight_library_1790356306250.jpg', 'Between life and death there is a library. A place where everyone gets a chance to live the life they always wanted...')">
+                        <div class="trend-img">
+                            <img src="assets/midnight_library_1790356306250.jpg" alt="Book">
+                            <div class="trend-badge">Book</div>
+                            <div class="trend-number">01</div>
+                        </div>
+                        <div class="trend-info">
+                            <h3>The Midnight Library</h3>
+                            <p>Matt Haig</p>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="trend-card" onclick="openTrendingModal('The Future of AI in Education', 'Technology', 'assets/ai_education_1790356330177.jpg', 'As AI models evolve, schools are adopting new technologies to personalize learning for every student.')">
+                        <div class="trend-img">
+                            <img src="assets/ai_education_1790356330177.jpg" alt="News">
+                            <div class="trend-badge">News</div>
+                            <div class="trend-number">02</div>
+                        </div>
+                        <div class="trend-info">
+                            <h3>The Future of AI in Education</h3>
+                            <p>5 min read</p>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="trend-card" onclick="openTrendingModal('Small Habits, Big Changes', 'Lifestyle', 'assets/small_habits_1790356343677.jpg', 'Discover how tiny 1-minute habits can compound over time to drastically improve your focus and health.')">
+                        <div class="trend-img">
+                            <img src="assets/small_habits_1790356343677.jpg" alt="Article">
+                            <div class="trend-badge">Article</div>
+                            <div class="trend-number">03</div>
+                        </div>
+                        <div class="trend-info">
+                            <h3>Small Habits, Big Changes</h3>
+                            <p>8 min read</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <!-- LATEST NEWS SECTION -->
+        <section class="latest-news-section section" style="background: var(--c-bg);">
+            <div class="container">
+                <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 4rem; position: relative;">
+    <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+        <div class="eyebrow" style="justify-content: center; color: var(--c-accent);"><i class="fa-solid fa-star-of-life"></i> STAY INFORMED</div>
+        <h2 style="font-size: 3.5rem; font-family: var(--font-heading); font-style: italic;"><span style="color: var(--split-c1);">Latest</span> <span style="color: var(--split-c2);">News</span></h2>
+    </div>
+    <a href="news.html" class="view-all" style="position: absolute; right: 0; bottom: 0;">View All News <i class="fa-solid fa-arrow-right"></i></a>
+</div>
+                
+                <div class="latest-news-grid">
+                    <!-- Main News -->
+                    <div class="news-main-card" onclick="window.location.href='news.html'" style="background: var(--c-surface); border-radius: 16px; border: 1px solid var(--c-border); overflow: hidden; display: flex; flex-direction: column; cursor: pointer; transition: 0.3s; height: 100%;">
+                        <div class="news-img-wrap" style="height: 350px; position: relative;">
+                            <img src="assets/top_universities_1790356356263.jpg" style="width: 100%; height: 100%; object-fit: cover;">
+                            <div style="position: absolute; top: 1.5rem; left: 1.5rem; background: var(--c-primary); color: var(--c-bg); padding: 0.4rem 1rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600;">Education</div>
+                        </div>
+                        <div style="padding: 2.5rem; display: flex; flex-direction: column; flex: 1;">
+                            <h3 style="font-size: 2.2rem; margin-bottom: 1rem; font-family: var(--font-heading);">Top Universities to Watch in 2026</h3>
+                            <p style="color: var(--c-text-muted); font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem; flex: 1;">Global education trends are shaping the future as hybrid learning models and AI integration become the new standard across campuses worldwide...</p>
+                            <div style="font-size: 0.9rem; color: var(--c-text-muted); font-weight: 600;">Apr 24, 2026 &bull; 6 min read</div>
+                        </div>
+                    </div>
+                    
+                    <!-- News List -->
+                    <div class="news-list" style="display: flex; flex-direction: column; gap: 2rem;">
+                        <div class="news-list-item" onclick="window.location.href='news.html'" style="display: flex; gap: 1.5rem; align-items: center; cursor: pointer; background: var(--c-surface); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--c-border); transition: 0.3s;">
+                            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=200&q=80" style="width: 140px; height: 140px; border-radius: 8px; object-fit: cover;">
+                            <div>
+                                <div style="color: var(--c-accent); font-size: 0.85rem; font-weight: 700; margin-bottom: 0.5rem; text-transform: uppercase;">Technology</div>
+                                <h4 style="font-size: 1.4rem; font-family: var(--font-heading); margin-bottom: 1rem;">Breakthrough in Renewable Energy Storage</h4>
+                                <div style="font-size: 0.85rem; color: var(--c-text-muted);">Apr 15, 2026 &bull; 4 min read</div>
+                            </div>
+                        </div>
+                        <div class="news-list-item" onclick="window.location.href='news.html'" style="display: flex; gap: 1.5rem; align-items: center; cursor: pointer; background: var(--c-surface); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--c-border); transition: 0.3s;">
+                            <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=200&q=80" style="width: 140px; height: 140px; border-radius: 8px; object-fit: cover;">
+                            <div>
+                                <div style="color: var(--c-accent); font-size: 0.85rem; font-weight: 700; margin-bottom: 0.5rem; text-transform: uppercase;">Business</div>
+                                <h4 style="font-size: 1.4rem; font-family: var(--font-heading); margin-bottom: 1rem;">Global Markets See Positive Growth Patterns</h4>
+                                <div style="font-size: 0.85rem; color: var(--c-text-muted);">Apr 14, 2026 &bull; 3 min read</div>
+                            </div>
+                        </div>
+                        <div class="news-list-item" onclick="window.location.href='news.html'" style="display: flex; gap: 1.5rem; align-items: center; cursor: pointer; background: var(--c-surface); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--c-border); transition: 0.3s;">
+                            <img src="https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=200&q=80" style="width: 140px; height: 140px; border-radius: 8px; object-fit: cover;">
+                            <div>
+                                <div style="color: var(--c-accent); font-size: 0.85rem; font-weight: 700; margin-bottom: 0.5rem; text-transform: uppercase;">Culture</div>
+                                <h4 style="font-size: 1.4rem; font-family: var(--font-heading); margin-bottom: 1rem;">The Power of Reading in the Digital Age</h4>
+                                <div style="font-size: 0.85rem; color: var(--c-text-muted);">Apr 12, 2026 &bull; 4 min read</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        
+        
+        <!-- SCROLLING CARDS SECTION -->
+        <section class="scrolling-books section" style="padding-top: 4rem; padding-bottom: 2rem; background: var(--c-bg); overflow: hidden; position: relative;">
+            <div class="container" style="margin-bottom: 2rem;">
+                <h2 style="font-size: 3.5rem; font-family: var(--font-heading); font-style: italic; text-align: center;"><span style="color: var(--split-c1);">Visual</span> <span style="color: var(--split-c2);">Archive</span></h2>
+            </div>
+            <div class="marquee-wrapper" style="display: flex; gap: 2rem; animation: scrollMarquee 20s linear infinite; width: max-content; padding: 0 2rem;">
+                <div class="scroll-card" onclick="toggleScrollInfo(this)">
+                    <img src="vintage_books_collection_1790311768173.jpg">
+                    <div class="scroll-info">
+                        <h4>The Midnight Library</h4>
+                        <p>Matt Haig</p>
+                        <span>A journey through alternate lives.</span>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="scroll-card" onclick="toggleScrollInfo(this)">
+                    <img src="archived_newspapers_1790311793944.jpg">
+                    <div class="scroll-info">
+                        <h4>Silent Spring</h4>
+                        <p>Rachel Carson</p>
+                        <span>An environmental classic.</span>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="scroll-card" onclick="toggleScrollInfo(this)">
+                    <img src="arts_category_1790333299814.jpg">
+                    <div class="scroll-info">
+                        <h4>Emma</h4>
+                        <p>Jane Austen</p>
+                        <span>A comedy of manners.</span>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="scroll-card" onclick="toggleScrollInfo(this)">
+                    <img src="vintage_astronomy_1790311822625.jpg">
+                    <div class="scroll-info">
+                        <h4>1984</h4>
+                        <p>George Orwell</p>
+                        <span>A dystopian masterpiece.</span>
+                    </div>
+                </div>
+                
+                <!-- Duplicated for infinite scroll -->
+                <div class="scroll-card" onclick="toggleScrollInfo(this)">
+                    <img src="vintage_books_collection_1790311768173.jpg">
+                    <div class="scroll-info">
+                        <h4>The Midnight Library</h4>
+                        <p>Matt Haig</p>
+                        <span>A journey through alternate lives.</span>
+                    </div>
+                </div>
+                <div class="scroll-card" onclick="toggleScrollInfo(this)">
+                    <img src="archived_newspapers_1790311793944.jpg">
+                    <div class="scroll-info">
+                        <h4>Silent Spring</h4>
+                        <p>Rachel Carson</p>
+                        <span>An environmental classic.</span>
+                    </div>
+                </div>
+                <div class="scroll-card" onclick="toggleScrollInfo(this)">
+                    <img src="arts_category_1790333299814.jpg">
+                    <div class="scroll-info">
+                        <h4>Emma</h4>
+                        <p>Jane Austen</p>
+                        <span>A comedy of manners.</span>
+                    </div>
+                </div>
+                <div class="scroll-card" onclick="toggleScrollInfo(this)">
+                    <img src="vintage_astronomy_1790311822625.jpg">
+                    <div class="scroll-info">
+                        <h4>1984</h4>
+                        <p>George Orwell</p>
+                        <span>A dystopian masterpiece.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EDITOR'S PICK SECTION - GUESS THE READ -->
+        <section class="editors-pick section" style="background: var(--c-surface); padding-top: 2rem; padding-bottom: 6rem; text-align: center; margin-top: 5rem;">
+            <div class="container" style="max-width: 800px;">
+                <h2 style="font-size: 3.5rem; font-family: var(--font-heading); font-style: italic; margin-bottom: 1rem; color: var(--c-heading);"><span style="color: var(--split-c1);">Guess the Read</span> <span style="color: var(--split-c2);">of the Month</span></h2>
+                <p style="color: var(--c-text-muted); font-size: 1.2rem; margin-bottom: 3rem;">We selected a masterpiece that defines this month. Can you unveil it?</p>
+                
+                <div id="guessRevealContainer" style="background: var(--c-deep); color: #ffffff !important; border-radius: 24px; padding: 4rem 2rem; cursor: pointer; transition: transform 0.5s, box-shadow 0.3s; box-shadow: var(--shadow-md); position: relative; overflow: hidden;" onclick="revealBook()" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='var(--shadow-lg)';" onmouseout="this.style.transform='none'; this.style.boxShadow='var(--shadow-md)';">
+                    
+                    <div id="guessContent" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                        <i class="fa-solid fa-question" style="font-size: 5rem; color: #ffffff; margin-bottom: 2rem; animation: pulse 2s infinite;"></i>
+                        <h3 style="font-size: 2rem; color: #ffffff;">Tap to Reveal</h3>
+                    </div>
+                    
+                    <div id="revealedContent" style="display: none; flex-direction: column; align-items: center; text-align: center; opacity: 0; transition: opacity 0.5s; color: #ffffff !important;">
+                        <div style="color: #ffffff; font-weight: bold; letter-spacing: 2px; margin-bottom: 1rem;">THIS IS THE READ OF THE MONTH</div>
+                        <h3 style="font-size: 3.5rem; font-family: var(--font-heading); font-style: italic; margin-bottom: 1rem; color: #ffffff;">The Great Gatsby</h3>
+                        <p style="max-width: 600px; opacity: 0.9; margin-bottom: 2rem; line-height: 1.6; font-size: 1.1rem; color: #ffffff;">F. Scott Fitzgerald's magnum opus captures the decadence and excess of the Jazz Age. A brilliant exploration of the American dream.</p>
+                        
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+                            <a href="online-reader.html" class="btn-solid-cream" style="background: var(--c-accent); color: var(--c-bg); border: none; text-decoration: none; padding: 1rem 2.5rem; border-radius: 50px; font-weight: bold; font-size: 1.1rem; transition: 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" onclick="event.stopPropagation()">Start Reading</a>
+                            <a href="collection.html" class="btn-outline-gold" style="border: 2px solid var(--c-accent); color: var(--c-accent); background: transparent; text-decoration: none; padding: 1rem 2.5rem; border-radius: 50px; font-weight: bold; font-size: 1.1rem; transition: 0.3s;" onmouseover="this.style.background='var(--c-accent)'; this.style.color='var(--c-bg)';" onmouseout="this.style.background='transparent'; this.style.color='var(--c-accent)';" onclick="event.stopPropagation()">Add to Shelf</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <script>
+                function revealBook() {
+                    const guessContent = document.getElementById('guessContent');
+                    const revealed = document.getElementById('revealedContent');
+                    const container = document.getElementById('guessRevealContainer');
+                    
+                    if(guessContent.style.display !== 'none') {
+                        guessContent.style.display = 'none';
+                        revealed.style.display = 'flex';
+                        
+                        // Force reflow
+                        void revealed.offsetWidth;
+                        
+                        revealed.style.opacity = '1';
+                        container.style.cursor = 'default';
+                        container.onmouseover = null;
+                        container.onmouseout = null;
+                        container.style.transform = 'none';
+                    }
+                }
+            </script>
+        </section>
+
+        <!-- BLOGS SECTION -->
+        <section class="blogs section">
+            <div class="container">
+                <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 4rem; position: relative;">
+                    <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+                        <div class="eyebrow" style="justify-content: center;">READ & GROW</div>
+                        <h2 style="font-size: 3.5rem; font-family: var(--font-heading); font-style: italic;"><span style="color: var(--split-c1);">From Our</span> <span style="color: var(--split-c2);">Blogs</span></h2>
+                        <p class="subtitle" style="margin: 1rem auto 0;">Insights, ideas and stories.</p>
+                    </div>
+                    <a href="blog.html" class="view-all" style="position: absolute; right: 0; bottom: 0;">View All <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="blog-grid">
+                    <div class="blog-card" onclick="window.location.href='blog-details.html'">
+                        <div class="blog-img">
+                            <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=600&q=80" alt="Blog 1">
+                            <div class="blog-tag">Psychology</div>
+                        </div>
+                        <div class="blog-info">
+                            <h3>Finding Balance in a Busy World</h3>
+                            <div class="blog-meta">Apr 20, 2026 &bull; 5 min read</div>
+                        </div>
+                    </div>
+                    <div class="blog-card" onclick="window.location.href='blog-details.html'">
+                        <div class="blog-img">
+                            <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=600&q=80" alt="Blog 2">
+                            <div class="blog-tag">Literature</div>
+                        </div>
+                        <div class="blog-info">
+                            <h3>Why Classic Books Still Matter</h3>
+                            <div class="blog-meta">Apr 18, 2026 &bull; 8 min read</div>
+                        </div>
+                    </div>
+                    <div class="blog-card" onclick="window.location.href='blog-details.html'">
+                        <div class="blog-img">
+                            <img src="travel_blog_1790333327544.jpg" alt="Blog 3">
+                            <div class="blog-tag">Travel</div>
+                        </div>
+                        <div class="blog-info">
+                            <h3>The Joy of Slow Travel</h3>
+                            <div class="blog-meta">Apr 15, 2026 &bull; 4 min read</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        
+        <!-- INTERACTIVE SECTION -->
+        <section class="interactive-section section" style="padding: 6rem 0;">
+            <div class="container">
+                <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 4rem;">
+                    <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+                        <div class="eyebrow" style="justify-content: center;"><i class="fa-solid fa-gamepad"></i> INTERACTIVE</div>
+                        <h2 style="font-size: 3.5rem; font-family: var(--font-heading); font-style: italic;"><span style="color: var(--split-c1);">Engage with</span> <span style="color: var(--split-c2);">Archivia</span></h2>
+                    </div>
+                </div>
+                
+                <div class="interactive-grid">
+                    <!-- Reading Challenge -->
+                    <div style="background: var(--c-surface); padding: 3rem; border-radius: 16px; border: 1px solid var(--c-border); display: flex; flex-direction: column; justify-content: center; box-shadow: var(--shadow-sm);">
+                        <div class="eyebrow" style="color: var(--c-accent); margin-bottom: 0.5rem;"><i class="fa-solid fa-fire"></i> BOOK OF THE WEEK</div>
+                        <h3 style="font-family: var(--font-heading); font-size: 2.2rem; margin-bottom: 1rem;">The Secret History</h3>
+                        <p style="color: var(--c-text-muted); font-size: 1.1rem; margin-bottom: 1rem;">A mesmerizing journey into the dark side of academia, following a group of eccentric classics students whose obsession with ancient Greek rituals leads them down a path of no return.</p>
+                        
+                        <div style="margin-bottom: 1.5rem; display: flex; gap: 1rem; align-items: center;">
+                            <div style="display: flex; gap: 0.3rem; color: #D96B32;">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                            </div>
+                            <span style="font-size: 0.9rem; color: var(--c-text-muted);">4.8/5 from our readers</span>
+                        </div>
+
+                        <div style="margin-bottom: 1.5rem;">
+                            <strong style="display: block; margin-bottom: 0.5rem;">Key Takeaways:</strong>
+                            <ul style="list-style-type: disc; margin-left: 1.5rem; color: var(--c-text-muted);">
+                                <li>The danger of unchecked obsession</li>
+                                <li>A critique of elite academic circles</li>
+                                <li>The blurring lines between beauty and morality</li>
+                            </ul>
+                        </div>
+
+                        <div style="display: flex; gap: 1rem; align-items: center; margin-top: auto;">
+                            <span style="font-weight: 600;">Do you agree with the rating?</span>
+                            <button class="agree-btn" onclick="this.style.background='#5A1725'; this.style.color='#F1E3D3'; this.innerHTML='<i class=\'fa-solid fa-check\'></i> Agreed!'" style="padding: 0.5rem 1.5rem; border: 1px solid var(--c-border); border-radius: 50px; background: transparent; cursor: pointer; transition: 0.3s; color: var(--c-text);">Agree</button>
+                            <button class="disagree-btn" onclick="this.style.background='#5A1725'; this.style.color='#F1E3D3'; this.innerHTML='<i class=\'fa-solid fa-xmark\'></i> Disagreed'" style="padding: 0.5rem 1.5rem; border: 1px solid var(--c-border); border-radius: 50px; background: transparent; cursor: pointer; transition: 0.3s; color: var(--c-text);">Disagree</button>
+                        </div>
+                    </div>
+                    <!-- Genre Quiz -->
+                    <div style="background: var(--c-deep); color: #FFF9F1; padding: 3rem; border-radius: 16px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; overflow: hidden; box-shadow: var(--shadow-sm); transition: 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='none'">
+                        <i class="fa-solid fa-wand-magic-sparkles" style="position: absolute; top: -20px; right: -20px; font-size: 8rem; opacity: 0.1; transform: rotate(-15deg);"></i>
+                        <h3 style="font-family: var(--font-heading); font-size: 2.5rem; margin-bottom: 1rem; color: #FFF9F1; position: relative; z-index: 2;">Find Your Next Read</h3>
+                        <p style="margin-bottom: 2.5rem; opacity: 0.9; font-size: 1.1rem; max-width: 80%; position: relative; z-index: 2;">Take our 3-question visual quiz to get a personalized recommendation from the archive.</p>
+                        <button class="btn-solid-cream" onclick="document.getElementById('quizModal').style.display='flex'" style="position: relative; z-index: 2;">Start the Quiz <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIGITAL LIBRARY - THE SHELF -->
+
+        <section class="digital-shelf section" style="background: var(--c-bg); color: var(--c-text); position: relative; padding: 8rem 0; overflow: hidden;">
+            <div class="container" style="position: relative; z-index: 2;">
+                <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 6rem;">
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <div class="eyebrow" style="justify-content: center; color: var(--c-accent);">THE DIGITAL SHELF</div>
+                        <h2 style="font-size: 3.5rem; font-family: var(--font-heading); font-style: italic; color: var(--c-text);"><span style="color: var(--split-c1);">Recently added</span> <span style="color: var(--split-c2);">to the archive.</span></h2>
+                    </div>
+                </div>
+                
+                <!-- The Realistic Shelf -->
+                
+                <!-- The Realistic Shelf -->
+                <div class="shelf-container" style="position: relative; width: 100%; max-width: 1100px; margin: 0 auto; display: flex; justify-content: center; align-items: flex-end; gap: 4px; padding-bottom: 15px; border-bottom: 20px solid var(--c-border); box-shadow: inset 0 -15px 25px rgba(0,0,0,0.1);">
+                    
+                    <!-- Spine 1 -->
+                    <div class="book-spine" onclick="openShelfBookModal('The Odyssey', 'Homer', '800 BC', 'Epic Poetry', 'CL-001', 'Slate Blue', 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80')" style="background: var(--c-primary); height: 320px; width: 60px;">
+                        <div class="spine-content">
+                            <span class="spine-author">HOMER</span>
+                            <span class="spine-title" style="color: var(--c-bg);">THE ODYSSEY</span>
+                            <span class="spine-logo"><i class="fa-solid fa-anchor"></i></span>
+                        </div>
+                        <div class="spine-info-panel"><h4>The Odyssey</h4><p>Homer â€¢ 800 BC</p></div>
+                        <div class="spine-bookmark"></div>
+                    </div>
+
+                    <!-- Spine 2 -->
+                    <div class="book-spine" onclick="openShelfBookModal('Silent Spring', 'Rachel Carson', '1962', 'Science', 'SC-142', 'Seafoam Gray', 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80')" style="background: var(--c-accent); height: 300px; width: 50px;">
+                        <div class="spine-content">
+                            <span class="spine-author" style="color: var(--c-text);">R. CARSON</span>
+                            <span class="spine-title" style="color: var(--c-text);">SILENT SPRING</span>
+                            <span class="spine-logo" style="color: var(--c-text);"><i class="fa-solid fa-leaf"></i></span>
+                        </div>
+                        <div class="spine-info-panel"><h4>Silent Spring</h4><p>Rachel Carson â€¢ 1962</p></div>
+                        <div class="spine-bookmark"></div>
+                    </div>
+
+                    <!-- Spine 3 -->
+                    <div class="book-spine" onclick="openShelfBookModal('Emma', 'Jane Austen', '1815', 'Romance', 'LT-089', 'Blush Pink', 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=400&q=80')" style="background: var(--c-deep); height: 280px; width: 55px;">
+                        <div class="spine-content">
+                            <span class="spine-author">J. AUSTEN</span>
+                            <span class="spine-title" style="color: var(--c-bg);">EMMA</span>
+                            <span class="spine-logo"><i class="fa-solid fa-heart"></i></span>
+                        </div>
+                        <div class="spine-info-panel"><h4>Emma</h4><p>Jane Austen â€¢ 1815</p></div>
+                        <div class="spine-bookmark"></div>
+                    </div>
+
+                    <!-- Spine 4 -->
+                    <div class="book-spine" onclick="openShelfBookModal('1984', 'George Orwell', '1949', 'Dystopian', 'FI-198', 'Charcoal', 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=400&q=80')" style="background: #2B1B18; height: 310px; width: 45px;">
+                        <div class="spine-content">
+                            <span class="spine-author">G. ORWELL</span>
+                            <span class="spine-title" style="color: var(--c-accent);">1984</span>
+                            <span class="spine-logo" style="color: #fff;"><i class="fa-solid fa-eye"></i></span>
+                        </div>
+                        <div class="spine-info-panel"><h4>1984</h4><p>George Orwell â€¢ 1949</p></div>
+                        <div class="spine-bookmark"></div>
+                    </div>
+
+                    <!-- Spine 5 -->
+                    <div class="book-spine" onclick="openShelfBookModal('Dune', 'Frank Herbert', '1965', 'Sci-Fi', 'SF-001', 'Muted Lavender', 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80')" style="background: #D96B32; height: 330px; width: 70px;">
+                        <div class="spine-content">
+                            <span class="spine-author" style="color: var(--c-text);">HERBERT</span>
+                            <span class="spine-title" style="color: var(--c-text);">DUNE</span>
+                            <span class="spine-logo" style="color: var(--c-text);"><i class="fa-solid fa-meteor"></i></span>
+                        </div>
+                        <div class="spine-info-panel"><h4>Dune</h4><p>Frank Herbert â€¢ 1965</p></div>
+                        <div class="spine-bookmark"></div>
+                    </div>
+
+                    <!-- Spine 6 -->
+                    <div class="book-spine" onclick="openShelfBookModal('Moby Dick', 'Herman Melville', '1851', 'Adventure', 'CL-042', 'Mist White', 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80')" style="background: var(--c-surface); height: 340px; width: 65px; color: var(--c-text);">
+                        <div class="spine-content" style="color: var(--c-text);">
+                            <span class="spine-author">MELVILLE</span>
+                            <span class="spine-title">MOBY DICK</span>
+                            <span class="spine-logo"><i class="fa-solid fa-water"></i></span>
+                        </div>
+                        <div class="spine-info-panel"><h4>Moby Dick</h4><p>Herman Melville â€¢ 1851</p></div>
+                        <div class="spine-bookmark"></div>
+                    </div>
+
+                    <!-- Spine 7 -->
+                    <div class="book-spine" style="background: var(--c-primary); height: 310px; width: 55px;">
+                        <div class="spine-content">
+                            <span class="spine-author">F. SCOTT</span>
+                            <span class="spine-title" style="color: var(--c-bg);">GATSBY</span>
+                        </div>
+                        <div class="spine-info-panel"><h4>The Great Gatsby</h4><p>F. Scott Fitzgerald â€¢ 1925</p></div>
+                        <div class="spine-bookmark"></div>
+                    </div>
+
+                    <!-- Spine 8 -->
+                    <div class="book-spine" style="background: var(--c-deep); height: 290px; width: 45px;">
+                        <div class="spine-content">
+                            <span class="spine-author">BRONTE</span>
+                            <span class="spine-title" style="color: var(--c-bg);">JANE EYRE</span>
+                        </div>
+                        <div class="spine-info-panel"><h4>Jane Eyre</h4><p>Charlotte Bronte â€¢ 1847</p></div>
+                        <div class="spine-bookmark"></div>
+                    </div>
+                    
+                    <!-- Spine 9 -->
+                    <div class="book-spine" style="background: var(--c-primary); color: var(--c-bg); height: 320px; width: 60px;">
+                        <div class="spine-content" style="color: var(--c-deep);">
+                            <span class="spine-author">TOLKIEN</span>
+                            <span class="spine-title">THE HOBBIT</span>
+                        </div>
+                        <div class="spine-info-panel"><h4>The Hobbit</h4><p>J.R.R. Tolkien â€¢ 1937</p></div>
+                        <div class="spine-bookmark"></div>
+                    </div>
+
+                    <!-- Spine 10 -->
+                    <div class="book-spine" style="background: var(--c-accent); height: 350px; width: 65px;">
+                        <div class="spine-content" style="color: var(--c-text);">
+                            <span class="spine-author">SHELLEY</span>
+                            <span class="spine-title">FRANKENSTEIN</span>
+                        </div>
+                        <div class="spine-info-panel"><h4>Frankenstein</h4><p>Mary Shelley â€¢ 1818</p></div>
+                        <div class="spine-bookmark"></div>
+                    </div>
+                    
+                    <!-- Spine 11 -->
+                    <div class="book-spine" style="background: var(--c-primary); height: 270px; width: 40px;">
+                        <div class="spine-content">
+                            <span class="spine-author">WILDE</span>
+                            <span class="spine-title" style="color: var(--c-bg);">DORIAN GRAY</span>
+                        </div>
+                        <div class="spine-info-panel"><h4>The Picture of Dorian Gray</h4><p>Oscar Wilde â€¢ 1890</p></div>
+                        <div class="spine-bookmark"></div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 4rem;">
+                    <a href="library.html" class="btn-solid-cream" style="background: var(--c-primary); color: var(--c-bg); padding: 1rem 3rem; border-radius: 50px; font-weight: 600; text-decoration: none; font-size: 1.1rem; display: inline-block;">Explore Full Library <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        
+        <!-- NEW TESTIMONIALS SECTION -->
+        <section class="testimonials section" style="background: var(--c-bg); padding: 8rem 0;">
+            <div class="container">
+                <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 4rem;">
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <div class="eyebrow" style="justify-content: center;">COMMUNITY VOICES</div>
+                        <h2 style="font-size: 3.5rem; font-family: var(--font-heading); font-style: italic;"><span style="color: var(--split-c1);">Thoughtful</span> <span style="color: var(--split-c2);">Readers</span></h2>
+                    </div>
+                </div>
+                <div class="testimonials-grid">
+                    <div style="background: var(--c-surface); padding: 3rem; border-radius: 12px; border: 1px solid var(--c-border); position: relative;">
+                        <i class="fa-solid fa-quote-right" style="position: absolute; top: 2rem; right: 2rem; font-size: 3rem; color: var(--c-accent); opacity: 0.2;"></i>
+                        <p style="font-family: var(--font-quote); font-size: 1.3rem; font-style: italic; line-height: 1.6; margin-bottom: 2rem;">"Archivia isn't just a library; it feels like walking into a carefully curated vintage bookshop. The design and collections are breathtakingly thoughtful."</p>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=100&q=80" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                            <div>
+                                <h5 style="font-size: 1rem; margin: 0; color: var(--c-primary);">Elena Rostova</h5>
+                                <span style="font-size: 0.8rem; color: var(--c-text-muted);">Literary Critic</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background: var(--c-surface); padding: 3rem; border-radius: 12px; border: 1px solid var(--c-border); position: relative;">
+                        <i class="fa-solid fa-quote-right" style="position: absolute; top: 2rem; right: 2rem; font-size: 3rem; color: var(--c-accent); opacity: 0.2;"></i>
+                        <p style="font-family: var(--font-quote); font-size: 1.3rem; font-style: italic; line-height: 1.6; margin-bottom: 2rem;">"The way the digital shelf interacts and presents information makes discovering new ideas incredibly engaging. It's a true portal to knowledge."</p>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                            <div>
+                                <h5 style="font-size: 1rem; margin: 0; color: var(--c-primary);">David Chen</h5>
+                                <span style="font-size: 0.8rem; color: var(--c-text-muted);">Historian</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background: var(--c-surface); padding: 3rem; border-radius: 12px; border: 1px solid var(--c-border); position: relative;">
+                        <i class="fa-solid fa-quote-right" style="position: absolute; top: 2rem; right: 2rem; font-size: 3rem; color: var(--c-accent); opacity: 0.2;"></i>
+                        <p style="font-family: var(--font-quote); font-size: 1.3rem; font-style: italic; line-height: 1.6; margin-bottom: 2rem;">"I love the seamless blend of current news and classic literature. It feels incredibly premium and warmâ€”like an old friend."</p>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                            <div>
+                                <h5 style="font-size: 1rem; margin: 0; color: var(--c-primary);">Sarah Jenkins</h5>
+                                <span style="font-size: 0.8rem; color: var(--c-text-muted);">Avid Reader</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- GLOBAL MODALS -->
+        <!-- Trending Modal -->
+        <div id="trendingModal" class="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center; backdrop-filter: blur(5px);">
+            <div class="modal-content" style="background: var(--c-surface); color: var(--c-text); width: 90%; max-width: 800px; border-radius: 16px; overflow: hidden; display: flex; position: relative;">
+                <button onclick="closeTrendingModal()" style="position: absolute; top: 1rem; right: 1rem; background: rgba(0,0,0,0.1); border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; z-index: 10;"><i class="fa-solid fa-xmark"></i></button>
+                <div style="width: 40%;">
+                    <img id="tmImg" src="" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div style="width: 60%; padding: 3rem;">
+                    <span id="tmCat" style="color: var(--c-accent); font-weight: 600; font-size: 0.85rem; text-transform: uppercase;"></span>
+                    <h2 id="tmTitle" style="font-size: 2.2rem; margin: 0.5rem 0 1rem; color: var(--c-primary);"></h2>
+                    <p id="tmDesc" style="font-size: 1.1rem; color: var(--c-text-muted); line-height: 1.6; margin-bottom: 2rem;"></p>
+                    <button onclick="window.location.href='blog.html'" class="btn-solid-cream" style="background: var(--c-primary); color: var(--c-bg); border-radius: 50px; padding: 0.8rem 2rem; font-weight: 600; border: none; cursor: pointer;">Explore More <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shelf Modal -->
+        <div id="shelfModal" class="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; justify-content: center; align-items: center;">
+            <button onclick="closeShelfModal()" style="position: absolute; top: 2rem; right: 2rem; background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.3); width: 50px; height: 50px; border-radius: 50%; font-size: 1.5rem; cursor: pointer;"><i class="fa-solid fa-xmark"></i></button>
+            <div style="text-align: center; color: #fff;">
+                <i class="fa-solid fa-cubes" style="font-size: 5rem; color: var(--c-accent); margin-bottom: 2rem; animation: float 3s infinite ease-in-out;"></i>
+                <h2 style="font-size: 3rem; font-family: var(--font-heading); margin-bottom: 1rem;">Welcome to the Digital Archive</h2>
+                <p style="opacity: 0.7; max-width: 400px; margin: 0 auto 2rem;">Drag to rotate the bookshelf. Click a book to read.</p>
+                <button onclick="window.location.href='collection.html'" style="background: var(--c-accent); border: none; padding: 1rem 3rem; border-radius: 50px; font-weight: bold; color: #fff; cursor: pointer; font-size: 1.1rem;">Enter 3D Library</button>
+            </div>
+        </div>
+
+        <!-- CTA SECTION -->
+        <section class="cta section">
+            <div class="cta-banner">
+                <div class="container cta-content">
+                    <div class="cta-text">
+                        <h2>Join a community of curious minds.</h2>
+                        <p>Read. Learn. Grow. Together.</p>
+                    </div>
+                    <button class="btn-solid-cream" onclick="window.location.href='library.html'">Explore Library <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+                <div class="cta-bg-elements">
+                    <i class="fa-solid fa-feather-pointed cta-feather"></i>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-book-open"></i>
+                        <i class="fa-solid fa-fire logo-flame"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h2>Archivia</h2>
+                        <span>BOOKS &bull; NEWS &bull; IDEAS</span>
+                    </div>
+                </a>
+                <p class="footer-desc">A modern destination for discovering books, exploring ideas and staying informed.</p>
+                <div class="socials">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="home2.html">Home 2</a>
+                <a href="about.html">About Us</a>
+                <a href="library.html">Library</a>
+                <a href="services.html">Services</a>
+                <a href="blog.html">Blog</a>
+                <a href="pricing.html">Pricing</a>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Support</h4>
+                <a href="contact.html">Contact</a>
+                <a href="faq.html">FAQ</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+            
+            <div class="footer-contact">
+                <h4>Get in Touch</h4>
+                <p><i class="fa-regular fa-envelope"></i> hello@Archivia.com</p>
+                <p><i class="fa-solid fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fa-solid fa-location-dot"></i> 123 Literary Lane, NY</p>
+                <p><i class="fa-regular fa-clock"></i> Mon - Sat: 9AM - 6PM</p>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Archivia. All Rights Reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+        <!-- Detailed Shelf Book Modal -->
+        <div id="shelfBookModal" class="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(8px);">
+            <div class="modal-content" style="background: var(--c-bg); color: var(--c-text); width: 95%; max-width: 1000px; border-radius: 20px; overflow: hidden; display: flex; position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.5);">
+                <button onclick="closeShelfBookModal()" style="position: absolute; top: 1.5rem; right: 1.5rem; background: var(--c-surface); border: 1px solid var(--c-border); width: 45px; height: 45px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; z-index: 10; color: var(--c-text); transition: 0.3s;"><i class="fa-solid fa-xmark"></i></button>
+                
+                <div style="width: 35%; background: var(--c-deep); padding: 4rem 2rem; display: flex; align-items: center; justify-content: center;">
+                    <img id="sbmCover" src="" style="width: 100%; max-width: 250px; border-radius: 4px; box-shadow: 15px 15px 30px rgba(0,0,0,0.6);">
+                </div>
+                
+                <div style="width: 65%; padding: 4rem 3rem; display: flex; flex-direction: column; justify-content: center;">
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                        <span id="sbmGenre" style="background: var(--c-surface); color: var(--c-primary); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase;"></span>
+                        <span style="color: var(--c-text-muted); font-size: 0.9rem; align-self: center;">CATALOG: <span id="sbmCatalog"></span></span>
+                    </div>
+                    
+                    <h2 id="sbmTitle" style="font-size: 3rem; font-family: var(--font-heading); color: var(--c-primary); margin-bottom: 0.5rem; line-height: 1.1;"></h2>
+                    <h4 id="sbmAuthor" style="font-size: 1.4rem; color: var(--c-accent); font-weight: 400; margin-bottom: 1.5rem;"></h4>
+                    
+                    <div style="display: flex; gap: 2rem; margin-bottom: 2rem; border-top: 1px solid var(--c-border); border-bottom: 1px solid var(--c-border); padding: 1rem 0;">
+                        <div>
+                            <span style="display: block; font-size: 0.75rem; color: var(--c-text-muted); font-weight: bold;">PUBLISHED</span>
+                            <span id="sbmYear" style="font-weight: 600;"></span>
+                        </div>
+                        <div>
+                            <span style="display: block; font-size: 0.75rem; color: var(--c-text-muted); font-weight: bold;">AVAILABILITY</span>
+                            <span style="font-weight: 600; color: #2E8B57;"><i class="fa-solid fa-check-circle"></i> Digital Archive</span>
+                        </div>
+                    </div>
+                    
+                    <p id="sbmDesc" style="font-size: 1.1rem; line-height: 1.7; color: var(--c-text-muted); margin-bottom: 2.5rem;">A legendary work now digitized and fully restored for the modern reader. Experience the original text with high-resolution scans of the first edition prints.</p>
+                    
+                    <div style="display: flex; gap: 1.5rem;">
+                        <a id="sbmReadBtn" href="#" class="btn-solid-cream" style="display:inline-block; text-decoration:none; background: var(--c-primary); color: var(--c-bg); padding: 1rem 2.5rem; border-radius: 50px; font-weight: 600; border: none; cursor: pointer; font-size: 1rem; align-items: center; gap: 0.5rem;"><i class="fa-solid fa-book-open"></i> READ PREVIEW</a>
+                        <button id="sbmBookmarkBtn" class="btn-outline-gold" style="background: transparent; color: var(--c-primary); border: 2px solid var(--c-primary); padding: 1rem 2.5rem; border-radius: 50px; font-weight: 600; cursor: pointer; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem;"><i class="fa-regular fa-bookmark"></i> ADD TO BOOKMARKS</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+<div id="quizModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center; backdrop-filter: blur(5px);">
+    <div style="background: var(--c-surface); padding: 3rem; border-radius: 16px; max-width: 600px; width: 90%; position: relative;">
+        <button onclick="document.getElementById('quizModal').style.display='none'" style="position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; font-size: 1.5rem; color: var(--c-text); cursor: pointer;"><i class="fa-solid fa-xmark"></i></button>
+        
+        <div id="q1">
+            <h3 style="font-family: var(--font-heading); font-size: 2rem; margin-bottom: 1.5rem;">Question 1 of 5</h3>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">What type of setting usually draws you in?</p>
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <button class="quiz-opt" onclick="nextQ(1)">A bustling, futuristic metropolis</button>
+                <button class="quiz-opt" onclick="nextQ(1)">A quiet, mysterious countryside</button>
+                <button class="quiz-opt" onclick="nextQ(1)">A magical realm full of wonders</button>
+                <button class="quiz-opt" onclick="nextQ(1)">A historically accurate ancient city</button>
+            </div>
+        </div>
+        
+        <div id="q2" style="display:none;">
+            <h3 style="font-family: var(--font-heading); font-size: 2rem; margin-bottom: 1.5rem;">Question 2 of 5</h3>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">Which protagonist trait do you prefer?</p>
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <button class="quiz-opt" onclick="nextQ(2)">Flawed but brilliant</button>
+                <button class="quiz-opt" onclick="nextQ(2)">Brave and selfless</button>
+                <button class="quiz-opt" onclick="nextQ(2)">Cunning and ambitious</button>
+                <button class="quiz-opt" onclick="nextQ(2)">Ordinary person in extraordinary circumstances</button>
+            </div>
+        </div>
+
+        <div id="q3" style="display:none;">
+            <h3 style="font-family: var(--font-heading); font-size: 2rem; margin-bottom: 1.5rem;">Question 3 of 5</h3>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">What pacing do you enjoy the most?</p>
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <button class="quiz-opt" onclick="nextQ(3)">Fast and action-packed</button>
+                <button class="quiz-opt" onclick="nextQ(3)">Slow burn with deep character development</button>
+                <button class="quiz-opt" onclick="nextQ(3)">Unpredictable with lots of twists</button>
+                <button class="quiz-opt" onclick="nextQ(3)">Atmospheric and lyrical</button>
+            </div>
+        </div>
+
+        <div id="q4" style="display:none;">
+            <h3 style="font-family: var(--font-heading); font-size: 2rem; margin-bottom: 1.5rem;">Question 4 of 5</h3>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">Pick a central theme:</p>
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <button class="quiz-opt" onclick="nextQ(4)">Love and betrayal</button>
+                <button class="quiz-opt" onclick="nextQ(4)">Survival against all odds</button>
+                <button class="quiz-opt" onclick="nextQ(4)">Solving a complex mystery</button>
+                <button class="quiz-opt" onclick="nextQ(4)">Coming of age and self-discovery</button>
+            </div>
+        </div>
+
+        <div id="q5" style="display:none;">
+            <h3 style="font-family: var(--font-heading); font-size: 2rem; margin-bottom: 1.5rem;">Question 5 of 5</h3>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">How long should the book be?</p>
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <button class="quiz-opt" onclick="nextQ(5)">Short and sweet (Under 300 pages)</button>
+                <button class="quiz-opt" onclick="nextQ(5)">Standard length (300-500 pages)</button>
+                <button class="quiz-opt" onclick="nextQ(5)">An epic doorstopper (500+ pages)</button>
+                <button class="quiz-opt" onclick="nextQ(5)">I don't mind, as long as it's good!</button>
+            </div>
+        </div>
+
+        <div id="qResult" style="display:none; text-align: center;">
+            <h3 style="font-family: var(--font-heading); font-size: 2.5rem; margin-bottom: 1rem; color: var(--c-accent);">Your Match!</h3>
+            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=300&q=80" style="width: 150px; border-radius: 8px; margin-bottom: 1.5rem; box-shadow: var(--shadow-sm);">
+            <h4 style="font-size: 1.5rem; margin-bottom: 0.5rem; font-family: var(--font-heading);">The Midnight Library</h4>
+            <p style="color: var(--c-text-muted); margin-bottom: 2rem;">Based on your choices, this philosophical and heartwarming journey is perfect for you.</p>
+            <button class="btn-solid-cream" onclick="document.getElementById('quizModal').style.display='none'; resetQ();" style="background: #5A1725; color: #FFF9F1;">Close & Explore</button>
+        </div>
+    </div>
+</div>
+
+<style>
+.quiz-opt {
+    padding: 1rem 1.5rem;
+    border: 1px solid var(--c-border);
+    border-radius: 8px;
+    background: var(--c-bg);
+    color: var(--c-text);
+    text-align: left;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.quiz-opt:hover {
+    background: var(--c-accent);
+    color: #FFF9F1;
+    border-color: var(--c-accent);
+}
+
+@keyframes scrollMarquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+.marquee-wrapper.paused {
+    animation-play-state: paused;
+}
+.scroll-card {
+    position: relative;
+    width: 250px;
+    height: 350px;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: 0.3s;
+}
+.scroll-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.scroll-info {
+    position: absolute;
+    bottom: 0; left: 0; width: 100%;
+    background: rgba(13, 6, 52, 0.95);
+    color: #F1E3D3;
+    padding: 1.5rem;
+    transform: translateY(100%);
+    transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.scroll-info h4 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+.scroll-info p {
+    color: var(--c-accent);
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+.scroll-card.active .scroll-info {
+    transform: translateY(0);
+}
+.scroll-card.active {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+    z-index: 10;
+}
+
+    /* Premium UI Enhancements */
+    section { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+    section.visible { opacity: 1; transform: translateY(0); }
+    
+    .hero-content { animation: heroFadeIn 1s ease-out forwards; }
+    @keyframes heroFadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .book-spine { transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s; }
+    .book-spine:hover { transform: translateY(-15px) scale(1.05); box-shadow: 0 15px 30px rgba(0,0,0,0.3); z-index: 10; }
+    
+    .article-card { transition: transform 0.3s ease, box-shadow 0.3s ease; border: 1px solid transparent; }
+    .article-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); border-color: var(--c-border); }
+    .article-card img { transition: transform 0.6s ease; }
+    .article-card:hover img { transform: scale(1.05); }
+    
+    .archive-item { transition: transform 0.4s ease, box-shadow 0.4s ease; border-radius: 12px; overflow: hidden; }
+    .archive-item:hover { transform: scale(1.02) translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.15); z-index: 2; }
+    .archive-item img { transition: transform 0.8s ease; }
+    .archive-item:hover img { transform: scale(1.1); }
+    
+    .btn-solid, .btn-outline { transition: all 0.3s ease; position: relative; overflow: hidden; }
+    .btn-solid:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); }
+    .btn-outline:hover { background-color: var(--c-primary); color: var(--c-bg); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); }
+
+</style>
+
+<script>
+function nextQ(current) {
+    document.getElementById('q' + current).style.display = 'none';
+    if (current < 5) {
+        document.getElementById('q' + (current + 1)).style.display = 'block';
+    } else {
+        document.getElementById('qResult').style.display = 'block';
+    }
+}
+function resetQ() {
+    document.getElementById('qResult').style.display = 'none';
+    document.getElementById('q1').style.display = 'block';
+}
+
+function toggleScrollInfo(el) {
+    const wrapper = document.querySelector('.marquee-wrapper');
+    const wasActive = el.classList.contains('active');
+    
+    document.querySelectorAll('.scroll-card').forEach(c => c.classList.remove('active'));
+    
+    if (!wasActive) {
+        el.classList.add('active');
+        wrapper.classList.add('paused');
+    } else {
+        wrapper.classList.remove('paused');
+    }
+}
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const sections = document.querySelectorAll("section");
+        
+        const observerOptions = {
+            root: null,
+            rootMargin: "0px",
+            threshold: 0.15
+        };
+        
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+        
+        // Ensure hero is visible immediately
+        setTimeout(() => {
+            const hero = document.querySelector(".hero-section");
+            if(hero) hero.classList.add("visible");
+        }, 100);
+    });
+</script>
+
+</body>
+</html>

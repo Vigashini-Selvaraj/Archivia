@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Midnight Library - Book Details | Archivia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specific Book Details Styles leveraging style.css variables */
+        .book-hero { padding-top: 8rem; position: relative; overflow: hidden; background: var(--c-surface); border-bottom: 1px solid var(--c-border); }
+        .book-hero-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: center; max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
+        .book-cover-large { width: 100%; border-radius: 12px; box-shadow: var(--shadow-lg); transition: transform 0.3s ease; }
+        .book-cover-large:hover { transform: scale(1.02) rotate(1deg); }
+        
+        .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 2rem; border-top: 1px solid var(--c-border); padding-top: 2rem; }
+        .stat-box { text-align: left; }
+        .stat-label { font-size: 0.8rem; color: var(--c-text-muted); text-transform: uppercase; font-weight: bold; letter-spacing: 1px; margin-bottom: 0.5rem; }
+        .stat-value { font-size: 1.1rem; color: var(--c-text); font-weight: 600; font-family: var(--font-body); }
+        
+        .highlight-card { background: var(--c-bg); border: 1px solid var(--c-border); padding: 2rem; border-radius: 12px; transition: var(--transition); }
+        .highlight-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--c-primary); }
+        
+        .author-box { display: flex; gap: 3rem; align-items: center; background: var(--c-primary); color: var(--c-bg); padding: 4rem; border-radius: 16px; box-shadow: var(--shadow-lg); }
+        .author-photo { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 4px solid var(--c-accent); flex-shrink: 0; }
+        
+        .review-card { background: var(--c-surface); border: 1px solid var(--c-border); padding: 2rem; border-radius: 12px; }
+        
+        @media(max-width: 900px) {
+            .book-hero-grid { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
+            .book-cover-large { max-width: 300px; margin: 0 auto; }
+            .stat-grid { grid-template-columns: 1fr 1fr; }
+            .author-box { flex-direction: column; text-align: center; padding: 2rem; }
+        }
+    
+        .grid-responsive-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4rem; align-items: center; }
+        @media(max-width: 900px) {
+            .grid-responsive-2 { grid-template-columns: 1fr; gap: 2rem; }
+        }
+    </style>
+
+    <style>
+        .grid-responsive-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .grid-responsive-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+        @media(max-width: 900px) {
+            .grid-responsive-3, .grid-responsive-4 { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media(max-width: 600px) {
+            .grid-responsive-3, .grid-responsive-4 { grid-template-columns: 1fr; }
+        }
+    
+        .grid-responsive-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4rem; align-items: center; }
+        @media(max-width: 900px) {
+            .grid-responsive-2 { grid-template-columns: 1fr; gap: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="about.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                    <i class="fa-solid fa-fire logo-flame"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Archivia</h1>
+                    <span>BOOKS &bull; NEWS &bull; IDEAS</span>
+                </div>
+            </a>
+            
+            <div class="nav-links desktop-only">
+                <a href="index.html" >Home</a>
+                <a href="home2.html">Home 2</a>
+                <a href="about.html">About Us</a>
+                <a href="library.html">Library</a>
+                <a href="services.html">Services</a>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact</a>
+            </div>
+
+                        <div class="nav-controls">
+                <button id="rtlToggle" class="nav-btn rtl-btn" style="width: 60px; justify-content: center;">
+                    <span class="dir-text fw-600">LTR</span>
+                </button>
+                <button id="themeToggle" class="nav-btn theme-btn">
+                    <i class="fa-solid fa-sun light-icon"></i>
+                    <i class="fa-solid fa-moon dark-icon" style="display:none;"></i>
+                </button>
+                <div class="profile-dropdown-wrap desktop-only">
+                    <button class="nav-btn profile-btn"><i class="fa-regular fa-user"></i> <i class="fa-solid fa-chevron-down small-chevron" style="font-size:0.7rem;"></i></button>
+                    <div class="profile-dropdown">
+                        <a href="login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
+                        <a href="register.html"><i class="fa-solid fa-user-plus"></i> Register</a>
+                    </div>
+                </div>
+                <button id="mobileMenuBtn" class="nav-btn mobile-only"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </nav>
+    <div id="mobileMenu" class="mobile-menu">
+        <button id="closeMobileMenu" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+        <div class="mobile-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="home2.html">Home 2</a>
+            <a href="about.html">About Us</a>
+            <a href="library.html">Library</a>
+            <a href="services.html">Services</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact</a>
+            <div style="width: 100%; height: 1px; background: var(--c-border); margin: 1rem 0;"></div>
+            <a href="login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
+            <a href="register.html"><i class="fa-solid fa-user-plus"></i> Register</a>
+        </div>
+    </div>
+
+    <main>
+        <!-- 01. BOOK HERO / COVER STORY -->
+        <section class="book-hero">
+            <div class="hero-bg-texture" style="background-image: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1920&q=80'); opacity: 0.05;"></div>
+            <div class="book-hero-grid position-relative">
+                <div>
+                    <img id="hero-img" src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=800&q=80" alt="Book Cover" class="book-cover-large">
+                </div>
+                <div>
+                    <div class="eyebrow" style="color: var(--c-accent); margin-bottom: 1rem;"><i class="fa-solid fa-star"></i> FICTION &bull; BESTSELLER</div>
+                    <h1 id="hero-title" style="font-size: 4rem; font-family: var(--font-heading); line-height: 1.1; margin-bottom: 1rem;">The Midnight Library</h1>
+                    <h2 id="hero-author" style="font-size: 2rem; font-family: var(--font-heading); font-style: italic; color: var(--c-text-muted); margin-bottom: 2rem;">By Matt Haig</h2>
+                    
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+                        <div style="color: #f39c12; font-size: 1.2rem;">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <span style="color: var(--c-text-muted); font-weight: 600;">4.8/5 (12,450 Reviews)</span>
+                    </div>
+                    
+                    <p style="font-size: 1.2rem; color: var(--c-text); line-height: 1.8; margin-bottom: 3rem;">
+                        Between life and death there is a library, and within that library, the shelves go on forever. Every book provides a chance to try another life you could have lived.
+                    </p>
+                    
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <button onclick="window.location.href='online-reader.html'" class="btn-solid-cream" style="padding: 1rem 2.5rem; border-radius: 50px; font-weight: 600; background: var(--c-primary); color: var(--c-bg); border: none; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;"><i class="fa-solid fa-book-open"></i> Read Now</button>
+                        <a href="collection.html" class="btn-outline-gold" style="display:inline-block; padding: 1rem 2.5rem; border-radius: 50px; font-weight: 600; border: 2px solid var(--c-primary); color: var(--c-primary); background: transparent; text-decoration:none; font-size: 1.1rem; cursor: pointer; align-items: center; gap: 0.5rem; transition: 0.3s;" onmouseover="this.style.background='var(--c-primary)'; this.style.color='#FFF';" onmouseout="this.style.background='transparent'; this.style.color='var(--c-primary)';"><i class="fa-solid fa-bookmark"></i> Add to Shelf</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 02. ABOUT THE BOOK -->
+        <section class="section">
+            <div class="container" style="max-width: 900px; margin: 0 auto;">
+                <div style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 2rem; width: 100%;">
+                    <div class="eyebrow" style="color: var(--c-accent); margin-bottom: 1rem;">SYNOPSIS</div>
+                    <h2 style="font-size: 3rem; font-family: var(--font-heading);"><span style="color: var(--split-c1);">About the</span> <span style="color: var(--split-c2);">Book</span></h2>
+                </div>
+                <p style="font-size: 1.2rem; color: var(--c-text-muted); line-height: 2; margin-bottom: 1.5rem; text-align: center;">
+                    Somewhere out beyond the edge of the universe there is a library that contains an infinite number of books, each one the story of another reality. One tells the story of your life as it is, along with another book for the other life you could have lived if you had made a different choice at any point in your life. While we all wonder how our lives might have been, what if you had the chance to go to the library and see for yourself? Would any of these other lives truly be better?
+                </p>
+                <p style="font-size: 1.2rem; color: var(--c-text-muted); line-height: 2; text-align: center;">
+                    In The Midnight Library, Matt Haig's enchanting blockbuster novel, Nora Seed finds herself faced with this decision. Faced with the possibility of changing her life for a new one, following a different career, undoing old breakups, realizing her dreams of becoming a glaciologist; she must search within herself as she travels through the Midnight Library to decide what is truly fulfilling in life, and what makes it worth living in the first place.
+                </p>
+            </div>
+        </section>
+
+        <!-- 03. BOOK AT A GLANCE -->
+        <section class="section" style="background: var(--c-surface);">
+            <div class="container">
+                <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 2rem;">
+                    <h2 style="font-size: 2.5rem; font-family: var(--font-heading);"><span style="color: var(--split-c1);">Book at a</span> <span style="color: var(--split-c2);">Glance</span></h2>
+                </div>
+                
+                <div class="stat-grid" style="background: var(--c-bg); padding: 3rem; border-radius: 12px; border: 1px solid var(--c-border); box-shadow: var(--shadow-sm);">
+                    <div class="stat-box">
+                        <div class="stat-label">Author</div>
+                        <div class="stat-value" id="stat-author">Matt Haig</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Publication Year</div>
+                        <div class="stat-value">2020</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Publisher</div>
+                        <div class="stat-value">Viking</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Language</div>
+                        <div class="stat-value">English</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Pages</div>
+                        <div class="stat-value">288</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Genre</div>
+                        <div class="stat-value">Fiction, Fantasy, Science Fiction</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">ISBN</div>
+                        <div class="stat-value">9780525559474</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Availability</div>
+                        <div class="stat-value" style="color: #27ae60;"><i class="fa-solid fa-circle-check"></i> Available in Library</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04. WHAT MAKES THIS BOOK INTERESTING -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header" style="justify-content: space-between; align-items: flex-end; margin-bottom: 3rem;">
+                    <div>
+                        <div class="eyebrow" style="color: var(--c-accent);">KEY HIGHLIGHTS</div>
+                        <h2 style="font-size: 3rem; font-family: var(--font-heading);"><span style="color: var(--split-c1);">Themes &</span> <span style="color: var(--split-c2);">Highlights</span></h2>
+                    </div>
+                </div>
+                
+                <div class="grid-responsive-3">
+                    <div class="highlight-card">
+                        <div style="font-size: 2.5rem; color: var(--c-accent); margin-bottom: 1rem;"><i class="fa-solid fa-infinity"></i></div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1rem;">The Multiverse Theory</h3>
+                        <p style="color: var(--c-text-muted); line-height: 1.6;">Explores the quantum physics concept of parallel universes translated into personal human choices.</p>
+                    </div>
+                    <div class="highlight-card">
+                        <div style="font-size: 2.5rem; color: var(--c-accent); margin-bottom: 1rem;"><i class="fa-solid fa-heart-pulse"></i></div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1rem;">Mental Health & Regret</h3>
+                        <p style="color: var(--c-text-muted); line-height: 1.6;">A profound look into depression, the heavy burden of regret, and the journey toward self-acceptance.</p>
+                    </div>
+                    <div class="highlight-card">
+                        <div style="font-size: 2.5rem; color: var(--c-accent); margin-bottom: 1rem;"><i class="fa-solid fa-compass"></i></div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1rem;">Meaning of Success</h3>
+                        <p style="color: var(--c-text-muted); line-height: 1.6;">Challenges societal definitions of success, fame, and wealth against everyday human connection.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05. INSIDE THE PAGES -->
+        <section class="section" style="background: var(--c-surface);">
+            <div class="container">
+                <div class="section-header" style="justify-content: space-between; align-items: flex-end; margin-bottom: 3rem;">
+                    <div>
+                        <div class="eyebrow" style="color: var(--c-accent);">STRUCTURE</div>
+                        <h2 style="font-size: 3rem; font-family: var(--font-heading);"><span style="color: var(--split-c1);">Inside the</span> <span style="color: var(--split-c2);">Pages</span></h2>
+                    </div>
+                </div>
+                
+                <div class="grid-responsive-2">
+                    <div>
+                        <style>
+                            @keyframes slideInItems {
+                                from { opacity: 0; transform: translateX(-40px); }
+                                to { opacity: 1; transform: translateX(0); }
+                            }
+                        
+        .grid-responsive-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4rem; align-items: center; }
+        @media(max-width: 900px) {
+            .grid-responsive-2 { grid-template-columns: 1fr; gap: 2rem; }
+        }
+    </style>
+                        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1.5rem;">
+                            <li style="display: flex; gap: 1.5rem; align-items: flex-start; padding-bottom: 1.5rem; border-bottom: 1px solid var(--c-border); opacity: 0; animation: slideInItems 0.8s ease forwards; animation-delay: 0.2s;">
+                                <div style="font-family: var(--font-heading); font-size: 2rem; color: var(--c-accent); font-weight: bold; width: 40px;">01</div>
+                                <div style="flex: 1;">
+                                    <h4 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.5rem;">The Book of Regrets</h4>
+                                    <p style="color: var(--c-text-muted); font-size: 0.95rem; margin-bottom: 1rem;">The heavy volume containing every regret Nora has ever had, which she must confront before moving forward.</p>
+                                    <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=300&q=80" style="width: 140px; height: 90px; object-fit: cover; border-radius: 8px; box-shadow: var(--shadow-sm);" alt="Book of Regrets">
+                                </div>
+                            </li>
+                            <li style="display: flex; gap: 1.5rem; align-items: flex-start; padding-bottom: 1.5rem; border-bottom: 1px solid var(--c-border); opacity: 0; animation: slideInItems 0.8s ease forwards; animation-delay: 0.4s;">
+                                <div style="font-family: var(--font-heading); font-size: 2rem; color: var(--c-accent); font-weight: bold; width: 40px;">02</div>
+                                <div style="flex: 1;">
+                                    <h4 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.5rem;">The Glaciologist Life</h4>
+                                    <p style="color: var(--c-text-muted); font-size: 0.95rem; margin-bottom: 1rem;">A deep dive into one of Nora's unfulfilled dreams in the freezing expanses of Svalbard.</p>
+                                    <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=300&q=80" style="width: 140px; height: 90px; object-fit: cover; border-radius: 8px; box-shadow: var(--shadow-sm);" alt="Glaciologist Life">
+                                </div>
+                            </li>
+                            <li style="display: flex; gap: 1.5rem; align-items: flex-start; opacity: 0; animation: slideInItems 0.8s ease forwards; animation-delay: 0.6s;">
+                                <div style="font-family: var(--font-heading); font-size: 2rem; color: var(--c-accent); font-weight: bold; width: 40px;">03</div>
+                                <div style="flex: 1;">
+                                    <h4 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.5rem;">The Rockstar Timeline</h4>
+                                    <p style="color: var(--c-text-muted); font-size: 0.95rem; margin-bottom: 1rem;">Exploring fame, fortune, and the hidden costs of massive international success.</p>
+                                    <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=300&q=80" style="width: 140px; height: 90px; object-fit: cover; border-radius: 8px; box-shadow: var(--shadow-sm);" alt="Rockstar Timeline">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div style="height: 400px; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-md);">
+                        <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=800&q=80" style="width: 100%; height: 100%; object-fit: cover; filter: sepia(0.2);" alt="Library interior">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 06. ABOUT THE AUTHOR -->
+        <section class="section">
+            <div class="container">
+                <div class="author-box">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80" alt="Matt Haig" class="author-photo">
+                    <div>
+                        <div class="eyebrow" style="color: var(--c-accent); margin-bottom: 0.5rem;">THE MIND BEHIND THE BOOK</div>
+                        <h2 id="author-name" style="font-size: 3rem; font-family: var(--font-heading); margin-bottom: 1rem; color: var(--c-bg);">Matt Haig</h2>
+                        <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem; opacity: 0.9;">
+                            Matt Haig is the number one bestselling author of Reasons to Stay Alive, Notes on a Nervous Planet, and several highly acclaimed novels for adults, including How to Stop Time, The Humans, and The Radleys. His work often tackles themes of mental health, existence, and time with immense empathy and wit.
+                        </p>
+                        <div style="margin-bottom: 2rem; opacity: 0.8; font-size: 0.9rem;">
+                            <strong>Notable Works:</strong> How to Stop Time &bull; The Humans &bull; Reasons to Stay Alive
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 07. READER EXPERIENCE -->
+        <section class="section" style="background: var(--c-surface);">
+            <div class="container">
+                <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 3rem;">
+                    <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+                        <div class="eyebrow" style="color: var(--c-accent);">COMMUNITY</div>
+                        <h2 style="font-size: 3rem; font-family: var(--font-heading);"><span style="color: var(--split-c1);">Reader</span> <span style="color: var(--split-c2);">Experience</span></h2>
+                    </div>
+                </div>
+                
+                <div class="grid-responsive-3">
+                    <div class="review-card" style="background: var(--c-bg); padding: 2.5rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--c-border); transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: default;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='var(--shadow-lg)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-md)';">
+                        <div style="color: #f39c12; font-size: 1.2rem; margin-bottom: 1.5rem;">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <h4 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1rem; color: var(--c-primary);">A profound masterpiece</h4>
+                        <p style="color: var(--c-text-muted); line-height: 1.8; font-size: 1.05rem; margin-bottom: 2rem;">"This book fundamentally changed how I view my past mistakes. It is beautiful, sad, and ultimately incredibly uplifting."</p>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--c-accent); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold;">S</div>
+                            <div style="font-weight: bold; font-size: 0.95rem; color: var(--c-text);">Sarah Jenkins</div>
+                        </div>
+                    </div>
+                    <div class="review-card" style="background: var(--c-bg); padding: 2.5rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--c-border); transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: default;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='var(--shadow-lg)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-md)';">
+                        <div style="color: #f39c12; font-size: 1.2rem; margin-bottom: 1.5rem;">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <h4 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1rem; color: var(--c-primary);">Brilliant concept</h4>
+                        <p style="color: var(--c-text-muted); line-height: 1.8; font-size: 1.05rem; margin-bottom: 2rem;">"The way Haig weaves philosophy into an accessible fiction narrative is stunning. I couldn't put it down."</p>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--c-accent); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold;">M</div>
+                            <div style="font-weight: bold; font-size: 0.95rem; color: var(--c-text);">Michael T.</div>
+                        </div>
+                    </div>
+                    <div class="review-card" style="background: var(--c-bg); padding: 2.5rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--c-border); transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: default;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='var(--shadow-lg)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-md)';">
+                        <div style="color: #f39c12; font-size: 1.2rem; margin-bottom: 1.5rem;">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <h4 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1rem; color: var(--c-primary);">Simply beautiful</h4>
+                        <p style="color: var(--c-text-muted); line-height: 1.8; font-size: 1.05rem; margin-bottom: 2rem;">"An absolute triumph of imagination and empathy. Highly recommended for anyone going through a tough transition in life."</p>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--c-accent); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold;">E</div>
+                            <div style="font-weight: bold; font-size: 0.95rem; color: var(--c-text);">Emma Woodhouse</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 08. RELATED BOOKS -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header" style="justify-content: space-between; align-items: flex-end; margin-bottom: 3rem;">
+                    <div>
+                        <div class="eyebrow" style="color: var(--c-accent);">SIMILAR READS</div>
+                        <h2 style="font-size: 3rem; font-family: var(--font-heading);"><span style="color: var(--split-c1);">Related</span> <span style="color: var(--split-c2);">Books</span></h2>
+                    </div>
+                    <a href="library.html" class="view-all">View Library <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="grid-responsive-4">
+                    <!-- Reuse lib-card style natively from library -->
+                    <div style="background: var(--c-surface); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--c-border); display: flex; flex-direction: column;">
+                        <div style="border-radius: 8px; overflow: hidden; margin-bottom: 1rem; height: 200px;"><img src="https://images.unsplash.com/photo-1499540633125-484965b60031?auto=format&fit=crop&w=400&q=80" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                        <div style="font-size: 0.8rem; color: var(--c-accent); margin-bottom: 0.5rem; font-weight: bold;">FICTION</div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.2rem;">How to Stop Time</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.8rem; margin-bottom: 1rem;">Matt Haig &bull; 2017</p>
+                        <a href="#" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600; text-decoration: none;">View Book</a>
+                    </div>
+                    <div style="background: var(--c-surface); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--c-border); display: flex; flex-direction: column;">
+                        <div style="border-radius: 8px; overflow: hidden; margin-bottom: 1rem; height: 200px;"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                        <div style="font-size: 0.8rem; color: var(--c-accent); margin-bottom: 0.5rem; font-weight: bold;">FICTION</div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.2rem;">Dark Matter</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.8rem; margin-bottom: 1rem;">Blake Crouch &bull; 2016</p>
+                        <a href="#" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600; text-decoration: none;">View Book</a>
+                    </div>
+                    <div style="background: var(--c-surface); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--c-border); display: flex; flex-direction: column;">
+                        <div style="border-radius: 8px; overflow: hidden; margin-bottom: 1rem; height: 200px;"><img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=400&q=80" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                        <div style="font-size: 0.8rem; color: var(--c-accent); margin-bottom: 0.5rem; font-weight: bold;">FICTION</div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.2rem;">Oona Out of Order</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.8rem; margin-bottom: 1rem;">Margarita Montimore &bull; 2020</p>
+                        <a href="#" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600; text-decoration: none;">View Book</a>
+                    </div>
+                    <div style="background: var(--c-surface); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--c-border); display: flex; flex-direction: column;">
+                        <div style="border-radius: 8px; overflow: hidden; margin-bottom: 1rem; height: 200px;"><img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?auto=format&fit=crop&w=400&q=80" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                        <div style="font-size: 0.8rem; color: var(--c-accent); margin-bottom: 0.5rem; font-weight: bold;">FICTION</div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.2rem;">The Time Traveler's Wife</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.8rem; margin-bottom: 1rem;">Audrey Niffenegger &bull; 2003</p>
+                        <a href="#" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600; text-decoration: none;">View Book</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 09. YOU MAY ALSO EXPLORE -->
+        <section class="section" style="background: var(--c-surface);">
+            <div class="container">
+                <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 3rem;">
+                    <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+                        <div class="eyebrow" style="color: var(--c-accent);">ARTICLES & ARCHIVES</div>
+                        <h2 style="font-size: 3rem; font-family: var(--font-heading);"><span style="color: var(--split-c1);">You May</span> <span style="color: var(--split-c2);">Also Explore</span></h2>
+                    </div>
+                </div>
+                
+                <style>
+                    .grid-explore { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+                    @media(max-width: 768px) {
+                        .grid-explore { grid-template-columns: 1fr; }
+                        .card-explore { flex-direction: column; text-align: center; }
+                        .card-explore > div:first-child { width: 100%; height: 200px; }
+                    }
+                </style>
+                <div class="grid-explore">
+                    <div class="card-explore" style="display: flex; gap: 1.5rem; background: var(--c-bg); border: 1px solid var(--c-border); padding: 1.5rem; border-radius: 12px; align-items: center;">
+                        <div style="width: 100px; height: 100px; border-radius: 8px; overflow: hidden; flex-shrink: 0;"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                        <div>
+                            <div style="font-size: 0.8rem; color: var(--c-accent); font-weight: bold; margin-bottom: 0.3rem;">EDITORIAL ARTICLE</div>
+                            <h4 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.5rem;"><a href="#" style="color: var(--c-primary); text-decoration: none;">The Science of Regret</a></h4>
+                            <p style="color: var(--c-text-muted); font-size: 0.9rem;">How modern psychology views our obsession with the past.</p>
+                        </div>
+                    </div>
+                    <div class="card-explore" style="display: flex; gap: 1.5rem; background: var(--c-bg); border: 1px solid var(--c-border); padding: 1.5rem; border-radius: 12px; align-items: center;">
+                        <div style="width: 100px; height: 100px; border-radius: 8px; overflow: hidden; flex-shrink: 0;"><img src="https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=400&q=80" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                        <div>
+                            <div style="font-size: 0.8rem; color: var(--c-accent); font-weight: bold; margin-bottom: 0.3rem;">HISTORICAL ARCHIVE</div>
+                            <h4 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.5rem;"><a href="#" style="color: var(--c-primary); text-decoration: none;">The Multiverse in 1920s Fiction</a></h4>
+                            <p style="color: var(--c-text-muted); font-size: 0.9rem;">Early explorations of alternate realities in literature.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. CONTINUE YOUR READING -->
+        <section class="section" style="background: var(--c-deep); color: var(--c-bg);">
+            <div class="container" style="max-width: 800px; margin: 0 auto;">
+                <div style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 3rem; width: 100%;">
+                    <div class="eyebrow" style="color: var(--c-accent); margin-bottom: 1rem;">WHAT'S NEXT?</div>
+                    <h2 style="font-size: 3.5rem; font-family: var(--font-heading); color: var(--c-bg);">
+                        Are you ready to open <br>
+                        <span style="font-style: italic; color: var(--c-accent);">The Midnight Library?</span>
+                    </h2>
+                </div>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="#" class="btn-solid-cream" style="padding: 1rem 2.5rem; border-radius: 50px; font-weight: 600; background: var(--c-accent); color: var(--c-bg); text-decoration: none; border: none; font-size: 1.1rem;"><i class="fa-solid fa-book-open"></i> Read Now</a>
+                    <a href="collection.html" class="btn-outline-gold" style="padding: 1rem 2.5rem; border-radius: 50px; font-weight: 600; border: 2px solid var(--c-bg); color: var(--c-bg); text-decoration: none; font-size: 1.1rem; transition: 0.3s;" onmouseover="this.style.background='var(--c-bg)'; this.style.color='var(--c-primary)';" onmouseout="this.style.background='transparent'; this.style.color='var(--c-bg)';"><i class="fa-solid fa-bookmark"></i> Add to Shelf</a>
+                    <a href="library.html" class="btn-outline-gold" style="padding: 1rem 2.5rem; border-radius: 50px; font-weight: 600; border: 2px solid var(--c-bg); color: var(--c-bg); background: transparent; text-decoration: none; font-size: 1.1rem; transition: 0.3s;" onmouseover="this.style.background='var(--c-bg)'; this.style.color='var(--c-primary)';" onmouseout="this.style.background='transparent'; this.style.color='var(--c-bg)';">Explore More Books</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-book-open"></i>
+                        <i class="fa-solid fa-fire logo-flame"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h2>Archivia</h2>
+                        <span>BOOKS &bull; NEWS &bull; IDEAS</span>
+                    </div>
+                </a>
+                <p class="footer-desc">A modern destination for discovering books, exploring ideas and staying informed.</p>
+                <div class="socials">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="home2.html">Home 2</a>
+                <a href="about.html">About Us</a>
+                <a href="library.html">Library</a>
+                <a href="services.html">Services</a>
+                <a href="blog.html">Blog</a>
+                <a href="pricing.html">Pricing</a>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Support</h4>
+                <a href="contact.html">Contact</a>
+                <a href="faq.html">FAQ</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+            
+            <div class="footer-contact">
+                <h4>Get in Touch</h4>
+                <p><i class="fa-regular fa-envelope"></i> hello@Archivia.com</p>
+                <p><i class="fa-solid fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fa-solid fa-location-dot"></i> 123 Literary Lane, NY</p>
+                <p><i class="fa-regular fa-clock"></i> Mon - Sat: 9AM - 6PM</p>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Archivia. All Rights Reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            if(urlParams.has('title')) {
+                document.getElementById('hero-title').innerText = urlParams.get('title');
+                document.title = urlParams.get('title') + ' - Book Details | Archivia';
+            }
+            if(urlParams.has('author')) {
+                document.getElementById('hero-author').innerText = "By " + urlParams.get('author');
+                const authorName = document.getElementById('author-name');
+                if(authorName) authorName.innerText = urlParams.get('author');
+                const statAuthor = document.getElementById('stat-author');
+                if(statAuthor) statAuthor.innerText = urlParams.get('author');
+            }
+            if(urlParams.has('img')) {
+                document.getElementById('hero-img').src = urlParams.get('img');
+            }
+        });
+    </script>
+
+</body>
+</html>

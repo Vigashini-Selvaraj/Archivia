@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collections | Archivia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* PROPER HERO SECTION */
+        .collection-hero {
+            position: relative;
+            padding: 8rem 0 4rem;
+            background: var(--c-bg);
+            border-bottom: 1px solid var(--c-border);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+        .ch-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .ch-content h1 { font-family: var(--font-heading); font-size: clamp(3rem, 5vw, 4.5rem); line-height: 1.1; margin-bottom: 1.5rem; }
+        .ch-content p { color: var(--c-text-muted); font-size: 1.1rem; margin-bottom: 2rem; line-height: 1.6; }
+        .ch-img-box { position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2); height: 500px; }
+        .ch-img-box img { width: 100%; height: 100%; object-fit: cover; }
+        @media (max-width: 900px) {
+            .ch-grid { grid-template-columns: 1fr; text-align: center; }
+            .ch-img-box { height: 350px; }
+        }
+
+        /* ERAS OF LITERATURE (Detailed Design) */
+        .era-section { padding: 6rem 0; background: var(--c-surface); border-bottom: 1px solid var(--c-border); }
+        .era-block { display: grid; grid-template-columns: 300px 1fr; gap: 4rem; padding: 4rem 0; border-bottom: 1px solid var(--c-border); }
+        .era-block:last-child { border-bottom: none; }
+        .era-year { font-family: var(--font-heading); font-size: 4rem; font-weight: 700; color: var(--c-accent); font-style: italic; line-height: 1; }
+        .era-details h3 { font-family: var(--font-heading); font-size: 2.5rem; margin-bottom: 1rem; }
+        .era-details p { color: var(--c-text-muted); font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem; }
+        .era-authors { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .era-author-tag { padding: 0.4rem 1rem; border-radius: 50px; background: var(--c-bg); border: 1px solid var(--c-border); font-size: 0.9rem; font-weight: 600; color: var(--c-text); }
+        @media (max-width: 768px) {
+            .era-block { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 0; text-align: center; }
+            .era-authors { justify-content: center; }
+        }
+
+        /* 3D STACKS */
+        .stack-section { padding: 5rem 0; background: var(--c-bg); border-bottom: 1px solid var(--c-border); }
+        .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem 2rem; padding-top: 2rem; }
+        .stack-card { position: relative; height: 380px; perspective: 1000px; cursor: pointer; }
+        .stack-item {
+            position: absolute; width: 70%; height: 280px; left: 15%; border-radius: 8px; overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15); border: 4px solid var(--c-bg); transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .stack-item img { width: 100%; height: 100%; object-fit: cover; }
+        .stack-item:nth-child(1) { bottom: 20px; z-index: 3; transform: rotate(0deg) scale(1); }
+        .stack-item:nth-child(2) { bottom: 40px; z-index: 2; transform: rotate(-5deg) scale(0.95); opacity: 0.8; }
+        .stack-item:nth-child(3) { bottom: 60px; z-index: 1; transform: rotate(5deg) scale(0.9); opacity: 0.6; }
+        
+        .stack-card:hover .stack-item:nth-child(1) { transform: translateY(-20px) rotate(0deg) scale(1.05); }
+        .stack-card:hover .stack-item:nth-child(2) { transform: translateX(-30px) translateY(-10px) rotate(-15deg) scale(1); opacity: 1; }
+        .stack-card:hover .stack-item:nth-child(3) { transform: translateX(30px) translateY(-10px) rotate(15deg) scale(1); opacity: 1; }
+        
+        .stack-info { position: absolute; bottom: -30px; left: 0; width: 100%; text-align: center; }
+        .stack-title { font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.3rem; }
+        .stack-meta { font-size: 0.9rem; color: var(--c-text-muted); }
+
+        /* AWARD WINNERS (Library Book Style) */
+        .award-section { padding: 6rem 0; background: var(--c-surface); border-bottom: 1px solid var(--c-border); }
+        .award-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 2rem; }
+        .award-book { text-align: center; }
+        .award-book-img { width: 100%; aspect-ratio: 2/3; border-radius: 8px; overflow: hidden; box-shadow: var(--shadow-sm); transition: transform 0.3s; margin-bottom: 1rem; }
+        .award-book-img img { width: 100%; height: 100%; object-fit: cover; }
+        .award-book:hover .award-book-img { transform: translateY(-10px); box-shadow: var(--shadow-md); }
+        .award-badge { display: inline-block; padding: 0.3rem 0.8rem; background: var(--c-primary); color: var(--c-bg); border-radius: 50px; font-size: 0.8rem; font-weight: bold; margin-bottom: 0.5rem; }
+
+        /* MY COLLECTION (8 books) */
+        .my-collection-section { padding: 6rem 0; background: var(--c-bg); border-bottom: 1px solid var(--c-border); }
+        .mc-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 1rem; }
+        .mc-book { position: relative; border-radius: 8px; overflow: hidden; box-shadow: var(--shadow-sm); aspect-ratio: 2/3; transition: transform 0.3s; }
+        .mc-book img { width: 100%; height: 100%; object-fit: cover; }
+        .mc-book:hover { transform: translateY(-15px) scale(1.05); box-shadow: var(--shadow-lg); z-index: 10; border: 2px solid var(--c-accent); }
+        @media (max-width: 1200px) { .mc-grid { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; } }
+        @media (max-width: 600px) { .mc-grid { grid-template-columns: repeat(2, 1fr); } }
+
+        /* NEW SECTION: AUTHOR SPOTLIGHT */
+        .author-section { padding: 6rem 0; background: var(--c-surface); border-bottom: 1px solid var(--c-border); }
+        .author-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+        .author-card { background: var(--c-bg); border: 1px solid var(--c-border); border-radius: 12px; padding: 2rem; text-align: center; transition: 0.3s; }
+        .author-card:hover { transform: translateY(-5px); border-color: var(--c-accent); }
+        .author-img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin: 0 auto 1rem; border: 3px solid var(--c-surface); }
+        
+        /* NEW SECTION: READING CHALLENGES */
+        .challenge-section { padding: 6rem 0; background: var(--c-bg); }
+        .challenge-box { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 16px; padding: 3rem; display: flex; align-items: center; gap: 4rem; }
+        .challenge-progress { position: relative; width: 150px; height: 150px; border-radius: 50%; background: conic-gradient(var(--c-primary) 75%, var(--c-border) 0); display: flex; align-items: center; justify-content: center; }
+        .challenge-inner { width: 120px; height: 120px; border-radius: 50%; background: var(--c-surface); display: flex; align-items: center; justify-content: center; flex-direction: column; font-family: var(--font-heading); }
+        @media (max-width: 768px) { .challenge-box { flex-direction: column; text-align: center; gap: 2rem; } }
+
+    </style>
+    
+</head>
+<body>
+<nav class="navbar">
+        <div class="nav-container">
+            <a href="about.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                    <i class="fa-solid fa-fire logo-flame"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Archivia</h1>
+                    <span>BOOKS &bull; NEWS &bull; IDEAS</span>
+                </div>
+            </a>
+            
+            <div class="nav-links desktop-only">
+                <a href="index.html" class="active">Home</a>
+                <a href="home2.html">Home 2</a>
+                <a href="about.html">About Us</a>
+                <a href="library.html">Library</a>
+                <a href="services.html">Services</a>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact</a>
+            </div>
+
+                        <div class="nav-controls">
+                <button id="rtlToggle" class="nav-btn rtl-btn" style="width: 60px; justify-content: center;">
+                    <span class="dir-text fw-600">LTR</span>
+                </button>
+                <button id="themeToggle" class="nav-btn theme-btn">
+                    <i class="fa-solid fa-sun light-icon"></i>
+                    <i class="fa-solid fa-moon dark-icon" style="display:none;"></i>
+                </button>
+                <div class="profile-dropdown-wrap desktop-only">
+                    <button class="nav-btn profile-btn"><i class="fa-regular fa-user"></i> <i class="fa-solid fa-chevron-down small-chevron" style="font-size:0.7rem;"></i></button>
+                    <div class="profile-dropdown">
+                        <a href="login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
+                        <a href="register.html"><i class="fa-solid fa-user-plus"></i> Register</a>
+                    </div>
+                </div>
+                <button id="mobileMenuBtn" class="nav-btn mobile-only"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div id="mobileMenu" class="mobile-menu">
+        <button id="closeMobileMenu" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+        <div class="mobile-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="home2.html">Home 2</a>
+            <a href="about.html">About Us</a>
+            <a href="library.html">Library</a>
+            <a href="services.html">Services</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact</a>
+            <div style="width: 100%; height: 1px; background: var(--c-border); margin: 1rem 0;"></div>
+            <a href="login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
+            <a href="register.html"><i class="fa-solid fa-user-plus"></i> Register</a>
+        </div>
+    </div>
+
+    <main>
+
+<main>
+    <!-- 1. PROPER HERO SECTION -->
+    <section class="collection-hero">
+        <div class="container ch-grid">
+            <div class="ch-content">
+                <div class="eyebrow" style="margin-bottom: 1rem;"><i class="fa-solid fa-bookmark"></i> CURATED WORLDS</div>
+                <h1><span style="color: var(--split-c1);">The</span> <span style="color: var(--split-c2);">Collections</span></h1>
+                <p>Explore deeply curated assortments of literature. From ancient foundational texts to modern masterpieces, we have hand-picked the finest selections to guide your reading journey. Immersive, beautifully designed, and ready for you.</p>
+                <a href="#eras" class="btn-solid-cream" style="padding: 0.8rem 2rem; border-radius: 50px; font-weight: 600; display: inline-block; background: var(--c-primary); color: var(--c-bg); text-decoration: none;">Explore Now</a>
+            </div>
+            <div class="ch-img-box">
+                <img src="hero.jpg" alt="Vintage Library Desk">
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. ERAS OF LITERATURE (Clear Sections) -->
+    <section class="era-section" id="eras">
+        <div class="container">
+            <div class="eyebrow" style="margin-bottom: 1rem; text-align: center; display: flex; justify-content: center;"><i class="fa-solid fa-clock-rotate-left"></i> JOURNEY THROUGH TIME</div>
+            <h2 style="font-size: 2.5rem; font-family: var(--font-heading); margin-bottom: 4rem; text-align: center;"><span style="color: #111111;">Eras of</span> <span style="color: #800020;">Literature</span></h2>
+            
+            <div class="era-block">
+                <div class="era-year">800 BC</div>
+                <div class="era-details">
+                    <h3>Antiquity</h3>
+                    <p>The dawn of epic poetry, foundational philosophy, and early drama. This era laid the groundwork for all Western literature, introducing heroes, gods, and the very structure of narrative.</p>
+                    <div class="era-authors">
+                        <span class="era-author-tag">Homer</span>
+                        <span class="era-author-tag">Plato</span>
+                        <span class="era-author-tag">Aristotle</span>
+                        <span class="era-author-tag">Sophocles</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="era-block">
+                <div class="era-year">14th C.</div>
+                <div class="era-details">
+                    <h3>The Renaissance</h3>
+                    <p>A rebirth of humanism and art, propelled by the revolution of the printing press. Literature shifted towards the human experience, challenging old dogmas with wit and observation.</p>
+                    <div class="era-authors">
+                        <span class="era-author-tag">Dante Alighieri</span>
+                        <span class="era-author-tag">William Shakespeare</span>
+                        <span class="era-author-tag">Miguel de Cervantes</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="era-block">
+                <div class="era-year">19th C.</div>
+                <div class="era-details">
+                    <h3>Romanticism & Realism</h3>
+                    <p>A reaction against extreme rationalism, giving rise to intense emotion, individualism, and nature worship, eventually transitioning into the gritty, unvarnished depiction of everyday life.</p>
+                    <div class="era-authors">
+                        <span class="era-author-tag">Mary Shelley</span>
+                        <span class="era-author-tag">Victor Hugo</span>
+                        <span class="era-author-tag">Jane Austen</span>
+                        <span class="era-author-tag">Fyodor Dostoevsky</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. 3D STACK COLLECTIONS -->
+    <section class="stack-section">
+        <div class="container">
+            <div class="eyebrow" style="margin-bottom: 1rem; text-align: center; display: flex; justify-content: center;"><i class="fa-solid fa-layer-group"></i> THEMED BUNDLES</div>
+            <h2 style="font-size: 2.5rem; font-family: var(--font-heading); margin-bottom: 4rem; text-align: center;"><span style="color: #111111;">Curated</span> <span style="color: #800020;">Stacks</span></h2>
+            
+            <div class="stack-grid">
+                <!-- Stack 1 -->
+                <div class="stack-card" onclick="location.href='library.html?tag=dystopian'">
+                    <div class="stack-item"><img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80" alt="Book 1"></div>
+                    <div class="stack-item"><img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=400&q=80" alt="Book 2"></div>
+                    <div class="stack-item"><img src="https://images.unsplash.com/photo-1526243741027-444d633d7365?auto=format&fit=crop&w=400&q=80" alt="Book 3"></div>
+                    <div class="stack-info">
+                        <h3 class="stack-title">Dystopian Futures</h3>
+                        <div class="stack-meta">8 Books &bull; Sci-Fi</div>
+                    </div>
+                </div>
+                
+                <!-- Stack 2 -->
+                <div class="stack-card" onclick="location.href='library.html?tag=philosophy'">
+                    <div class="stack-item"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Book 1"></div>
+                    <div class="stack-item"><img src="https://images.unsplash.com/photo-1455390582262-044cdead27d8?auto=format&fit=crop&w=400&q=80" alt="Book 2"></div>
+                    <div class="stack-item"><img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=400&q=80" alt="Book 3"></div>
+                    <div class="stack-info">
+                        <h3 class="stack-title">Mind & Matter</h3>
+                        <div class="stack-meta">12 Books &bull; Philosophy</div>
+                    </div>
+                </div>
+
+                <!-- Stack 3 -->
+                <div class="stack-card" onclick="location.href='library.html?tag=classics'">
+                    <div class="stack-item"><img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80" alt="Book 1"></div>
+                    <div class="stack-item"><img src="https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=400&q=80" alt="Book 2"></div>
+                    <div class="stack-item"><img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=400&q=80" alt="Book 3"></div>
+                    <div class="stack-info">
+                        <h3 class="stack-title">Essential Classics</h3>
+                        <div class="stack-meta">25 Books &bull; Literature</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. AWARD WINNERS (6 Gemini-Generated Books) -->
+    <section class="award-section">
+        <div class="container">
+            <div class="eyebrow" style="margin-bottom: 1rem; text-align: center; display: flex; justify-content: center;"><i class="fa-solid fa-award"></i> HALL OF FAME</div>
+            <h2 style="font-size: 2.5rem; font-family: var(--font-heading); margin-bottom: 4rem; text-align: center;"><span style="color: #111111;">Award-Winning</span> <span style="color: #800020;">Books</span></h2>
+            
+            <div class="award-grid">
+                <div class="award-book">
+                    <div class="award-badge">Pulitzer Prize</div>
+                    <div class="award-book-img"><img src="award1.jpg" alt="Award Book 1"></div>
+                    <h4 style="font-family: var(--font-heading); font-size: 1.2rem;">The Silent Echo</h4>
+                </div>
+                <div class="award-book">
+                    <div class="award-badge">Booker Prize</div>
+                    <div class="award-book-img"><img src="award2.jpg" alt="Award Book 2"></div>
+                    <h4 style="font-family: var(--font-heading); font-size: 1.2rem;">Whispers of Stone</h4>
+                </div>
+                <div class="award-book">
+                    <div class="award-badge">Nobel Prize</div>
+                    <div class="award-book-img"><img src="personal1.jpg" alt="Award Book 3"></div>
+                    <h4 style="font-family: var(--font-heading); font-size: 1.2rem;">The Unwritten Life</h4>
+                </div>
+                <div class="award-book">
+                    <div class="award-badge">Hugo Award</div>
+                    <div class="award-book-img"><img src="personal2.jpg" alt="Award Book 4"></div>
+                    <h4 style="font-family: var(--font-heading); font-size: 1.2rem;">Celestial Legacy</h4>
+                </div>
+                <div class="award-book">
+                    <div class="award-badge">National Book</div>
+                    <div class="award-book-img"><img src="award1.jpg" alt="Award Book 5"></div>
+                    <h4 style="font-family: var(--font-heading); font-size: 1.2rem;">Golden Sands</h4>
+                </div>
+                <div class="award-book">
+                    <div class="award-badge">Women's Prize</div>
+                    <div class="award-book-img"><img src="award2.jpg" alt="Award Book 6"></div>
+                    <h4 style="font-family: var(--font-heading); font-size: 1.2rem;">Midnight's Child</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. AUTHOR SPOTLIGHT (NEW SECTION) -->
+    <section class="author-section">
+        <div class="container">
+            <div class="eyebrow" style="margin-bottom: 1rem; text-align: center; display: flex; justify-content: center;"><i class="fa-solid fa-pen-nib"></i> THE MINDS BEHIND</div>
+            <h2 style="font-size: 2.5rem; font-family: var(--font-heading); margin-bottom: 4rem; text-align: center;"><span style="color: #111111;">Author</span> <span style="color: #800020;">Spotlights</span></h2>
+            
+            <div class="author-grid">
+                <div class="author-card">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80" class="author-img" alt="Author">
+                    <h4 style="font-family: var(--font-heading); font-size: 1.3rem;">Elena Vance</h4>
+                    <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Master of modern philosophical fiction.</p>
+                </div>
+                <div class="author-card">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80" class="author-img" alt="Author">
+                    <h4 style="font-family: var(--font-heading); font-size: 1.3rem;">Marcus Thorne</h4>
+                    <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Award-winning sci-fi worldbuilder.</p>
+                </div>
+                <div class="author-card">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=200&q=80" class="author-img" alt="Author">
+                    <h4 style="font-family: var(--font-heading); font-size: 1.3rem;">Sarah Jennings</h4>
+                    <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Pulitzer prize-winning historian.</p>
+                </div>
+                <div class="author-card">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" class="author-img" alt="Author">
+                    <h4 style="font-family: var(--font-heading); font-size: 1.3rem;">Arthur Pendleton</h4>
+                    <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Classic literature analytical expert.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. READING CHALLENGE (NEW SECTION) -->
+    <section class="challenge-section">
+        <div class="container">
+            <div class="challenge-box">
+                <div class="challenge-progress">
+                    <div class="challenge-inner">
+                        <span style="font-size: 2rem; color: var(--c-primary);">75%</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="font-family: var(--font-heading); font-size: 2rem; margin-bottom: 1rem;"><span style="color: #111111;">2026 Reading</span> <span style="color: #800020;">Challenge</span></h3>
+                    <p style="color: var(--c-text-muted); font-size: 1.1rem; margin-bottom: 1.5rem;">You have read 15 out of 20 books for your personalized challenge. Keep up the great work!</p>
+                    <button class="btn-outline-gold" style="padding: 0.6rem 2rem; border-radius: 50px; font-weight: bold; border: 2px solid var(--c-primary); color: var(--c-primary); background: transparent;">View Progress</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. MY COLLECTION (8 Books) -->
+    <section class="my-collection-section">
+        <div class="container">
+            <div class="eyebrow" style="margin-bottom: 1rem; text-align: center; display: flex; justify-content: center;"><i class="fa-solid fa-heart"></i> PERSONAL</div>
+            <h2 style="font-size: 2.5rem; font-family: var(--font-heading); margin-bottom: 4rem; text-align: center;"><span style="color: #111111;">My</span> <span style="color: #800020;">Collection</span></h2>
+            
+            <div class="mc-grid">
+                <div class="mc-book"><img src="personal1.jpg" alt="My Book 1"></div>
+                <div class="mc-book"><img src="award2.jpg" alt="My Book 2"></div>
+                <div class="mc-book"><img src="personal2.jpg" alt="My Book 3"></div>
+                <div class="mc-book"><img src="award1.jpg" alt="My Book 4"></div>
+                <div class="mc-book"><img src="award2.jpg" alt="My Book 5"></div>
+                <div class="mc-book"><img src="personal1.jpg" alt="My Book 6"></div>
+                <div class="mc-book"><img src="award1.jpg" alt="My Book 7"></div>
+                <div class="mc-book"><img src="personal2.jpg" alt="My Book 8"></div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-book-open"></i>
+                        <i class="fa-solid fa-fire logo-flame"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h2>Archivia</h2>
+                        <span>BOOKS &bull; NEWS &bull; IDEAS</span>
+                    </div>
+                </a>
+                <p class="footer-desc">A modern destination for discovering books, exploring ideas and staying informed.</p>
+                <div class="socials">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="home2.html">Home 2</a>
+                <a href="about.html">About Us</a>
+                <a href="library.html">Library</a>
+                <a href="services.html">Services</a>
+                <a href="blog.html">Blog</a>
+                <a href="pricing.html">Pricing</a>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Support</h4>
+                <a href="contact.html">Contact</a>
+                <a href="faq.html">FAQ</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+            
+            <div class="footer-contact">
+                <h4>Get in Touch</h4>
+                <p><i class="fa-regular fa-envelope"></i> hello@Archivia.com</p>
+                <p><i class="fa-solid fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fa-solid fa-location-dot"></i> 123 Literary Lane, NY</p>
+                <p><i class="fa-regular fa-clock"></i> Mon - Sat: 9AM - 6PM</p>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Archivia. All Rights Reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+<script src="script.js"></script>
+</body>
+</html>

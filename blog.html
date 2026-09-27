@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog & Ideas | Archivia</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Responsive overrides injected for mobile grid layouts */
+        .grid-responsive-blog-main { display: grid; grid-template-columns: 1.5fr 1fr; gap: 4rem; }
+        .grid-responsive-blog-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+        .grid-responsive-blog-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .grid-responsive-blog-inner { display: grid; grid-template-columns: 1fr 1fr; height: auto; margin-bottom: 2rem; }
+        .grid-responsive-blog-inner-2 { display: grid; grid-template-columns: 1fr 1fr; height: auto; }
+        
+        @media(max-width: 900px) {
+            .grid-responsive-blog-main { grid-template-columns: 1fr !important; gap: 2rem !important; }
+            .grid-responsive-blog-4 { grid-template-columns: repeat(2, 1fr) !important; }
+            .grid-responsive-blog-2 { grid-template-columns: 1fr !important; }
+            .grid-responsive-blog-inner, .grid-responsive-blog-inner-2 { grid-template-columns: 1fr !important; }
+            .story-scene { grid-template-columns: 1fr !important; gap: 2rem !important; text-align: center !important; }
+            .story-text { order: 2; }
+            .story-img-container { order: 1; }
+        }
+        @media(max-width: 600px) {
+            .grid-responsive-blog-4 { grid-template-columns: 1fr !important; }
+        }
+        
+        /* Story Hero CSS */
+        .story-hero { position: relative; overflow: hidden; background: var(--c-bg); padding: 10rem 0 6rem; border-bottom: 1px solid var(--c-border); display: flex; align-items: center; justify-content: center; min-height: 80vh; }
+        
+        .story-scene { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 4rem; max-width: 1200px; margin: 0 auto; text-align: left; }
+        
+        .story-illustration-wrap { position: relative; width: 100%; max-width: 500px; height: 500px; margin-left: auto; animation: floatMain 6s ease-in-out infinite alternate; display: flex; justify-content: center; align-items: center; }
+        .story-illustration { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; box-shadow: 0 20px 60px rgba(0,0,0,0.15); border: 8px solid var(--c-bg); z-index: 2; position: relative; }
+        
+        /* Floating Elements */
+        .floating-element { position: absolute; pointer-events: none; z-index: 1; }
+        .particle { width: 8px; height: 8px; background: var(--c-accent); border-radius: 50%; opacity: 0.6; filter: blur(1px); }
+        .letter { font-family: var(--font-heading); font-size: 1.5rem; font-weight: bold; color: var(--c-primary); opacity: 0.7; text-shadow: 0 0 10px rgba(255,255,255,0.8); }
+        
+        /* Animations */
+        @keyframes floatMain { 0% { transform: translateY(0); } 100% { transform: translateY(-20px); } }
+        @keyframes escape1 { 0% { opacity: 0; transform: translate(0, 0) rotate(0deg) scale(0.5); } 20% { opacity: 1; } 100% { opacity: 0; transform: translate(-150px, -200px) rotate(-45deg) scale(1.5); } }
+        @keyframes escape2 { 0% { opacity: 0; transform: translate(0, 0) rotate(0deg) scale(0.5); } 20% { opacity: 1; } 100% { opacity: 0; transform: translate(180px, -250px) rotate(60deg) scale(1.2); } }
+        @keyframes escape3 { 0% { opacity: 0; transform: translate(0, 0) rotate(0deg) scale(0.5); } 20% { opacity: 1; } 100% { opacity: 0; transform: translate(-80px, -300px) rotate(-90deg) scale(1.8); } }
+        @keyframes escape4 { 0% { opacity: 0; transform: translate(0, 0) rotate(0deg) scale(0.5); } 20% { opacity: 1; } 100% { opacity: 0; transform: translate(120px, -150px) rotate(30deg) scale(1); } }
+        
+        .e1 { animation: escape1 5s infinite linear; top: 40%; left: 40%; }
+        .e2 { animation: escape2 6s infinite linear 1s; top: 50%; left: 50%; font-size: 2rem; }
+        .e3 { animation: escape3 7s infinite linear 2s; top: 45%; left: 45%; }
+        .e4 { animation: escape4 5.5s infinite linear 0.5s; top: 35%; left: 55%; font-size: 1.2rem; }
+        .e5 { animation: escape1 6.5s infinite linear 2.5s; top: 50%; left: 40%; }
+        
+        .p1 { animation: escape2 8s infinite linear; top: 30%; left: 60%; }
+        .p2 { animation: escape3 7.5s infinite linear 1.5s; top: 60%; left: 40%; }
+        .p3 { animation: escape1 6s infinite linear 3s; top: 40%; left: 50%; }
+
+        .story-text { max-width: 600px; position: relative; z-index: 5; }
+        .story-eyebrow { font-family: var(--font-heading); color: var(--c-accent); letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 1rem; font-weight: bold; }
+        .story-title { font-size: clamp(3.5rem, 6vw, 5rem); font-family: var(--font-heading); line-height: 1.1; margin-bottom: 1.5rem; }
+        .story-desc { font-size: 1.25rem; color: var(--c-text-muted); line-height: 1.8; margin-bottom: 2.5rem; max-width: 550px; }
+        
+        @media(max-width: 900px) {
+            .story-scene { grid-template-columns: 1fr; text-align: center; }
+            .story-illustration-wrap { margin: 0 auto; width: 400px; height: 400px; margin-top: 3rem; }
+            .story-desc { margin-left: auto; margin-right: auto; }
+        }
+        @media(max-width: 700px) {
+            .story-illustration-wrap { width: 300px; height: 300px; }
+        }
+
+        .article-card {
+            background: var(--c-bg);
+            border-radius: 12px;
+            border: 1px solid var(--c-border);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--c-primary);
+        }
+
+        .article-img {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .article-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .article-card:hover .article-img img {
+            transform: scale(1.05);
+        }
+
+        .article-tag {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--c-primary);
+            color: var(--c-bg);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 1;
+        }
+
+        .cat-pill {
+            padding: 0.8rem 1.5rem;
+            border: 1px solid var(--c-border);
+            border-radius: 50px;
+            background: var(--c-surface);
+            color: var(--c-text);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+        }
+
+        .cat-pill:hover,
+        .cat-pill.active {
+            background: var(--c-primary);
+            color: var(--c-bg);
+            border-color: var(--c-primary);
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .trending-card {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            border-bottom: 1px solid var(--c-border);
+            padding: 1.5rem 0;
+            transition: transform 0.2s;
+        }
+
+        .trending-card:hover {
+            transform: translateX(10px);
+        }
+
+        .trending-num {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            color: var(--c-border);
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        .continue-card {
+            background: var(--c-bg);
+            border: 1px solid var(--c-border);
+            padding: 2rem;
+            border-radius: 16px;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .continue-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            border-color: var(--c-primary);
+        }
+        .progress-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 5px solid var(--c-surface);
+            border-top-color: var(--c-primary);
+            border-right-color: var(--c-primary);
+            background: var(--c-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-heading);
+            font-weight: bold;
+            color: var(--c-text);
+            position: relative;
+        }
+
+        /* Redesigned Weekly Challenge */
+        .challenge-box {
+            background: var(--c-surface);
+            border: 1px solid var(--c-border);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .challenge-left {
+            background: var(--c-bg);
+            color: var(--c-text);
+            padding: 4rem 3rem;
+            flex: 1;
+            position: relative;
+        }
+
+        .challenge-right {
+            background: var(--c-bg);
+            padding: 4rem 3rem;
+            flex: 1.5;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .step-row {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--c-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-family: var(--font-heading);
+            color: var(--c-text-muted);
+            transition: all 0.3s;
+        }
+
+        .step-row.completed .step-circle {
+            background: var(--c-accent);
+            color: var(--c-bg);
+            border-color: var(--c-accent);
+        }
+
+        .step-row.active .step-circle {
+            border-color: var(--c-primary);
+            color: var(--c-primary);
+            box-shadow: 0 0 0 4px rgba(45, 17, 56, 0.1);
+        }
+
+        .premium-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid var(--c-border);
+            background: var(--c-surface);
+        }
+
+        .premium-blur {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background: linear-gradient(to top, var(--c-surface) 40%, transparent);
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 2rem;
+            z-index: 1;
+        }
+
+        /* Redesigned Community */
+        .community-box {
+            background: var(--c-bg);
+            border-radius: 16px;
+            border: 1px solid var(--c-border);
+            display: flex;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .community-img {
+            flex: 1;
+            background: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80') center/cover;
+            min-height: 300px;
+        }
+
+        .community-content {
+            flex: 1.2;
+            padding: 4rem;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        @media(max-width: 1000px) {
+            .filter-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .challenge-box,
+            .community-box {
+                flex-direction: column;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media(max-width: 700px) {
+            .filter-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .continue-card {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media(max-width: 500px) {
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    
+        @media(max-width: 600px) {
+            .grid-responsive-blog-4 > div { margin-bottom: 2.5rem; }
+            .grid-responsive-blog-4 a { display: block !important; width: 100%; box-sizing: border-box; }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="about.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                    <i class="fa-solid fa-fire logo-flame"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Archivia</h1>
+                    <span>BOOKS &bull; NEWS &bull; IDEAS</span>
+                </div>
+            </a>
+
+            <div class="nav-links desktop-only">
+                <a href="index.html">Home</a>
+                <a href="home2.html">Home 2</a>
+                <a href="about.html">About Us</a>
+                <a href="library.html">Library</a>
+                <a href="services.html">Services</a>
+                <a href="blog.html" class="active">Blog</a>
+                <a href="contact.html">Contact</a>
+            </div>
+
+                        <div class="nav-controls">
+                <button id="rtlToggle" class="nav-btn rtl-btn" style="width: 60px; justify-content: center;">
+                    <span class="dir-text fw-600">LTR</span>
+                </button>
+                <button id="themeToggle" class="nav-btn theme-btn">
+                    <i class="fa-solid fa-sun light-icon"></i>
+                    <i class="fa-solid fa-moon dark-icon" style="display:none;"></i>
+                </button>
+                <div class="profile-dropdown-wrap desktop-only">
+                    <button class="nav-btn profile-btn"><i class="fa-regular fa-user"></i> <i class="fa-solid fa-chevron-down small-chevron" style="font-size:0.7rem;"></i></button>
+                    <div class="profile-dropdown">
+                        <a href="login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
+                        <a href="register.html"><i class="fa-solid fa-user-plus"></i> Register</a>
+                    </div>
+                </div>
+                <button id="mobileMenuBtn" class="nav-btn mobile-only"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </nav>
+    <div id="mobileMenu" class="mobile-menu">
+        <button id="closeMobileMenu" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+        <div class="mobile-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="home2.html">Home 2</a>
+            <a href="about.html">About Us</a>
+            <a href="library.html">Library</a>
+            <a href="services.html">Services</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact</a>
+            <div style="width: 100%; height: 1px; background: var(--c-border); margin: 1rem 0;"></div>
+            <a href="login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
+            <a href="register.html"><i class="fa-solid fa-user-plus"></i> Register</a>
+        </div>
+    </div>
+
+    <main>
+        <!-- 01. ENTER THE STORY HERO -->
+        <section class="story-hero">
+            <div class="story-scene container">
+                
+                <div class="story-text">
+                    <div class="story-eyebrow"><i class="fa-solid fa-sparkles" style="margin-right: 0.5rem; font-size: 0.8rem;"></i> ENTER THE STORY</div>
+                    <h1 class="story-title"><span style="color: var(--split-c1);">Where ideas come</span> <br> <span style="font-style: italic; font-weight: 800; color: var(--split-c2);">to life.</span></h1>
+                    <p class="story-desc">
+                        Immerse yourself in a living archive of stories, perspectives, and ideas that leap off the page.
+                    </p>
+                    <a href="#articles-container" class="btn-solid-cream" style="padding: 1.2rem 3.5rem; border-radius: 50px; font-weight: 600; background: var(--c-primary); color: var(--c-bg); border: none; text-decoration: none; font-size: 1.1rem; display: inline-block; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: 0.3s;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.2)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.1)';">Explore the Archive</a>
+                </div>
+                
+                <div class="story-illustration-wrap">
+                    <img src="girl_reading_book.jpg" alt="Girl reading a magical book" class="story-illustration">
+                    
+                    <!-- Floating Letters from the book -->
+                    <span class="floating-element letter e1">A</span>
+                    <span class="floating-element letter e2">r</span>
+                    <span class="floating-element letter e3">c</span>
+                    <span class="floating-element letter e4">h</span>
+                    <span class="floating-element letter e5">i</span>
+                    
+                    <!-- Floating Particles / Magic dust -->
+                    <span class="floating-element particle p1"></span>
+                    <span class="floating-element particle p2"></span>
+                    <span class="floating-element particle p3"></span>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- 02 & 03. EXPLORE TOPICS (Filterable Grid of 20 Articles) -->
+        <section class="section">
+            <div class="container">
+                <div style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 2rem; gap: 0.5rem;">
+                    <div class="eyebrow" style="color: var(--c-accent);">THE ARCHIVE</div>
+                    <h2 style="font-size: 3.5rem; font-family: var(--font-heading);"><span style="color: var(--split-c1);">Explore</span> <span style="color: var(--split-c2);">Articles</span></h2>
+                </div>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;" id="filter-pills">
+                    <div class="cat-pill active" onclick="filterArticles('All')">All Topics</div>
+                    <div class="cat-pill" onclick="filterArticles('Tech')">Tech</div>
+                    <div class="cat-pill" onclick="filterArticles('History')">History</div>
+                    <div class="cat-pill" onclick="filterArticles('Culture')">Culture</div>
+                    <div class="cat-pill" onclick="filterArticles('Fiction')">Fiction</div>
+                    <div class="cat-pill" onclick="filterArticles('Philosophy')">Philosophy</div>
+                    <div class="cat-pill" onclick="filterArticles('Interviews')">Interviews</div>
+                </div>
+
+                <div class="filter-grid" id="articles-container">
+                    <!-- Javascript will populate the 20 articles here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 04. EDITOR'S PICKS & 05. TRENDING READS (Redesigned) -->
+        <section class="section" style="background: var(--c-surface);">
+            <div class="container">
+                <style>
+                    .curated-split-section {
+                        display: grid;
+                        grid-template-columns: 1.5fr 1fr;
+                        gap: 4rem;
+                    }
+                    @media (max-width: 900px) {
+                        .curated-split-section {
+                            grid-template-columns: 1fr;
+                            gap: 4rem;
+                        }
+                    }
+                    .new-editor-card {
+                        background: var(--c-bg);
+                        border: 1px solid var(--c-border);
+                        border-radius: 16px;
+                        overflow: hidden;
+                        display: grid;
+                        grid-template-columns: 1fr 1.2fr;
+                        margin-bottom: 2rem;
+                        box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+                        transition: transform 0.3s;
+                    }
+                    .new-editor-card:hover {
+                        transform: translateY(-4px);
+                        border-color: var(--c-primary);
+                    }
+                    .new-editor-img-wrap {
+                        width: 100%;
+                        height: 100%;
+                        position: relative;
+                        overflow: hidden;
+                        min-height: 250px;
+                    }
+                    .new-editor-img-wrap img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        transition: transform 0.5s ease;
+                    }
+                    .new-editor-card:hover .new-editor-img-wrap img {
+                        transform: scale(1.05);
+                    }
+                    @media (max-width: 600px) {
+                        .new-editor-card {
+                            grid-template-columns: 1fr;
+                        }
+                        .new-editor-img-wrap {
+                            height: 250px;
+                        }
+                        .new-editor-img-wrap img {
+                            position: static;
+                        }
+                    }
+                    .new-trending-card {
+                        display: flex;
+                        align-items: center;
+                        gap: 1.5rem;
+                        padding: 1.5rem 0;
+                        border-bottom: 1px solid var(--c-border);
+                        transition: transform 0.2s;
+                        text-decoration: none;
+                        color: inherit;
+                    }
+                    .new-trending-card:hover {
+                        transform: translateX(8px);
+                    }
+                    .new-trending-num {
+                        font-family: var(--font-heading);
+                        font-size: 3rem;
+                        color: var(--c-border);
+                        font-weight: 700;
+                        font-style: italic;
+                        line-height: 1;
+                    }
+                </style>
+                <div class="curated-split-section">
+                    
+                    <!-- Editor's Picks -->
+                    <div>
+                        <div class="eyebrow" style="color: var(--c-accent); margin-bottom: 1rem;">CURATED</div>
+                        <h2 style="font-size: 2.5rem; font-family: var(--font-heading); margin-bottom: 2rem;"><span style="color: var(--split-c1);">Editor's</span> <span style="color: var(--split-c2);">Picks</span></h2>
+                        
+                        <div class="new-editor-card">
+                            <div class="new-editor-img-wrap">
+                                <img src="assets/psychology_rereading.jpg" alt="Editor Pick 1">
+                            </div>
+                            <div style="padding: 2.5rem;">
+                                <h3 style="font-family: var(--font-heading); font-size: 1.6rem; margin-bottom: 1rem; color: var(--c-text);">The Psychology of Rereading</h3>
+                                <p style="color: var(--c-text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.6;">Why returning to a familiar book provides a unique kind of neurological comfort.</p>
+                                <a href="blog-details.html?id=article0" class="btn-outline-gold" style="padding: 0.6rem 1.5rem; border-radius: 50px; font-weight: 600; border: 2px solid var(--c-border); color: var(--c-text); text-decoration: none; display: inline-block;">View Article</a>
+                            </div>
+                        </div>
+
+                        <div class="new-editor-card">
+                            <div class="new-editor-img-wrap">
+                                <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=800&q=80" alt="Editor Pick 2">
+                            </div>
+                            <div style="padding: 2.5rem;">
+                                <h3 style="font-family: var(--font-heading); font-size: 1.6rem; margin-bottom: 1rem; color: var(--c-text);">The Art of the Prologue</h3>
+                                <p style="color: var(--c-text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.6;">When to use them, when to skip them, and why they remain a controversial tool.</p>
+                                <a href="blog-details.html?id=article1" class="btn-outline-gold" style="padding: 0.6rem 1.5rem; border-radius: 50px; font-weight: 600; border: 2px solid var(--c-border); color: var(--c-text); text-decoration: none; display: inline-block;">View Article</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trending Reads -->
+                    <div>
+                        <div class="eyebrow" style="color: var(--c-accent); margin-bottom: 1rem;">POPULAR NOW</div>
+                        <h2 style="font-size: 2.5rem; font-family: var(--font-heading); margin-bottom: 2rem;"><span style="color: var(--split-c1);">Trending</span> <span style="color: var(--split-c2);">Reads</span></h2>
+                        
+                        <a href="blog-details.html?id=article2" class="new-trending-card">
+                            <div class="new-trending-num">01</div>
+                            <div>
+                                <h4 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.3rem;">The Art of Stoicism Today</h4>
+                                <div style="font-size: 0.85rem; color: var(--c-text-muted);"><i class="fa-regular fa-eye"></i> 14k views</div>
+                            </div>
+                        </a>
+                        
+                        <a href="blog-details.html?id=article3" class="new-trending-card">
+                            <div class="new-trending-num">02</div>
+                            <div>
+                                <h4 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.3rem;">How to Build a Digital Brain</h4>
+                                <div style="font-size: 0.85rem; color: var(--c-text-muted);"><i class="fa-regular fa-eye"></i> 11k views</div>
+                            </div>
+                        </a>
+                        
+                        <a href="blog-details.html?id=article4" class="new-trending-card">
+                            <div class="new-trending-num">03</div>
+                            <div>
+                                <h4 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.3rem;">Interview: The Creator of Archivia</h4>
+                                <div style="font-size: 0.85rem; color: var(--c-text-muted);"><i class="fa-regular fa-eye"></i> 8.5k views</div>
+                            </div>
+                        </a>
+                        
+                        <a href="blog-details.html?id=article5" class="new-trending-card">
+                            <div class="new-trending-num">04</div>
+                            <div>
+                                <h4 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.3rem;">The Decline of Fast Media</h4>
+                                <div style="font-size: 0.85rem; color: var(--c-text-muted);"><i class="fa-regular fa-eye"></i> 6k views</div>
+                            </div>
+                        </a>
+                        
+                        <a href="blog-details.html?id=article6" class="new-trending-card" style="border-bottom: none;">
+                            <div class="new-trending-num">05</div>
+                            <div>
+                                <h4 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.3rem;">Best Sci-Fi of the Decade</h4>
+                                <div style="font-size: 0.85rem; color: var(--c-text-muted);"><i class="fa-regular fa-eye"></i> 5.2k views</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 06. DIGITAL LIBRARY SHOWCASE -->
+        <section class="section" style="border-bottom: 1px solid var(--c-border);">
+            <div class="container">
+                <div class="section-header"
+                    style="justify-content: space-between; align-items: flex-end; margin-bottom: 3rem;">
+                    <div>
+                        <div class="eyebrow" style="color: var(--c-accent);">FROM THE ARCHIVES</div>
+                        <h2 style="font-size: 3rem; font-family: var(--font-heading);"><span style="color: var(--split-c1);">Featured</span> <span style="color: var(--split-c2);">Books</span></h2>
+                    </div>
+                    <a href="library.html"
+                        style="font-weight: bold; color: var(--c-primary); text-decoration: none;">View Library <i
+                            class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+                <div class="grid-responsive-blog-4">
+                    <div style="text-align: center;">
+                        <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80"
+                            alt="Book"
+                            style="width: 100%; height: 250px; object-fit: cover; border-radius: 8px; box-shadow: var(--shadow-sm); margin-bottom: 1rem;">
+                        <h4 style="font-family: var(--font-heading); font-size: 1.2rem; margin-bottom: 0.2rem;">
+                            Meditations</h4>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Marcus Aurelius
+                        </p>
+                        <a href="online-reader.html"
+                            style="display: inline-block; padding: 0.5rem 1.5rem; border-radius: 4px; border: 1px solid var(--c-primary); color: var(--c-primary); text-decoration: none; font-weight: bold; font-size: 0.9rem;">Read
+                            Now</a>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=400&q=80"
+                            alt="Book"
+                            style="width: 100%; height: 250px; object-fit: cover; border-radius: 8px; box-shadow: var(--shadow-sm); margin-bottom: 1rem;">
+                        <h4 style="font-family: var(--font-heading); font-size: 1.2rem; margin-bottom: 0.2rem;">The Art
+                            of War</h4>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Sun Tzu</p>
+                        <a href="online-reader.html"
+                            style="display: inline-block; padding: 0.5rem 1.5rem; border-radius: 4px; border: 1px solid var(--c-primary); color: var(--c-primary); text-decoration: none; font-weight: bold; font-size: 0.9rem;">Read
+                            Now</a>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="https://images.unsplash.com/photo-1526243741027-444d633d7365?auto=format&fit=crop&w=400&q=80"
+                            alt="Book"
+                            style="width: 100%; height: 250px; object-fit: cover; border-radius: 8px; box-shadow: var(--shadow-sm); margin-bottom: 1rem;">
+                        <h4 style="font-family: var(--font-heading); font-size: 1.2rem; margin-bottom: 0.2rem;">The
+                            Prince</h4>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Niccolo
+                            Machiavelli</p>
+                        <a href="online-reader.html"
+                            style="display: inline-block; padding: 0.5rem 1.5rem; border-radius: 4px; border: 1px solid var(--c-primary); color: var(--c-primary); text-decoration: none; font-weight: bold; font-size: 0.9rem;">Read
+                            Now</a>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80"
+                            alt="Book"
+                            style="width: 100%; height: 250px; object-fit: cover; border-radius: 8px; box-shadow: var(--shadow-sm); margin-bottom: 1rem;">
+                        <h4 style="font-family: var(--font-heading); font-size: 1.2rem; margin-bottom: 0.2rem;">Sapiens
+                        </h4>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Yuval Noah Harari
+                        </p>
+                        <a href="online-reader.html"
+                            style="display: inline-block; padding: 0.5rem 1.5rem; border-radius: 4px; border: 1px solid var(--c-primary); color: var(--c-primary); text-decoration: none; font-weight: bold; font-size: 0.9rem;">Read
+                            Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 07. CONTINUE READING (Progress) -->
+        <section class="section" style="background: var(--c-surface);">
+            <div class="container">
+                <h2 style="font-size: 2.5rem; font-family: var(--font-heading); margin-bottom: 2rem;">Continue Reading
+                </h2>
+
+                <div class="grid-2 grid-responsive-blog-2">
+                    <div class="continue-card">
+                        <div class="progress-circle">65%</div>
+                        <div style="flex-grow: 1;">
+                            <h4 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.3rem;">The
+                                Republic</h4>
+                            <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 0.5rem;">Plato</p>
+                            <div
+                                style="width: 100%; height: 4px; background: rgba(0,0,0,0.1); border-radius: 2px; margin-bottom: 1rem;">
+                                <div style="width: 65%; height: 100%; background: var(--c-accent); border-radius: 2px;">
+                                </div>
+                            </div>
+                            <a href="online-reader.html"
+                                style="color: var(--c-primary); font-weight: bold; text-decoration: none; font-size: 0.9rem;">Continue
+                                <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="continue-card">
+                        <div class="progress-circle" style="border-color: #27ae60;">22%</div>
+                        <div style="flex-grow: 1;">
+                            <h4 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.3rem;">
+                                History of Philosophy</h4>
+                            <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 0.5rem;">Will Durant
+                            </p>
+                            <div
+                                style="width: 100%; height: 4px; background: rgba(0,0,0,0.1); border-radius: 2px; margin-bottom: 1rem;">
+                                <div style="width: 22%; height: 100%; background: #27ae60; border-radius: 2px;"></div>
+                            </div>
+                            <a href="online-reader.html"
+                                style="color: var(--c-primary); font-weight: bold; text-decoration: none; font-size: 0.9rem;">Continue
+                                <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 08. WEEKLY READING CHALLENGE (Redesigned) -->
+        <section class="section" style="padding-top: 0; background: var(--c-surface);">
+            <div class="container">
+                <div class="challenge-box">
+                    <div class="challenge-left">
+                        <i class="fa-solid fa-trophy"
+                            style="font-size: 4rem; color: var(--c-accent); margin-bottom: 1.5rem;"></i>
+                        <h2
+                            style="font-size: 3rem; font-family: var(--font-heading); margin-bottom: 1rem; color: var(--c-text);">
+                            Weekly Reading Challenge</h2>
+                        <p style="font-size: 1.1rem; color: var(--c-text-muted); margin-bottom: 2rem;">Develop a consistent reading
+                            habit. Read 3 articles or chapters this week to unlock an exclusive historical badge for
+                            your profile.</p>
+                        <a href="#articles-container" class="btn-solid-cream"
+                            style="padding: 1rem 2.5rem; border-radius: 50px; font-weight: 600; background: var(--c-primary); color: var(--c-bg); border: none; text-decoration: none; display: inline-block;">Find
+                            Something to Read</a>
+                    </div>
+                    <div class="challenge-right">
+                        <div class="eyebrow" style="color: var(--c-text-muted); margin-bottom: 2rem;">YOUR PROGRESS THIS
+                            WEEK</div>
+
+                        <div class="step-row completed">
+                            <div class="step-circle"><i class="fa-solid fa-check"></i></div>
+                            <div>
+                                <h4 style="font-family: var(--font-heading); font-size: 1.2rem; color: var(--c-text);">
+                                    Article 1</h4>
+                                <p style="font-size: 0.9rem; color: var(--c-text-muted);">Completed on Monday</p>
+                            </div>
+                        </div>
+
+                        <div class="step-row active">
+                            <div class="step-circle">2</div>
+                            <div>
+                                <h4 style="font-family: var(--font-heading); font-size: 1.2rem; color: var(--c-text);">
+                                    Article 2</h4>
+                                <p style="font-size: 0.9rem; color: var(--c-primary); font-weight: bold;">In Progress
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="step-row">
+                            <div class="step-circle">3</div>
+                            <div>
+                                <h4
+                                    style="font-family: var(--font-heading); font-size: 1.2rem; color: var(--c-text-muted);">
+                                    Article 3</h4>
+                                <p style="font-size: 0.9rem; color: var(--c-text-muted);">Not started</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 09. SUBSCRIPTION / UNLOCK CONTENT -->
+        <section class="section" style="border-top: 1px solid var(--c-border);">
+            <div class="container">
+                <div style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 3rem; gap: 0.5rem;">
+                    <div class="eyebrow" style="color: var(--c-accent);">PREMIUM</div>
+                    <h2 style="font-size: 3rem; font-family: var(--font-heading);"><span style="color: var(--split-c1);">Exclusive</span> <span style="color: var(--split-c2);">Editorial</span></h2>
+                </div>
+
+                <div class="premium-card"
+                    style="max-width: 800px; margin: 0 auto; height: 400px; display: flex; flex-direction: column;">
+                    <div style="padding: 3rem 3rem 0; flex-grow: 1;">
+                        <h3 style="font-family: var(--font-heading); font-size: 2.5rem; margin-bottom: 1.5rem;">The
+                            Architecture of Information</h3>
+                        <p
+                            style="font-family: 'Newsreader', serif; font-size: 1.3rem; line-height: 1.8; color: var(--c-text-muted);">
+                            In the early days of the internet, websites were often described using spatial metaphors:
+                            "rooms," "halls," and "home pages." Today, as platforms have evolved into endless feeds, we
+                            have lost the sense of geographical place in our digital environments. But a new movement in
+                            UI design is attempting to bring the architecture back...
+                        </p>
+                    </div>
+                    <div class="premium-blur">
+                        <div style="text-align: center;">
+                            <i class="fa-solid fa-lock"
+                                style="font-size: 1.5rem; color: var(--c-accent); margin-bottom: 1rem;"></i>
+                            <h4 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 1rem;">This
+                                article is for Premium members only.</h4>
+                            <a href="pricing.html" class="btn-solid-cream"
+                                style="padding: 0.8rem 2.5rem; border-radius: 50px; font-weight: 600; background: var(--c-primary); color: var(--c-bg); border: none; text-decoration: none;">Unlock
+                                Full Article</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. NEWSLETTER & COMMUNITY (Redesigned) -->
+        <section class="section" style="background: var(--c-surface);">
+            <div class="container" style="max-width: 1000px;">
+                <div class="community-box">
+                    <div class="community-img"></div>
+                    <div class="community-content">
+                        <div class="eyebrow" style="color: var(--c-accent); margin-bottom: 1rem;">JOIN US</div>
+                        <h2 style="font-size: 3rem; font-family: var(--font-heading); margin-bottom: 1rem;">Join the
+                            Community</h2>
+                        <p style="font-size: 1.1rem; color: var(--c-text-muted); margin-bottom: 2rem;">
+                            Subscribe to our weekly newsletter for the latest articles, book recommendations, and
+                            editorial insights delivered straight to your inbox.
+                        </p>
+
+                        <form onsubmit="event.preventDefault(); alert('Thank you for subscribing!');"
+                            style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+                            <input type="email" placeholder="Email address..." required
+                                style="flex-grow: 1; padding: 1rem 1.5rem; border-radius: 8px; border: 1px solid var(--c-border); background: var(--c-surface); font-size: 1rem; color: var(--c-text); font-family: var(--font-body);">
+                            <button type="submit"
+                                style="padding: 1rem 2rem; border-radius: 8px; font-weight: 600; background: var(--c-primary); color: var(--c-bg); border: none; font-size: 1rem; cursor: pointer; font-family: var(--font-body);">Subscribe</button>
+                        </form>
+
+                        <p style="color: var(--c-text-muted); margin-bottom: 1rem; font-size: 0.9rem;">Want to unlock
+                            the full Archivia experience?</p>
+                        <div>
+                            <a href="login.html" class="btn-outline-gold"
+                                style="padding: 0.8rem 2rem; border-radius: 50px; font-weight: 600; border: 2px solid var(--c-border); color: var(--c-text); background: transparent; text-decoration: none; display: inline-block; font-size: 0.9rem;">Register
+                                an Account <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-book-open"></i>
+                        <i class="fa-solid fa-fire logo-flame"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h2>Archivia</h2>
+                        <span>BOOKS &bull; NEWS &bull; IDEAS</span>
+                    </div>
+                </a>
+                <p class="footer-desc">A modern destination for discovering books, exploring ideas and staying informed.</p>
+                <div class="socials">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="home2.html">Home 2</a>
+                <a href="about.html">About Us</a>
+                <a href="library.html">Library</a>
+                <a href="services.html">Services</a>
+                <a href="blog.html">Blog</a>
+                <a href="pricing.html">Pricing</a>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Support</h4>
+                <a href="contact.html">Contact</a>
+                <a href="faq.html">FAQ</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+            
+            <div class="footer-contact">
+                <h4>Get in Touch</h4>
+                <p><i class="fa-regular fa-envelope"></i> hello@Archivia.com</p>
+                <p><i class="fa-solid fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fa-solid fa-location-dot"></i> 123 Literary Lane, NY</p>
+                <p><i class="fa-regular fa-clock"></i> Mon - Sat: 9AM - 6PM</p>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Archivia. All Rights Reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const articles = [{ "title": "The Renaissance of Independent Bookstores", "cat": "Culture", "img": "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=600&q=80", "date": "Oct 12, 2026", "read": "5 min read", "id": "article0" }, { "title": "Uncovering the Lost Library of Alexandria", "cat": "History", "img": "https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=600&q=80", "date": "Oct 10, 2026", "read": "8 min read", "id": "article1" }, { "title": "E-Ink Revolution: What's Next?", "cat": "Tech", "img": "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80", "date": "Oct 08, 2026", "read": "4 min read", "id": "article2" }, { "title": "Stoicism in Modern Leadership", "cat": "Philosophy", "img": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=600&q=80", "date": "Oct 05, 2026", "read": "6 min read", "id": "article3" }, { "title": "Interview with Margaret Atwood", "cat": "Interviews", "img": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80", "date": "Oct 02, 2026", "read": "12 min read", "id": "article4" }, { "title": "The Evolution of Science Fiction", "cat": "Fiction", "img": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80", "date": "Sep 28, 2026", "read": "7 min read", "id": "article5" }, { "title": "AI's Role in Modern Publishing", "cat": "Tech", "img": "https://images.unsplash.com/photo-1555680202-c86f0e12f086?auto=format&fit=crop&w=600&q=80", "date": "Sep 25, 2026", "read": "5 min read", "id": "article6" }, { "title": "How the Printing Press Changed the World", "cat": "History", "img": "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=600&q=80", "date": "Sep 22, 2026", "read": "10 min read", "id": "article7" }, { "title": "The Art of World Building", "cat": "Fiction", "img": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=600&q=80", "date": "Sep 18, 2026", "read": "6 min read", "id": "article8" }, { "title": "Nietzsche for Beginners", "cat": "Philosophy", "img": "https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=600&q=80", "date": "Sep 15, 2026", "read": "8 min read", "id": "article9" }, { "title": "The Architecture of Grand Libraries", "cat": "Culture", "img": "https://images.unsplash.com/photo-1541963463532-d68292c34b19?auto=format&fit=crop&w=600&q=80", "date": "Sep 12, 2026", "read": "5 min read", "id": "article10" }, { "title": "A Chat with Neil Gaiman", "cat": "Interviews", "img": "https://images.unsplash.com/photo-1526243741027-444d633d7365?auto=format&fit=crop&w=600&q=80", "date": "Sep 09, 2026", "read": "15 min read", "id": "article11" }, { "title": "Quantum Computing and Data Archival", "cat": "Tech", "img": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80", "date": "Sep 05, 2026", "read": "6 min read", "id": "article12" }, { "title": "The Silk Road and the Exchange of Ideas", "cat": "History", "img": "https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=600&q=80", "date": "Sep 01, 2026", "read": "9 min read", "id": "article13" }, { "title": "Why We Need Magic Realism", "cat": "Fiction", "img": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=600&q=80", "date": "Aug 28, 2026", "read": "4 min read", "id": "article14" }, { "title": "Socrates vs. Modern Influencers", "cat": "Philosophy", "img": "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80", "date": "Aug 25, 2026", "read": "7 min read", "id": "article15" }, { "title": "The Rebirth of Vinyl and Physical Media", "cat": "Culture", "img": "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=600&q=80", "date": "Aug 20, 2026", "read": "5 min read", "id": "article16" }, { "title": "Talking with Historian Mary Beard", "cat": "Interviews", "img": "https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?auto=format&fit=crop&w=600&q=80", "date": "Aug 15, 2026", "read": "10 min read", "id": "article17" }, { "title": "Digital Typography Trends 2027", "cat": "Tech", "img": "assets/digital_typography.jpg", "date": "Aug 10, 2026", "read": "4 min read", "id": "article18" }, { "title": "The Golden Age of Islamic Science", "cat": "History", "img": "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=600&q=80", "date": "Aug 05, 2026", "read": "8 min read", "id": "article19" }];
+
+        function getCategoryColor(cat) {
+            if (cat === 'Tech') return '#27ae60';
+            if (cat === 'History') return 'var(--c-accent)';
+            if (cat === 'Culture') return 'var(--c-primary)';
+            if (cat === 'Fiction') return '#8e44ad';
+            if (cat === 'Philosophy') return '#d35400';
+            if (cat === 'Interviews') return '#2980b9';
+            return 'var(--c-primary)';
+        }
+
+        function renderArticles(filterCat) {
+            const container = document.getElementById('articles-container');
+            container.innerHTML = '';
+
+            const filtered = filterCat === 'All' ? articles : articles.filter(a => a.cat === filterCat);
+
+            filtered.forEach(article => {
+                const card = document.createElement('div');
+                card.className = 'article-card';
+                card.innerHTML = `
+                    <div class="article-img">
+                        <span class="article-tag" style="background: ${getCategoryColor(article.cat)};">${article.cat}</span>
+                        <img src="${article.img}" alt="${article.cat}">
+                    </div>
+                    <div style="padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1;">
+                        <div style="font-size: 0.9rem; color: var(--c-text-muted); margin-bottom: 0.5rem;">${article.date} &bull; ${article.read}</div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 1rem;">${article.title}</h3>
+                        <a href="blog-details.html?id=${article.id}" style="margin-top: auto; font-weight: bold; color: var(--c-primary); text-decoration: none;">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Initialize grid
+        renderArticles('All');
+
+        // Topic Pill toggle logic
+        document.querySelectorAll('#filter-pills .cat-pill').forEach(pill => {
+            pill.addEventListener('click', function () {
+                document.querySelectorAll('#filter-pills .cat-pill').forEach(p => p.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        function filterArticles(category) {
+            renderArticles(category);
+        }
+    </script>
+</body>
+
+</html>

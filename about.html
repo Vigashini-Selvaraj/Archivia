@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Archivia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Small utility classes specifically for About layout, matching style.css */
+        .about-text-center { text-align: center; max-width: 800px; margin: 0 auto; }
+        .about-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .about-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .about-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+        .about-card { background: var(--c-surface); border-radius: 12px; padding: 2rem; border: 1px solid var(--c-border); box-shadow: var(--shadow-sm); transition: var(--transition); height: 100%; }
+        .about-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--c-accent); }
+        .about-img-box { border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-sm); position: relative; }
+        .about-img-box img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+        .about-img-box:hover img { transform: scale(1.05); }
+        .timeline-wrapper { position: relative; padding-left: 2rem; border-left: 2px solid var(--c-border); }
+        .timeline-item { position: relative; margin-bottom: 3rem; }
+        .timeline-item::before { content: ''; position: absolute; left: -2.6rem; top: 0.2rem; width: 1rem; height: 1rem; background: var(--c-bg); border: 2px solid var(--c-accent); border-radius: 50%; }
+        
+        @media(max-width: 900px) {
+            .about-grid-2, .about-grid-3, .about-grid-4 { grid-template-columns: 1fr; }
+        }
+    
+        /* Interactive Shelf & Journey Styles */
+        .genre-pill { display: inline-block; padding: 0.5rem 1.5rem; margin: 0.5rem; border: 1px solid var(--c-accent); border-radius: 50px; cursor: pointer; transition: var(--transition); font-weight: 600; color: var(--c-primary); }
+        .genre-pill:hover, .genre-pill.active { background: var(--c-accent); color: var(--c-bg); transform: translateY(-2px); }
+        .shelf-container { margin-top: 3rem; padding-bottom: 20px; border-bottom: 12px solid var(--c-border); display: flex; gap: 10px; min-height: 150px; align-items: flex-end; justify-content: center; }
+        .shelf-book { width: 40px; height: 120px; border-radius: 4px; display: flex; align-items: center; justify-content: center; writing-mode: vertical-rl; text-orientation: mixed; color: white; font-weight: bold; font-size: 0.8rem; box-shadow: -2px 0 5px rgba(0,0,0,0.2); animation: dropIn 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); cursor: pointer; transition: transform 0.3s; }
+        .shelf-book:hover { transform: translateY(-10px); }
+        @keyframes dropIn { 0% { transform: translateY(-50px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+        
+        .journey-container { display: flex; align-items: stretch; gap: 4rem; margin-top: 3rem; }
+        .journey-steps { flex: 1; display: flex; flex-direction: column; gap: 1.5rem; position: relative; }
+        .journey-steps::before { content: ''; position: absolute; left: 24px; top: 0; bottom: 0; width: 2px; background: var(--c-border); z-index: 0; }
+        .journey-step { display: flex; align-items: center; gap: 1.5rem; cursor: pointer; position: relative; z-index: 1; transition: var(--transition); opacity: 0.6; }
+        .journey-step:hover { opacity: 1; transform: translateX(10px); }
+        .journey-step.active { opacity: 1; }
+        .journey-step-icon { width: 50px; height: 50px; border-radius: 50%; background: var(--c-surface); border: 2px solid var(--c-border); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--c-primary); transition: var(--transition); }
+        .journey-step.active .journey-step-icon { background: var(--c-accent); border-color: var(--c-accent); color: var(--c-bg); }
+        .journey-step-text { font-family: var(--font-heading); font-size: 1.5rem; }
+        
+        .journey-content { flex: 1; background: var(--c-surface); border-radius: 12px; padding: 3rem; border: 1px solid var(--c-border); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; justify-content: center; }
+        .journey-content h3 { font-size: 2rem; margin-bottom: 1rem; color: var(--c-accent); }
+        .journey-content p { font-size: 1.1rem; color: var(--c-text-muted); line-height: 1.8; }
+        .journey-content img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 1.5rem; display: none; }
+        
+        @media(max-width: 900px) {
+            .journey-container { flex-direction: column; gap: 2rem; }
+            .journey-steps::before { display: none; }
+            .journey-step { flex-direction: column; text-align: center; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="about.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                    <i class="fa-solid fa-fire logo-flame"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Archivia</h1>
+                    <span>BOOKS &bull; NEWS &bull; IDEAS</span>
+                </div>
+            </a>
+            
+            <div class="nav-links desktop-only">
+                <a href="index.html">Home</a>
+                <a href="home2.html">Home 2</a>
+                <a href="about.html" class="active">About Us</a>
+                <a href="library.html">Library</a>
+                <a href="services.html">Services</a>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact</a>
+            </div>
+
+                        <div class="nav-controls">
+                <button id="rtlToggle" class="nav-btn rtl-btn" style="width: 60px; justify-content: center;">
+                    <span class="dir-text fw-600">LTR</span>
+                </button>
+                <button id="themeToggle" class="nav-btn theme-btn">
+                    <i class="fa-solid fa-sun light-icon"></i>
+                    <i class="fa-solid fa-moon dark-icon" style="display:none;"></i>
+                </button>
+                <div class="profile-dropdown-wrap desktop-only">
+                    <button class="nav-btn profile-btn"><i class="fa-regular fa-user"></i> <i class="fa-solid fa-chevron-down small-chevron" style="font-size:0.7rem;"></i></button>
+                    <div class="profile-dropdown">
+                        <a href="login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
+                        <a href="register.html"><i class="fa-solid fa-user-plus"></i> Register</a>
+                    </div>
+                </div>
+                <button id="mobileMenuBtn" class="nav-btn mobile-only"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- MOBILE MENU -->
+    <div id="mobileMenu" class="mobile-menu">
+        <button id="closeMobileMenu" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+        <div class="mobile-links">
+            <a href="index.html">Home</a>
+            <a href="home2.html">Home 2</a>
+            <a href="about.html" class="active">About Us</a>
+            <a href="library.html">Library</a>
+            <a href="services.html">Services</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact</a>
+            <div style="width: 100%; height: 1px; background: var(--c-border); margin: 1rem 0;"></div>
+            <a href="login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
+            <a href="register.html"><i class="fa-solid fa-user-plus"></i> Register</a>
+        </div>
+    </div>
+
+    <main>
+                <!-- 01. THE STORY BEHIND Archivia -->
+        <section class="section" style="padding-top: 10rem; padding-bottom: 6rem; position: relative; overflow: hidden; background: var(--bg-main);">
+            <div class="hero-bg-texture" style="position: absolute; top:0; left:0; width:100%; height:100%; background: radial-gradient(circle at center, rgba(144, 28, 64, 0.05) 0%, transparent 70%);"></div>
+            
+            <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 10;">
+                <div style="text-align: left;">
+                    <div class="eyebrow" style="color: var(--c-accent); margin-bottom: 1rem; font-weight: bold; letter-spacing: 2px; display: flex; align-items: center; gap: 0.5rem;"><i class="fa-solid fa-feather-pointed"></i> OUR STORY</div>
+                    <h1 style="font-size: 4.5rem; font-family: var(--font-heading); line-height: 1.1; margin-bottom: 1.5rem;">
+                        <span style="color: var(--split-c1);">Every Page Holds</span> <br>
+                        <span style="color: var(--split-c2); font-style: italic;">A Story Worth Finding.</span>
+                    </h1>
+                    <p style="font-size: 1.2rem; color: var(--c-text-muted); margin-bottom: 2.5rem; line-height: 1.8; max-width: 90%;">
+                        Archivia brings books, articles, news, publications, and knowledge together in one thoughtfully curated digital space. We are building the bridge between historical archives and the pulse of today's most urgent narratives.
+                    </p>
+                    
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="library.html" class="btn-solid-cream" style="padding: 1.2rem 2.5rem; border-radius: 50px; font-weight: 600; background: var(--c-primary); color: var(--c-bg); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: 0.3s; box-shadow: var(--shadow-sm);" onmouseover="this.style.transform='translateY(-3px)';" onmouseout="this.style.transform='none';"><i class="fa-solid fa-book-open"></i> Start Reading</a>
+                        <a href="contact.html" class="btn-outline-gold" style="padding: 1.2rem 2.5rem; border-radius: 50px; font-weight: 600; border: 2px solid var(--c-primary); color: var(--c-primary); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: 0.3s;" onmouseover="this.style.background='var(--c-primary)'; this.style.color='var(--c-bg)';" onmouseout="this.style.background='transparent'; this.style.color='var(--c-primary)';">Contact Us</a>
+                    </div>
+                </div>
+                
+                <div class="hero-image-grid" style="display: grid; grid-template-columns: 1fr 1.2fr; grid-template-rows: 1fr 1fr; gap: 1.5rem; height: 550px; max-width: 550px; margin: 0 auto;">
+                    <!-- Top left image -->
+                    <div style="grid-column: 1; grid-row: 1; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-md); animation: floatGentle 7s ease-in-out infinite 0.5s;">
+                        <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=600&q=80" alt="Vintage Book Pages" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    </div>
+                    <!-- Bottom left image -->
+                    <div style="grid-column: 1; grid-row: 2; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-md); animation: floatGentle 8s ease-in-out infinite 1.5s;">
+                        <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=600&q=80" alt="Library Interior" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    </div>
+                    <!-- Large image on the right -->
+                    <div style="grid-column: 2; grid-row: 1 / 3; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-lg); animation: floatGentle 9s ease-in-out infinite 0s;">
+                        <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=800&q=80" alt="Archival Knowledge" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    </div>
+                </div>
+            </div>
+            
+            <style>
+                @keyframes floatGentle {
+                    0%, 100% { transform: translateY(0); }
+                    50% { transform: translateY(-15px); }
+                }
+            </style>
+        </section>
+
+                <!-- 02. WHY Archivia EXISTS -->
+        <section class="section" style="background: var(--c-surface); padding: 8rem 2rem;">
+            <div class="container">
+                <div class="about-text-center" style="margin-bottom: 5rem;">
+                    <div class="eyebrow" style="color: var(--c-accent); margin-bottom: 1rem;">OUR MANIFESTO</div>
+                    <h2 style="font-size: 3.5rem; font-family: var(--font-heading); margin-bottom: 1.5rem; font-style: italic; line-height: 1.2;">
+                        <span style="color: var(--split-c1);">Information is everywhere,</span><br>
+                        <span style="color: var(--split-c2);">but meaning is scarce.</span>
+                    </h2>
+                    <p style="font-size: 1.2rem; color: var(--c-text-muted); max-width: 800px; margin: 0 auto; line-height: 1.8;">
+                        We built Archivia to be a sanctuary for thoughtful readers. A place where algorithms don't dictate your reading habits, but where serendipity and curation guide you to your next great discovery.
+                    </p>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem;">
+                    <div style="padding: 3rem; background: var(--bg-main); border: 1px solid var(--c-border); border-radius: 12px; text-align: center; box-shadow: var(--shadow-sm); transition: 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='var(--shadow-md)';" onmouseout="this.style.transform='none'; this.style.boxShadow='var(--shadow-sm)';">
+                        <div style="width: 70px; height: 70px; margin: 0 auto 1.5rem; background: rgba(94, 13, 8, 0.1); color: var(--c-accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem;"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 1rem; color: var(--c-text);">Curated Discovery</h3>
+                        <p style="color: var(--c-text-muted); line-height: 1.6;">We handpick stories and books from centuries of history, ensuring you only spend time on what truly matters.</p>
+                    </div>
+                    <div style="padding: 3rem; background: var(--bg-main); border: 1px solid var(--c-border); border-radius: 12px; text-align: center; box-shadow: var(--shadow-sm); transition: 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='var(--shadow-md)';" onmouseout="this.style.transform='none'; this.style.boxShadow='var(--shadow-sm)';">
+                        <div style="width: 70px; height: 70px; margin: 0 auto 1.5rem; background: rgba(94, 13, 8, 0.1); color: var(--c-accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem;"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 1rem; color: var(--c-text);">Timeless Knowledge</h3>
+                        <p style="color: var(--c-text-muted); line-height: 1.6;">From ancient philosophy to tomorrow's innovations, our archives span across time to bring you the best ideas.</p>
+                    </div>
+                    <div style="padding: 3rem; background: var(--bg-main); border: 1px solid var(--c-border); border-radius: 12px; text-align: center; box-shadow: var(--shadow-sm); transition: 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='var(--shadow-md)';" onmouseout="this.style.transform='none'; this.style.boxShadow='var(--shadow-sm)';">
+                        <div style="width: 70px; height: 70px; margin: 0 auto 1.5rem; background: rgba(94, 13, 8, 0.1); color: var(--c-accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem;"><i class="fa-solid fa-book-bookmark"></i></div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 1rem; color: var(--c-text);">Distraction-Free</h3>
+                        <p style="color: var(--c-text-muted); line-height: 1.6;">A clean, minimalist reading environment designed to help you focus on the words, not the interface.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03. A LIBRARY THAT KEEPS MOVING -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 3rem;">
+                    <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+                        <div class="eyebrow" style="color: var(--c-accent);">THE IDEA</div>
+                        <h2 style="font-size: 3.5rem; font-family: var(--font-heading); font-style: italic;"><span style="color: var(--split-c1);">A Library</span> <span style="color: var(--split-c2);">That Keeps Moving.</span></h2>
+                    </div>
+                </div>
+                
+                <div class="about-grid-4">
+                    <div class="about-card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+                        <div class="about-img-box" style="height: 150px; border-radius: 0; box-shadow: none;">
+                            <img src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=400&q=80" alt="Discover">
+                        </div>
+                        <div style="padding: 1.5rem; flex: 1;">
+                            <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.5rem;">Discover</h3>
+                            <p style="color: var(--c-text-muted);">Find something beyond what you already know.</p>
+                        </div>
+                    </div>
+                    <div class="about-card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+                        <div class="about-img-box" style="height: 150px; border-radius: 0; box-shadow: none;">
+                            <img src="https://images.unsplash.com/photo-1499540633125-484965b60031?auto=format&fit=crop&w=400&q=80" alt="Pause">
+                        </div>
+                        <div style="padding: 1.5rem; flex: 1;">
+                            <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.5rem;">Pause</h3>
+                            <p style="color: var(--c-text-muted);">Give meaningful ideas the attention they deserve.</p>
+                        </div>
+                    </div>
+                    <div class="about-card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+                        <div class="about-img-box" style="height: 150px; border-radius: 0; box-shadow: none;">
+                            <img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=400&q=80" alt="Learn">
+                        </div>
+                        <div style="padding: 1.5rem; flex: 1;">
+                            <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.5rem;">Learn</h3>
+                            <p style="color: var(--c-text-muted);">Turn reading into curiosity and understanding.</p>
+                        </div>
+                    </div>
+                    <div class="about-card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+                        <div class="about-img-box" style="height: 150px; border-radius: 0; box-shadow: none;">
+                            <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=400&q=80" alt="Return">
+                        </div>
+                        <div style="padding: 1.5rem; flex: 1;">
+                            <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.5rem;">Return</h3>
+                            <p style="color: var(--c-text-muted);">Keep the stories worth remembering close.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04. FROM INK TO DIGITAL -->
+        <section class="section" style="background: var(--c-surface);">
+            <div class="container about-grid-2">
+                <div class="about-img-box" style="height: 500px;">
+                    <img src="https://images.unsplash.com/photo-1588666309990-d68f08e3d4a6?auto=format&fit=crop&q=80&w=600" alt="Evolution of Reading">
+                </div>
+                <div>
+                    <div class="eyebrow" style="color: var(--c-accent); margin-bottom: 1rem;">THE EVOLUTION</div>
+                    <h2 style="font-style: italic; font-size: 3rem; font-family: var(--font-heading); margin-bottom: 2rem;"><span style="color: var(--split-c1);">From Ink</span> <span style="color: var(--split-c2);">to Digital</span></h2>
+                    
+                    <div class="timeline-wrapper">
+                        <div class="timeline-item">
+                            <h3 style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--c-primary);">Print</h3>
+                            <p style="color: var(--c-text-muted);">The physical binding of thoughts. Heavy ink pressed into pages.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3 style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--c-primary);">Library</h3>
+                            <p style="color: var(--c-text-muted);">The architectural sanctuary dedicated entirely to preservation.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3 style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--c-accent);">Archivia</h3>
+                            <p style="color: var(--c-text-muted);">Bringing the reverence of the traditional library into the digital world.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05. WHAT LIVES INSIDE Archivia -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 3rem;">
+                    <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+                        <div class="eyebrow" style="color: var(--c-accent);">THE ECOSYSTEM</div>
+                        <h2 style="font-style: italic; font-size: 3rem; font-family: var(--font-heading);"><span style="color: var(--split-c1);">What Lives</span> <span style="color: var(--split-c2);">Inside Archivia?</span></h2>
+                    </div>
+                </div>
+                
+                <div class="about-grid-3">
+                    <div class="about-card" style="padding: 0; overflow: hidden;">
+                        <div class="about-img-box" style="height: 200px; border-radius: 0; box-shadow: none;">
+                            <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=400&q=80" alt="Books">
+                        </div>
+                        <div style="padding: 2rem;">
+                            <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.5rem;">Books</h3>
+                            <p style="color: var(--c-text-muted);">An expansive digital catalog of literature and theoretical frameworks.</p>
+                        </div>
+                    </div>
+                    <div class="about-card" style="padding: 0; overflow: hidden;">
+                        <div class="about-img-box" style="height: 200px; border-radius: 0; box-shadow: none;">
+                            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=400&q=80" alt="News">
+                        </div>
+                        <div style="padding: 2rem;">
+                            <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.5rem;">News</h3>
+                            <p style="color: var(--c-text-muted);">Daily editorial pieces crafted without clickbait.</p>
+                        </div>
+                    </div>
+                    <div class="about-card" style="padding: 0; overflow: hidden;">
+                        <div class="about-img-box" style="height: 200px; border-radius: 0; box-shadow: none;">
+                            <img src="assets/archives.jpg" alt="Archives">
+                        </div>
+                        <div style="padding: 2rem;">
+                            <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.5rem;">Archives</h3>
+                            <p style="color: var(--c-text-muted);">Preserving historical collections and out-of-print journals.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 06. OUR READING PHILOSOPHY -->
+        <section class="section" style="background: var(--c-surface);">
+            <div class="container">
+                <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 4rem;">
+                    <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+                        <div class="eyebrow" style="color: var(--c-accent); margin-bottom: 1rem;">OUR PHILOSOPHY</div>
+                        <h2 style="font-size: 3.5rem; font-family: var(--font-heading); font-style: italic;"><span style="color: var(--split-c1);">"Read Beyond</span> <span style="color: var(--split-c2);">the Headline."</span></h2>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+                    <div class="about-card" style="flex: 1; min-width: 300px; text-align: center; padding: 3rem 2rem; position: relative; overflow: hidden; group;">
+                        <div style="width: 80px; height: 80px; border-radius: 50%; background: rgba(94, 13, 8, 0.1); color: var(--c-accent); display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 2rem;"><i class="fa-solid fa-glasses"></i></div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 1rem;">Read Deeply</h3>
+                        <p style="color: var(--c-text-muted); line-height: 1.8;">Escape the endless scroll. We provide an environment built for long-form thoughts.</p>
+                    </div>
+                    <div class="about-card" style="flex: 1; min-width: 300px; text-align: center; padding: 3rem 2rem; position: relative; overflow: hidden; group;">
+                        <div style="width: 80px; height: 80px; border-radius: 50%; background: rgba(94, 13, 8, 0.1); color: var(--c-accent); display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 2rem;"><i class="fa-solid fa-seedling"></i></div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 1rem;">Discover Curiously</h3>
+                        <p style="color: var(--c-text-muted); line-height: 1.8;">Explore beyond familiar subjects. We curate unexpected perspectives.</p>
+                    </div>
+                    <div class="about-card" style="flex: 1; min-width: 300px; text-align: center; padding: 3rem 2rem; position: relative; overflow: hidden; group;">
+                        <div style="width: 80px; height: 80px; border-radius: 50%; background: rgba(94, 13, 8, 0.1); color: var(--c-accent); display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 2rem;"><i class="fa-solid fa-landmark"></i></div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 1rem;">Return Often</h3>
+                        <p style="color: var(--c-text-muted); line-height: 1.8;">Build a permanent shelf of knowledge. Revisit timeless stories.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 08. PEOPLE -->
+        <section class="section" style="background: var(--c-surface);">
+            <div class="container">
+                <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 4rem;">
+                    <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+                        <div class="eyebrow" style="color: var(--c-accent);">THE CURATORS</div>
+                        <h2 style="font-style: italic; font-size: 3rem; font-family: var(--font-heading);"><span style="color: var(--split-c1);">Built by People</span> <span style="color: var(--split-c2);">Who Love to Read.</span></h2>
+                    </div>
+                </div>
+                
+                <div class="about-grid-4" style="text-align: center;">
+                    <div>
+                        <div class="about-img-box" style="width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 1.5rem;">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80" alt="Editors">
+                        </div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.5rem;">Editors</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Quality Control</p>
+                    </div>
+                    <div>
+                        <div class="about-img-box" style="width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 1.5rem;">
+                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80" alt="Curators">
+                        </div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.5rem;">Curators</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Discovery</p>
+                    </div>
+                    <div>
+                        <div class="about-img-box" style="width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 1.5rem;">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Researchers">
+                        </div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.5rem;">Researchers</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Context</p>
+                    </div>
+                    <div>
+                        <div class="about-img-box" style="width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 1.5rem;">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80" alt="Designers">
+                        </div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.5rem;">Designers</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Experience</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <!-- NEW: BUILD YOUR SHELF -->
+        <section class="section">
+            <div class="container about-text-center">
+                <div class="eyebrow" style="color: var(--c-accent); margin-bottom: 1rem;">PERSONALIZED DISCOVERY</div>
+                <h2 style="font-style: italic; font-size: 3rem; font-family: var(--font-heading); margin-bottom: 1.5rem;"><span style="color: var(--split-c1);">Build Your</span> <span style="color: var(--split-c2);">Reading Shelf</span></h2>
+                <p style="font-size: 1.1rem; color: var(--c-text-muted); margin-bottom: 3rem;">
+                    Select your interests below to instantly curate your virtual bookshelf.
+                </p>
+                
+                <div id="genre-pills">
+                    <span class="genre-pill" data-genre="Fiction" data-color="#5E0D08">Fiction</span>
+                    <span class="genre-pill" data-genre="Science" data-color="#0D0634">Science</span>
+                    <span class="genre-pill" data-genre="Philosophy" data-color="#600347">Philosophy</span>
+                    <span class="genre-pill" data-genre="Technology" data-color="#2c3e50">Technology</span>
+                    <span class="genre-pill" data-genre="Art" data-color="#d35400">Art</span>
+                    <span class="genre-pill" data-genre="History" data-color="#8e44ad">History</span>
+                    <span class="genre-pill" data-genre="Comedy" data-color="#f39c12">Comedy</span>
+                    <span class="genre-pill" data-genre="Romance" data-color="#e74c3c">Romance</span>
+                    <span class="genre-pill" data-genre="Journals" data-color="#16a085">Journals</span>
+                    <span class="genre-pill" data-genre="Stories" data-color="#27ae60">Stories</span>
+                    <span class="genre-pill" data-genre="AI" data-color="#2980b9">AI</span>
+                    <span class="genre-pill" data-genre="Computer Science" data-color="#34495e">Computer Science</span>
+                </div>
+                
+                <div class="shelf-container" id="virtual-shelf">
+                    <!-- Books will drop in here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW: YOUR READING JOURNEY -->
+        <section class="section" style="background: var(--c-surface);">
+            <div class="container">
+                <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 4rem;">
+                    <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+                        <div class="eyebrow" style="color: var(--c-accent);">THE EXPERIENCE</div>
+                        <h2 style="font-style: italic; font-size: 3.5rem; font-family: var(--font-heading);"><span style="color: var(--split-c1);">Your</span> <span style="color: var(--split-c2);">Reading Journey</span></h2>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 3rem; flex-wrap: wrap;">
+                    <button class="journey-tab active" onclick="updateJourneyNew(0)" style="padding: 1rem 2rem; border-radius: 50px; border: 1px solid var(--c-border); background: var(--c-primary); color: var(--c-bg); font-weight: 600; cursor: pointer; transition: var(--transition);">01. Discover</button>
+                    <button class="journey-tab" onclick="updateJourneyNew(1)" style="padding: 1rem 2rem; border-radius: 50px; border: 1px solid var(--c-border); background: var(--c-bg); color: var(--c-text); font-weight: 600; cursor: pointer; transition: var(--transition);">02. Read</button>
+                    <button class="journey-tab" onclick="updateJourneyNew(2)" style="padding: 1rem 2rem; border-radius: 50px; border: 1px solid var(--c-border); background: var(--c-bg); color: var(--c-text); font-weight: 600; cursor: pointer; transition: var(--transition);">03. Save</button>
+                    <button class="journey-tab" onclick="updateJourneyNew(3)" style="padding: 1rem 2rem; border-radius: 50px; border: 1px solid var(--c-border); background: var(--c-bg); color: var(--c-text); font-weight: 600; cursor: pointer; transition: var(--transition);">04. Explore</button>
+                    <button class="journey-tab" onclick="updateJourneyNew(4)" style="padding: 1rem 2rem; border-radius: 50px; border: 1px solid var(--c-border); background: var(--c-bg); color: var(--c-text); font-weight: 600; cursor: pointer; transition: var(--transition);">05. Share</button>
+                </div>
+                
+                <div id="journey-display" class="about-grid-2" style="background: var(--c-bg); padding: 3rem; border-radius: 12px; border: 1px solid var(--c-border); box-shadow: var(--shadow-sm); transition: var(--transition);">
+                    <div>
+                        <div style="width: 60px; height: 60px; border-radius: 50%; background: rgba(94, 13, 8, 0.1); color: var(--c-accent); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.5rem;" id="jd-icon"><i class="fa-solid fa-compass"></i></div>
+                        <h3 id="jd-title" style="font-family: var(--font-heading); font-size: 2.5rem; margin-bottom: 1rem;">Discover</h3>
+                        <p id="jd-desc" style="color: var(--c-text-muted); font-size: 1.1rem; line-height: 1.8;">Begin by exploring a curated selection of editorial pieces, deep dives, and out-of-print historical archives carefully matched to your interests.</p>
+                    </div>
+                    <div class="about-img-box" style="height: 350px;">
+                        <img id="jd-img" src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=800&q=80" alt="Discover">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 09. OUR PROMISE & CTA -->
+        <section class="section" style="text-align: center; background: #1a3636; color: #f5f0e6;">
+            <div class="container about-text-center">
+                <div class="eyebrow" style="color: var(--c-accent); margin-bottom: 1rem;">YOUR NEXT STORY AWAITS</div>
+                <h2 style="font-size: 3.5rem; font-family: var(--font-heading); margin-bottom: 1.5rem; color: #f5f0e6;">
+                    Make Knowledge Easier To Find.<br>
+                    <span style="font-style: italic; color: #d4a373;">And Harder To Forget.</span>
+                </h2>
+                <p style="font-size: 1.1rem; color: rgba(255,255,255,0.7); margin-bottom: 3rem;">
+                    Explore something you've never read before.
+                </p>
+                <div style="display: flex; gap: 1rem; justify-content: center;">
+                    <a href="library.html" class="btn-solid-cream" style="padding: 1rem 2rem; border-radius: 50px; font-weight: 600; background: #f5f0e6; color: #1a3636; text-decoration: none; border: none;">Explore Collections</a>
+                    <a href="news.html" class="btn-outline-gold" style="padding: 1rem 2rem; border-radius: 50px; font-weight: 600; border: 2px solid #f5f0e6; color: #f5f0e6; text-decoration: none; background: transparent; transition: 0.3s;" onmouseover="this.style.background=\'#f5f0e6\'; this.style.color=\'#1a3636\';" onmouseout="this.style.background=\'transparent\'; this.style.color=\'#f5f0e6\';">Read Latest Stories</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-book-open"></i>
+                        <i class="fa-solid fa-fire logo-flame"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h2>Archivia</h2>
+                        <span>BOOKS &bull; NEWS &bull; IDEAS</span>
+                    </div>
+                </a>
+                <p class="footer-desc">A modern destination for discovering books, exploring ideas and staying informed.</p>
+                <div class="socials">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="home2.html">Home 2</a>
+                <a href="about.html">About Us</a>
+                <a href="library.html">Library</a>
+                <a href="services.html">Services</a>
+                <a href="blog.html">Blog</a>
+                <a href="pricing.html">Pricing</a>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Support</h4>
+                <a href="contact.html">Contact</a>
+                <a href="faq.html">FAQ</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+            
+            <div class="footer-contact">
+                <h4>Get in Touch</h4>
+                <p><i class="fa-regular fa-envelope"></i> hello@Archivia.com</p>
+                <p><i class="fa-solid fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fa-solid fa-location-dot"></i> 123 Literary Lane, NY</p>
+                <p><i class="fa-regular fa-clock"></i> Mon - Sat: 9AM - 6PM</p>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Archivia. All Rights Reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js">
+    function updateJourneyNew(index) {
+        const tabs = document.querySelectorAll('.journey-tab');
+        tabs.forEach((t, i) => {
+            if(i === index) {
+                t.style.background = 'var(--c-primary)';
+                t.style.color = 'var(--c-bg)';
+            } else {
+                t.style.background = 'var(--c-bg)';
+                t.style.color = 'var(--c-text)';
+            }
+        });
+        
+        const icons = ['fa-compass', 'fa-book-open', 'fa-bookmark', 'fa-map-location-dot', 'fa-share-nodes'];
+        
+        document.getElementById('jd-title').innerText = journeyData[index].title;
+        document.getElementById('jd-desc').innerText = journeyData[index].desc;
+        document.getElementById('jd-img').src = journeyData[index].img;
+        document.getElementById('jd-icon').innerHTML = `<i class="fa-solid ${icons[index]}"></i>`;
+    }
+</script>
+
+<script>
+    // Build Your Shelf Logic
+    document.querySelectorAll('.genre-pill').forEach(pill => {
+        pill.addEventListener('click', function() {
+            this.classList.toggle('active');
+            const genre = this.getAttribute('data-genre');
+            const color = this.getAttribute('data-color');
+            const shelf = document.getElementById('virtual-shelf');
+            
+            if(this.classList.contains('active')) {
+                // Add book
+                const book = document.createElement('div');
+                book.className = 'shelf-book';
+                book.style.backgroundColor = color;
+                book.setAttribute('data-genre', genre);
+                book.innerText = genre;
+                
+                // Randomize height slightly for realism
+                const height = Math.floor(Math.random() * 40) + 100;
+                book.style.height = height + 'px';
+                
+                shelf.appendChild(book);
+            } else {
+                // Remove book
+                const book = shelf.querySelector(`.shelf-book[data-genre="${genre}"]`);
+                if(book) shelf.removeChild(book);
+            }
+        });
+    });
+
+    // Reading Journey Logic
+    const journeyData = [
+        {
+            title: 'Discover',
+            desc: 'Begin by exploring a curated selection of editorial pieces, deep dives, and out-of-print historical archives carefully matched to your interests.',
+            img: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=800&q=80'
+        },
+        {
+            title: 'Read',
+            desc: 'Immerse yourself in a distraction-free reading environment. Adjust typography, background, and layout to suit your perfect reading condition.',
+            img: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=800&q=80'
+        },
+        {
+            title: 'Save',
+            desc: 'Found a quote that resonates? Highlight and save passages directly to your personal notebook for easy retrieval later.',
+            img: 'https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?auto=format&fit=crop&w=800&q=80'
+        },
+        {
+            title: 'Explore',
+            desc: 'Follow the footnotes. Our linked-data architecture connects related authors, topics, and historical eras dynamically as you read.',
+            img: 'https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=800&q=80'
+        },
+        {
+            title: 'Share',
+            desc: 'Export your beautifully formatted notes, generate reading lists, and share your most profound discoveries with the community.',
+            img: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80'
+        }
+    ];
+
+    function updateJourney(index) {
+        // Update active step
+        document.querySelectorAll('.journey-step').forEach((step, i) => {
+            if(i === index) step.classList.add('active');
+            else step.classList.remove('active');
+        });
+        
+        // Update content
+        const box = document.getElementById('journey-content-box');
+        box.innerHTML = `
+            <img src="${journeyData[index].img}" alt="${journeyData[index].title}" style="display: block;">
+            <h3>${journeyData[index].title}</h3>
+            <p>${journeyData[index].desc}</p>
+        `;
+    }
+
+    function updateJourneyNew(index) {
+        const tabs = document.querySelectorAll('.journey-tab');
+        tabs.forEach((t, i) => {
+            if(i === index) {
+                t.style.background = 'var(--c-primary)';
+                t.style.color = 'var(--c-bg)';
+            } else {
+                t.style.background = 'var(--c-bg)';
+                t.style.color = 'var(--c-text)';
+            }
+        });
+        
+        const icons = ['fa-compass', 'fa-book-open', 'fa-bookmark', 'fa-map-location-dot', 'fa-share-nodes'];
+        
+        document.getElementById('jd-title').innerText = journeyData[index].title;
+        document.getElementById('jd-desc').innerText = journeyData[index].desc;
+        document.getElementById('jd-img').src = journeyData[index].img;
+        document.getElementById('jd-icon').innerHTML = `<i class="fa-solid ${icons[index]}"></i>`;
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Reader | Archivia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specific Reader Styles */
+        body { background: #fdfbf7; color: #2D1138; }
+        [data-theme="dark"] body { background: #1a1a1a; color: #fdfbf7; }
+        
+        .reader-header { 
+            position: fixed; 
+            top: 0; left: 0; width: 100%; 
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1rem 2rem;
+            z-index: 1000;
+        }
+        [data-theme="dark"] .reader-header { background: rgba(26,26,26,0.95); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        
+        .reader-info { display: flex; align-items: center; gap: 1rem; }
+        .reader-cover { width: 40px; height: 60px; object-fit: cover; border-radius: 4px; box-shadow: var(--shadow-sm); }
+        
+        .reader-controls { display: flex; align-items: center; gap: 1.5rem; font-size: 1.2rem; }
+        .reader-controls i { cursor: pointer; color: var(--c-text-muted); transition: color 0.3s; }
+        .reader-controls i:hover { color: var(--c-primary); }
+        
+        .progress-container { flex-grow: 1; max-width: 300px; height: 4px; background: rgba(0,0,0,0.1); border-radius: 2px; overflow: hidden; margin: 0 2rem; display: none; }
+        .progress-bar { height: 100%; width: 25%; background: var(--c-accent); }
+        @media(min-width: 768px) { .progress-container { display: block; } }
+        
+        .reader-content { 
+            max-width: 750px; margin: 0 auto; padding: 120px 2rem 4rem; 
+            font-family: 'Newsreader', serif; font-size: 1.4rem; line-height: 1.8;
+        }
+        
+        .chapter-title { font-size: 2.5rem; font-weight: 700; margin-top: 4rem; margin-bottom: 2rem; text-align: center; font-family: var(--font-heading); }
+        .reader-text p { margin-bottom: 2rem; text-align: justify; }
+        .reader-text p:first-letter { font-size: 3rem; float: left; margin-right: 0.5rem; line-height: 1; color: var(--c-accent); font-family: var(--font-heading); }
+        
+        .paywall-panel { 
+            background: var(--c-surface); 
+            border: 1px solid var(--c-border); 
+            border-radius: 12px; 
+            padding: 4rem 2rem; 
+            text-align: center; 
+            margin-top: 4rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+        .paywall-fade {
+            position: absolute; top: -100px; left: 0; width: 100%; height: 100px;
+            background: linear-gradient(to bottom, rgba(253,251,247,0), rgba(253,251,247,1));
+        }
+        [data-theme="dark"] .paywall-fade { background: linear-gradient(to bottom, rgba(26,26,26,0), rgba(26,26,26,1)); }
+        
+    </style>
+</head>
+<body>
+
+    <!-- 01. READER HEADER -->
+    <header class="reader-header">
+        <div class="reader-info">
+            <button onclick="window.history.back()" style="background: none; border: none; font-size: 1.5rem; color: var(--c-text); cursor: pointer; margin-right: 1rem;"><i class="fa-solid fa-arrow-left"></i></button>
+            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80" alt="Book Cover" class="reader-cover" id="reader-cover-img">
+            <div>
+                <div style="font-family: var(--font-heading); font-weight: bold; font-size: 1.1rem;" id="reader-title">Meditations</div>
+                <div style="font-size: 0.8rem; color: var(--c-text-muted);" id="reader-author">Marcus Aurelius</div>
+            </div>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+        
+        <div class="reader-controls" style="display: flex; align-items: center; gap: 1rem;">
+            <button id="reader-rtl-toggle" style="background: transparent; border: 1px solid var(--c-border); color: var(--c-text); border-radius: 20px; padding: 0.2rem 0.8rem; font-size: 0.9rem; font-weight: 600; cursor: pointer; font-family: var(--font-body);">LTR</button>
+            <i class="fa-solid fa-moon" id="reader-theme-toggle" title="Toggle Theme" style="cursor: pointer; font-size: 1.2rem; color: var(--c-text);"></i>
+        </div>
+    </header>
+
+    <main class="reader-content">
+        <!-- 02. READING INTRODUCTION -->
+        <div style="text-align: center; margin-bottom: 5rem; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 3rem;">
+            <div class="eyebrow" style="color: var(--c-accent); margin-bottom: 1rem;">PUBLISHED 180 AD &bull; Archivia CLASSICS</div>
+            <h1 style="font-size: 3.5rem; font-family: var(--font-heading); margin-bottom: 1rem;" id="intro-title">Meditations</h1>
+            <p style="color: var(--c-text-muted); font-size: 1rem; font-family: var(--font-body);">Translated by George Long <br> Copyright Â© 2026 Archivia Archives. All rights reserved.</p>
+        </div>
+
+        <!-- 03. CHAPTER READING AREA -->
+        <div class="reader-text">
+            <h2 class="chapter-title">Book I</h2>
+            <p>From my grandfather Verus I learned good morals and the government of my temper. From the reputation and remembrance of my father, modesty and a manly character. From my mother, piety and beneficence, and abstinence, not only from evil deeds, but even from evil thoughts; and further, simplicity in my way of living, far removed from the habits of the rich.</p>
+            <p>From my great-grandfather, not to have frequented public schools, and to have had good teachers at home, and to know that on such things a man should spend liberally. From my governor, to be neither of the green nor of the blue party at the games in the Circus, nor a partizan either of the Parmularius or the Scutarius at the gladiators' fights; from him too I learned endurance of labour, and to want little, and to work with my own hands, and not to meddle with other people's affairs, and not to be ready to listen to slander.</p>
+            
+            <h2 class="chapter-title">Book II</h2>
+            <p>Begin the morning by saying to thyself, I shall meet with the busy-body, the ungrateful, arrogant, deceitful, envious, unsocial. All these things happen to them by reason of their ignorance of what is good and evil. But I who have seen the nature of the good that it is beautiful, and of the bad that it is ugly, and the nature of him who does wrong, that it is akin to me, not only of the same blood or seed, but that it participates in the same intelligence and the same portion of the divinity, I can neither be injured by any of them, for no one can fix on me what is ugly, nor can I be angry with my kinsman, nor hate him, For we are made for co-operation, like feet, like hands, like eyelids, like the rows of the upper and lower teeth. To act against one another then is contrary to nature; and it is acting against one another to be vexed and to turn away.</p>
+            <p>Whatever this is that I am, it is a little flesh and breath, and the ruling part. Throw away thy books; no longer distract thyself: it is not allowed; but as if thou wast now dying, despise the flesh; it is blood and bones and a network, a contexture of nerves, veins, and arteries. See the breath also, what kind of a thing it is, air, and not always the same, but every moment sent out and again drawn in.</p>
+        </div>
+
+        <!-- 04 & 05. PREMIUM CONTENT UNLOCK & PROMPT -->
+        <div class="paywall-panel">
+            <div class="paywall-fade"></div>
+            <i class="fa-solid fa-lock" style="font-size: 3rem; color: var(--c-accent); margin-bottom: 1.5rem;"></i>
+            <h2 style="font-size: 2.5rem; font-family: var(--font-heading); margin-bottom: 1rem;">Continue Reading with Archivia</h2>
+            <p style="font-family: var(--font-body); font-size: 1.1rem; color: var(--c-text-muted); margin-bottom: 2.5rem; max-width: 500px; margin-left: auto; margin-right: auto;">
+                You've reached the end of the free preview. Unlock the rest of this book and gain unlimited access to our entire library of books, archives, and exclusive articles.
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <button onclick="window.location.href='pricing.html'" class="btn-solid-cream" style="padding: 1rem 2.5rem; border-radius: 50px; font-weight: 600; background: var(--c-primary); color: var(--c-bg); border: none; font-size: 1.1rem; cursor: pointer; font-family: var(--font-body);">View Plan Details</button>
+                <button onclick="window.history.back()" class="btn-outline-gold" style="padding: 1rem 2.5rem; border-radius: 50px; font-weight: 600; border: 2px solid var(--c-border); color: var(--c-text); background: transparent; font-size: 1.1rem; cursor: pointer; font-family: var(--font-body);">Back to Book Details</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- 06. RELATED READING -->
+    <section class="section" style="background: var(--c-surface); margin-top: 4rem;">
+        <div class="container" style="max-width: 1000px; margin: 0 auto; padding: 4rem 2rem;">
+            <div class="section-header" style="justify-content: space-between; align-items: flex-end; margin-bottom: 3rem;">
+                <div>
+                    <div class="eyebrow" style="color: var(--c-accent);">MORE TO DISCOVER</div>
+                    <h2 style="font-size: 2.5rem; font-family: var(--font-heading);">Related Reading</h2>
+                </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+                <!-- Reused book card -->
+                <div style="background: var(--c-bg); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--c-border); display: flex; flex-direction: column;">
+                    <div style="border-radius: 8px; overflow: hidden; margin-bottom: 1rem; height: 200px;"><img src="https://images.unsplash.com/photo-1526243741027-444d633d7365?auto=format&fit=crop&w=400&q=80" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                    <div style="font-size: 0.8rem; color: var(--c-accent); margin-bottom: 0.5rem; font-weight: bold;">PHILOSOPHY</div>
+                    <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.2rem;">The Prince</h3>
+                    <p style="color: var(--c-text-muted); font-size: 0.8rem; margin-bottom: 1rem;">Niccolo Machiavelli</p>
+                    <a href="library.html" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600; text-decoration: none; font-family: var(--font-body);">Explore Book</a>
+                </div>
+                <div style="background: var(--c-bg); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--c-border); display: flex; flex-direction: column;">
+                    <div style="border-radius: 8px; overflow: hidden; margin-bottom: 1rem; height: 200px;"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                    <div style="font-size: 0.8rem; color: var(--c-accent); margin-bottom: 0.5rem; font-weight: bold;">PHILOSOPHY</div>
+                    <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.2rem;">The Art of War</h3>
+                    <p style="color: var(--c-text-muted); font-size: 0.8rem; margin-bottom: 1rem;">Sun Tzu</p>
+                    <a href="library.html" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-primary); border-radius: 4px; color: var(--c-primary); font-weight: 600; text-decoration: none; font-family: var(--font-body);">Explore Book</a>
+                </div>
+                <!-- Article Card -->
+                <div style="background: var(--c-bg); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--c-border); display: flex; flex-direction: column;">
+                    <div style="border-radius: 8px; overflow: hidden; margin-bottom: 1rem; height: 200px;"><img src="https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=400&q=80" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                    <div style="font-size: 0.8rem; color: var(--c-accent); margin-bottom: 0.5rem; font-weight: bold;">EDITORIAL ARTICLE</div>
+                    <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.2rem;">Stoicism Today</h3>
+                    <p style="color: var(--c-text-muted); font-size: 0.8rem; margin-bottom: 1rem;">Why ancient philosophy is trending.</p>
+                    <a href="#" style="margin-top: auto; padding: 0.5rem; text-align: center; border: 1px solid var(--c-border); border-radius: 4px; color: var(--c-text); font-weight: 600; text-decoration: none; font-family: var(--font-body);">Read Article</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-book-open"></i>
+                        <i class="fa-solid fa-fire logo-flame"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h2>Archivia</h2>
+                        <span>BOOKS &bull; NEWS &bull; IDEAS</span>
+                    </div>
+                </a>
+                <p class="footer-desc">A modern destination for discovering books, exploring ideas and staying informed.</p>
+                <div class="socials">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="home2.html">Home 2</a>
+                <a href="about.html">About Us</a>
+                <a href="library.html">Library</a>
+                <a href="services.html">Services</a>
+                <a href="blog.html">Blog</a>
+                <a href="pricing.html">Pricing</a>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Support</h4>
+                <a href="contact.html">Contact</a>
+                <a href="faq.html">FAQ</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+            
+            <div class="footer-contact">
+                <h4>Get in Touch</h4>
+                <p><i class="fa-regular fa-envelope"></i> hello@Archivia.com</p>
+                <p><i class="fa-solid fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fa-solid fa-location-dot"></i> 123 Literary Lane, NY</p>
+                <p><i class="fa-regular fa-clock"></i> Mon - Sat: 9AM - 6PM</p>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Archivia. All Rights Reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple Theme Toggle specifically for the reader
+        const themeToggle = document.getElementById('reader-theme-toggle');
+        const htmlElement = document.documentElement;
+        
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.getAttribute('data-theme') === 'dark') {
+                htmlElement.setAttribute('data-theme', 'light');
+                themeToggle.classList.remove('fa-sun');
+                themeToggle.classList.add('fa-moon');
+            } else {
+                htmlElement.setAttribute('data-theme', 'dark');
+                themeToggle.classList.remove('fa-moon');
+                themeToggle.classList.add('fa-sun');
+            }
+        });
+
+        // Simple RTL Toggle specifically for the reader
+        const rtlToggle = document.getElementById('reader-rtl-toggle');
+        rtlToggle.addEventListener('click', () => {
+            if (htmlElement.getAttribute('dir') === 'rtl') {
+                htmlElement.setAttribute('dir', 'ltr');
+                rtlToggle.innerText = 'LTR';
+            } else {
+                htmlElement.setAttribute('dir', 'rtl');
+                rtlToggle.innerText = 'RTL';
+            }
+        });
+        
+        // Parse URL parameters from book-details.html to carry over the title/author
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(document.referrer.split('?')[1] || window.location.search);
+            if(urlParams.has('title')) {
+                document.getElementById('reader-title').innerText = urlParams.get('title');
+                document.getElementById('intro-title').innerText = urlParams.get('title');
+                document.title = urlParams.get('title') + ' - Online Reader | Archivia';
+            }
+            if(urlParams.has('author')) {
+                document.getElementById('reader-author').innerText = urlParams.get('author');
+            }
+            if(urlParams.has('img')) {
+                document.getElementById('reader-cover-img').src = urlParams.get('img');
+            }
+        });
+    </script>
+</body>
+</html>

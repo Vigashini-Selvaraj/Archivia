@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARCHIVIA | Interactive Library</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="home2.css">
+</head>
+<body>
+    
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="about.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                    <i class="fa-solid fa-fire logo-flame"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Archivia</h1>
+                    <span>BOOKS &bull; NEWS &bull; IDEAS</span>
+                </div>
+            </a>
+            
+            <div class="nav-links desktop-only">
+                <a href="index.html">Home</a>
+                <a href="home2.html" class="active">Home 2</a>
+                <a href="about.html">About Us</a>
+                <a href="library.html">Library</a>
+                <a href="services.html">Services</a>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact</a>
+            </div>
+
+                        <div class="nav-controls">
+                <button id="rtlToggle" class="nav-btn rtl-btn" style="width: 60px; justify-content: center;">
+                    <span class="dir-text fw-600">LTR</span>
+                </button>
+                <button id="themeToggle" class="nav-btn theme-btn">
+                    <i class="fa-solid fa-sun light-icon"></i>
+                    <i class="fa-solid fa-moon dark-icon" style="display:none;"></i>
+                </button>
+                <div class="profile-dropdown-wrap desktop-only">
+                    <button class="nav-btn profile-btn"><i class="fa-regular fa-user"></i> <i class="fa-solid fa-chevron-down small-chevron" style="font-size:0.7rem;"></i></button>
+                    <div class="profile-dropdown">
+                        <a href="login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
+                        <a href="register.html"><i class="fa-solid fa-user-plus"></i> Register</a>
+                    </div>
+                </div>
+                <button id="mobileMenuBtn" class="nav-btn mobile-only"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    
+    <div id="mobileMenu" class="mobile-menu">
+        <button id="closeMobileMenu" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+        <div class="mobile-links">
+            <a href="index.html">Home</a>
+            <a href="home2.html" class="active">Home 2</a>
+            <a href="about.html">About Us</a>
+            <a href="library.html">Library</a>
+            <a href="services.html">Services</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact</a>
+            <div style="width: 100%; height: 1px; background: var(--c-border); margin: 1rem 0;"></div>
+            <a href="login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
+            <a href="register.html"><i class="fa-solid fa-user-plus"></i> Register</a>
+        </div>
+    </div>
+
+    <!-- 1. HERO -->
+    <section class="h2-hero">
+        <div class="h2-hero-container">
+            <div class="h2-hero-left">
+                <div class="meta color-burgundy-text">ARCHIVE â€¢ LIBRARY â€¢ KNOWLEDGE</div>
+                <h1 class="h2-hero-title" style="font-family: var(--font-heading); font-style: italic; font-size: 5.5rem; line-height: 1.1;">
+                    <span style="color: var(--split-c1);">A World Full Of Knowledge,</span> <br><span style="color: var(--split-c2);">Within Reach.</span>
+                </h1>
+                <p class="h2-hero-desc">Step into the ultimate digital library. From ancient manuscripts to tomorrow's breaking news, the archive is now open for your exploration.</p>
+                <div class="h2-hero-btns">
+                    <a href="library.html" class="btn-solid-cream" style="background: var(--c-primary); color: var(--c-bg); padding: 1rem 2.5rem; border-radius: 50px; font-weight: 600; text-decoration: none;">Explore Books <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="blog.html" class="btn-outline-gold" style="border: 2px solid var(--c-primary); color: var(--c-primary); padding: 1rem 2.5rem; border-radius: 50px; font-weight: 600; text-decoration: none;">Discover Stories</a>
+                </div>
+            </div>
+            <div class="h2-hero-right">
+                <div class="hero-book-interactive" id="heroInteractiveBook" onclick="openH2BookModal('Cosmic Maps', 'Elara Vance', '1912', 'Astronomy', 'Available', 'assets/flat_book_celestial_1790272752554.jpg')">
+                    <img src="assets/flat_book_celestial_1790272752554.jpg" alt="Celestial Book">
+                    <div class="hero-book-readme">READ ME</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. THE PROCESS -->
+    <section class="h2-process-section" id="h2-process" style="background: var(--bg-main); padding: 8rem 2rem 6rem;">
+        <div class="h2-process-container" style="max-width: 1400px; margin: 0 auto; text-align: center;">
+            <div class="meta color-gold-text">HOW IT WORKS</div>
+            <h2 class="color-burgundy-text" style="margin-top: 1rem; margin-bottom: 3rem; font-size: 3rem;"><span style="color: var(--split-c1);">Your Journey</span> <span style="color: var(--split-c2);">Through The Archive</span></h2>
+            <div class="h2-process-grid">
+                <div class="process-card">
+                    <div class="process-img">
+                        <img src="assets/subject_science_1790272898676.jpg" alt="Discover">
+                    </div>
+                    <div class="process-content">
+                        <h3><span class="process-num">1</span> Discover</h3>
+                        <p style="opacity: 0.8;">Search through millions of digitized historical books, newspapers, and editorial magazines perfectly preserved.</p>
+                    </div>
+                </div>
+                <div class="process-card">
+                    <div class="process-img">
+                        <img src="assets/subject_tech_1790272887118.jpg" alt="Curate">
+                    </div>
+                    <div class="process-content">
+                        <h3><span class="process-num">2</span> Curate</h3>
+                        <p style="opacity: 0.8;">Build your personal digital library shelf. Save important articles and create collections for future research.</p>
+                    </div>
+                </div>
+                <div class="process-card">
+                    <div class="process-img">
+                        <img src="assets/news_high_quality_1790272832596.jpg" alt="Immerse">
+                    </div>
+                    <div class="process-content">
+                        <h3><span class="process-num">3</span> Immerse</h3>
+                        <p style="opacity: 0.8;">Enter our distraction-free reading room. Adjust fonts, toggle dark mode, and dive entirely into knowledge.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. EXPLORE BY SUBJECT (Interactive List) -->
+    <section class="h2-index-section" style="padding: 6rem 2rem; background: var(--bg-alt);">
+        <div class="text-center" style="margin-bottom: 4rem; display: flex; flex-direction: column; align-items: center;">
+            <p class="meta color-gold-text" style="margin-bottom:1rem;">LIBRARY INDEX</p>
+            <h2 class="color-burgundy-text" style="font-size: 3.5rem; font-family: var(--font-heading); font-style: italic;"><span style="color: var(--split-c1);">Explore</span> <span style="color: var(--split-c2);">by Subject</span></h2>
+        </div>
+        <div class="h2-subject-layout">
+            <div class="subject-list">
+                <div class="subject-item active" onmouseover="changeSubjectImg('tech', this)">
+                    <h3>Technology</h3>
+                    <p>12,450 Volumes</p>
+                    <div class="subject-details">A deep dive into computing, artificial intelligence, architecture, and engineering innovations throughout history.</div>
+                </div>
+                <div class="subject-item" onmouseover="changeSubjectImg('science', this)">
+                    <h3>Science</h3>
+                    <p>18,200 Volumes</p>
+                    <div class="subject-details">Explore the laws of physics, biology, and chemistry. From ancient natural philosophy to quantum mechanics.</div>
+                </div>
+                <div class="subject-item" onmouseover="changeSubjectImg('education', this)">
+                    <h3>Education</h3>
+                    <p>9,120 Volumes</p>
+                    <div class="subject-details">Pedagogy, linguistic studies, and historical documents detailing the evolution of global teaching methods.</div>
+                </div>
+                <div class="subject-item" onmouseover="changeSubjectImg('history', this)">
+                    <h3>History</h3>
+                    <p>24,600 Volumes</p>
+                    <div class="subject-details">Chronicles of human civilization, ancient empires, war records, and geographical exploration journals.</div>
+                </div>
+            </div>
+            <div class="subject-visual" id="subjectVisual">
+                <img id="subjectHeroImg" src="assets/subject_tech_1790272887118.jpg" alt="Subject Display">
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. FEATURED COLLECTION -->
+    <section class="h2-collection-section" style="padding: 6rem 2rem; background: var(--bg-main);">
+        <div class="text-center" style="display: flex; flex-direction: column; align-items: center;">
+            <p class="meta color-gold-text">CURATED FOR YOU</p>
+            <h2 style="font-size: 3rem; font-family: var(--font-heading); font-style: italic; text-align: center;"><span style="color: var(--split-c1);">This Month's</span> <span style="color: var(--split-c2);">Collection</span></h2>
+            <p style="opacity: 0.8; font-size: 1.1rem; max-width: 600px; margin: 1rem auto 2rem;">A hand-picked selection of the most pristine and beautifully bound editions recently added to the archives.</p>
+        </div>
+        
+        <div class="collection-books-grid" style="max-width: 1200px; margin: 0 auto;">
+            <div class="premium-book-card" onclick="openH2BookModal('Chronicles of Eldroria', 'Archive Press', '1892', 'Fantasy', 'Available', 'assets/flat_book_vintage_1790272764080.jpg')">
+                <img src="assets/flat_book_vintage_1790272764080.jpg" alt="Vintage Leather">
+            </div>
+            <div class="premium-book-card" style="transform: translateY(40px);" onclick="openH2BookModal('Cosmic Maps', 'Elara Vance', '1910', 'Astronomy', 'Archive Only', 'assets/flat_book_celestial_1790272752554.jpg')">
+                <img src="assets/flat_book_celestial_1790272752554.jpg" alt="Celestial">
+            </div>
+            <div class="premium-book-card" onclick="openH2BookModal('The Romance of Blooms', 'Evelyn Claire', '1920', 'Romance', 'Available', 'assets/flat_book_floral_1790272820138.jpg')">
+                <img src="assets/flat_book_floral_1790272820138.jpg" alt="Romantic Floral">
+            </div>
+        </div>
+
+        <div class="text-center" style="margin-top: 6rem; display: flex; justify-content: center;">
+            <a href="collection.html" class="btn-outline-gold" style="display:inline-block; padding: 1rem 3rem; font-size: 1.1rem; border-radius: 50px; font-weight: bold; border: 2px solid var(--c-primary); color: var(--c-primary); text-decoration:none; background: transparent; transition: 0.3s;" onmouseover="this.style.background='var(--c-primary)'; this.style.color='#fff';" onmouseout="this.style.background='transparent'; this.style.color='var(--c-primary)';">View Full Collection</a>
+        </div>
+    </section>
+
+    <!-- 5. FROM THE SHELVES (15 Books Total Across 3 Shelves) -->
+    <section class="h2-shelves-section" id="h2-bookshelf" style="padding: 8rem 2rem; background: var(--bg-alt);">
+        <div class="text-center" style="margin-bottom: 4rem; display: flex; flex-direction: column; align-items: center;">
+            <h2 style="font-size: 3rem; font-family: var(--font-heading); font-style: italic; text-align: center;"><span style="color: var(--split-c1);">From the</span> <span style="color: var(--split-c2);">Shelves</span></h2>
+            <p class="meta color-burgundy-text" style="text-align: center;">RECENT ADDITIONS</p>
+        </div>
+        
+        <!-- Shelf 1 (5 books - Changed first row as requested) -->
+        <div class="h2-elegant-shelf" style="max-width: 1200px; margin: 0 auto 3rem;">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div class="shelf-book" onclick="openH2BookModal('The Art of Logic', 'Eugenia Cheng', '2018', 'Mathematics', 'Available', 'assets/logic.jpg')">
+                    <img src="assets/logic.jpg" alt="Logic">
+                </div>
+                <div class="shelf-book-title" style="margin-top: 1rem; font-family: var(--font-heading); font-size: 1.1rem; text-align: center;">The Art of Logic</div>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div class="shelf-book" onclick="openH2BookModal('Deep Space', 'Carl Sagan', '1994', 'Astronomy', 'Available', 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=400&q=80')">
+                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=400&q=80" alt="Space">
+                </div>
+                <div class="shelf-book-title" style="margin-top: 1rem; font-family: var(--font-heading); font-size: 1.1rem; text-align: center;">Deep Space</div>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div class="shelf-book" onclick="openH2BookModal('The Plant Kingdom', 'Botany Inst', '1922', 'Botany', 'Available', 'assets/botany.jpg')">
+                    <img src="assets/botany.jpg" alt="Botany">
+                </div>
+                <div class="shelf-book-title" style="margin-top: 1rem; font-family: var(--font-heading); font-size: 1.1rem; text-align: center;">The Plant Kingdom</div>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div class="shelf-book" onclick="openH2BookModal('Future Tech', 'Dr. AI', '2025', 'Tech', 'Available', 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80')">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80" alt="Tech">
+                </div>
+                <div class="shelf-book-title" style="margin-top: 1rem; font-family: var(--font-heading); font-size: 1.1rem; text-align: center;">Future Tech</div>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div class="shelf-book" onclick="openH2BookModal('Ancient Sands', 'Archaeology', '1899', 'History', 'Archive Only', 'https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=400&q=80')">
+                    <img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=400&q=80" alt="Desert">
+                </div>
+                <div class="shelf-book-title" style="margin-top: 1rem; font-family: var(--font-heading); font-size: 1.1rem; text-align: center;">Ancient Sands</div>
+            </div>
+        </div>
+
+        <!-- Shelf 2 (5 books) -->
+        <div class="h2-elegant-shelf" style="max-width: 1200px; margin: 0 auto 3rem;">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div class="shelf-book" onclick="openH2BookModal('Oceanography', 'Dr. Aris', '1984', 'Science', 'Available', 'assets/ocean.jpg')">
+                    <img src="assets/ocean.jpg" alt="Ocean">
+                </div>
+                <div class="shelf-book-title" style="margin-top: 1rem; font-family: var(--font-heading); font-size: 1.1rem; text-align: center;">Oceanography</div>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div class="shelf-book" onclick="openH2BookModal('Abstract Thoughts', 'Jane Doe', '1999', 'Philosophy', 'Available', 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=400&q=80')">
+                    <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=400&q=80" alt="Abstract">
+                </div>
+                <div class="shelf-book-title" style="margin-top: 1rem; font-family: var(--font-heading); font-size: 1.1rem; text-align: center;">Abstract Thoughts</div>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div class="shelf-book" onclick="openH2BookModal('Forest Paths', 'John Muir', '1901', 'Nature', 'Available', 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=400&q=80')">
+                    <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=400&q=80" alt="Nature">
+                </div>
+                <div class="shelf-book-title" style="margin-top: 1rem; font-family: var(--font-heading); font-size: 1.1rem; text-align: center;">Forest Paths</div>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div class="shelf-book" onclick="openH2BookModal('Architecture', 'Frank Lloyd', '1950', 'Design', 'Archive Only', 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=400&q=80')">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=400&q=80" alt="Architecture">
+                </div>
+                <div class="shelf-book-title" style="margin-top: 1rem; font-family: var(--font-heading); font-size: 1.1rem; text-align: center;">Architecture</div>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div class="shelf-book" onclick="openH2BookModal('Space Time', 'A. Einstein', '1920', 'Physics', 'Available', 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=400&q=80')">
+                    <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=400&q=80" alt="Space">
+                </div>
+                <div class="shelf-book-title" style="margin-top: 1rem; font-family: var(--font-heading); font-size: 1.1rem; text-align: center;">Space Time</div>
+            </div>
+        </div>
+
+        <!-- Shelf 3 (Curated Books) -->
+        <div class="h2-elegant-shelf" style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: center; gap: 2rem;">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div class="shelf-book" onclick="openH2BookModal('The Art of Logic', 'Eugenia Cheng', '2018', 'Mathematics', 'Available', 'assets/art of logic.png')">
+                    <img src="assets/art of logic.png" alt="The Art of Logic">
+                </div>
+                <div class="shelf-book-title" style="margin-top: 1rem; font-family: var(--font-heading); font-size: 1.1rem; text-align: center;">The Art of Logic</div>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div class="shelf-book" onclick="openH2BookModal('The Plant Kingdom', 'Botany Inst', '1922', 'Botany', 'Available', 'assets/Botany & Nature.png')">
+                    <img src="assets/Botany & Nature.png" alt="Botany & Nature">
+                </div>
+                <div class="shelf-book-title" style="margin-top: 1rem; font-family: var(--font-heading); font-size: 1.1rem; text-align: center;">Botany & Nature</div>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div class="shelf-book" onclick="openH2BookModal('Oceanography', 'Dr. Aris', '1984', 'Science', 'Available', 'assets/Deep Oceanography.png')">
+                    <img src="assets/Deep Oceanography.png" alt="Deep Oceanography">
+                </div>
+                <div class="shelf-book-title" style="margin-top: 1rem; font-family: var(--font-heading); font-size: 1.1rem; text-align: center;">Deep Oceanography</div>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div class="shelf-book" onclick="openH2BookModal('Neural Pathways', 'AI Research', '2025', 'Tech', 'Available', 'assets/ai_book_cover_1790334917272.jpg')">
+                    <img src="assets/ai_book_cover_1790334917272.jpg" alt="Artificial Intelligence">
+                </div>
+                <div class="shelf-book-title" style="margin-top: 1rem; font-family: var(--font-heading); font-size: 1.1rem; text-align: center;">Artificial Intelligence</div>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div class="shelf-book" onclick="openH2BookModal('Historia Mundi', 'Museum', '1648', 'History', 'Archive Only', 'assets/historical_archive_book_1790272287047.jpg')">
+                    <img src="assets/historical_archive_book_1790272287047.jpg" alt="Historia Mundi">
+                </div>
+                <div class="shelf-book-title" style="margin-top: 1rem; font-family: var(--font-heading); font-size: 1.1rem; text-align: center;">Historia Mundi</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. PERSONALIZED READING SHELF (Desk) -->
+    <section class="h2-desk-section" style="padding: 4rem 2rem 8rem; background: var(--bg-main);">
+        <div class="h2-desk-container" style="max-width: 1100px; margin: 0 auto; background: var(--c-surface); border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); overflow: hidden; display: flex; flex-direction: column;">
+            <div style="padding: 3rem; background: linear-gradient(135deg, #111111 0%, #800020 100%); color: #fff; text-align: center; border-bottom: 5px solid var(--c-accent);">
+                <div class="meta" style="color: #F1E3D3; margin-bottom: 0.5rem; font-weight:bold; letter-spacing: 2px;">YOUR READING DESK</div>
+                <h2 style="font-size: 3rem; font-family: var(--font-heading); font-style: italic; color: #fff; margin-bottom: 0;">Welcome Back, Reader.</h2>
+            </div>
+            
+            <div style="display: flex; flex-wrap: wrap; padding: 3rem; gap: 3rem;">
+                <div style="flex: 1; min-width: 300px; border-right: 1px solid var(--c-border); padding-right: 2rem;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--c-text);"><i class="fa-solid fa-book-open" style="color: var(--c-accent);"></i> Current Read</h3>
+                    
+                    <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+                        <img src="assets/modern_minimalist_book_1790272270915.jpg" style="width: 120px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" alt="Book">
+                        <div>
+                            <h4 style="font-size: 1.4rem; font-family: var(--font-heading); font-style: italic; margin-bottom: 0.5rem; color: var(--c-text);">The Design of Everyday Things</h4>
+                            <p style="color: var(--c-text); font-size: 0.9rem; margin-bottom: 1rem;">Don Norman</p>
+                            <div class="progress-wrapper" style="margin-bottom: 1.5rem;">
+                                <div class="progress-bar" style="background: var(--c-border); height: 8px; border-radius: 4px; overflow: hidden;"><div class="progress-fill" style="background: var(--c-primary); width: 68%; height: 100%;"></div></div>
+                                <span class="progress-text" style="font-size: 0.8rem; font-weight:bold; color: var(--c-primary); margin-top: 0.5rem; display: block;">68% COMPLETED</span>
+                            </div>
+                            <button class="btn-outline-gold" onclick="openH2BookModal('The Design of Everyday Things', 'Don Norman', '1988', 'Design', 'Saved', 'assets/modern_minimalist_book_1790272270915.jpg')" style="background: var(--c-primary); color: var(--c-bg); padding: 0.8rem 2rem; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; transition: 0.3s;" onmouseover="this.style.background='var(--c-accent)';" onmouseout="this.style.background='var(--c-primary)';">Continue Reading &rarr;</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="flex: 1; min-width: 300px;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--c-text);"><i class="fa-solid fa-clock-rotate-left" style="color: var(--c-accent);"></i> Recently Finished</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--c-border);">
+                            <div>
+                                <h4 style="font-size: 1.1rem; color: var(--c-text);">The Midnight Library</h4>
+                                <p style="font-size: 0.85rem; color: var(--c-text);">Matt Haig</p>
+                            </div>
+                            <span style="background: var(--c-border); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; color: var(--c-text);">100%</span>
+                        </li>
+                        <li style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--c-border);">
+                            <div>
+                                <h4 style="font-size: 1.1rem; color: var(--c-text);">Sapiens</h4>
+                                <p style="font-size: 0.85rem; color: var(--c-text);">Yuval Noah Harari</p>
+                            </div>
+                            <span style="background: var(--c-border); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; color: var(--c-text);">100%</span>
+                        </li>
+                    </ul>
+                    <a href="library.html" style="display: inline-block; margin-top: 1.5rem; color: var(--c-primary); font-weight: bold; text-decoration: underline;">View Full Reading History &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. NEWS + LIBRARY CONNECTION -->
+    <section class="h2-connection-section" style="padding: 6rem 2rem; background: var(--bg-alt);">
+        <div class="text-center" style="margin-bottom: 4rem;">
+            <h2 style="font-size: 4rem; font-family: var(--font-heading); font-style: italic;"><span style="color: var(--split-c1);">From Today's</span> <span style="color: var(--split-c2);">News</span></h2>
+            <p class="meta color-burgundy-text">LATEST UPDATES</p>
+        </div>
+        <div class="h2-conn-container" style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 4rem;">
+            <div class="h2-conn-left" style="flex:1;">
+                <div class="h2-news-card" onclick="openNewsModalH2()">
+                    <img src="assets/news_high_quality_1790272832596.jpg" alt="News">
+                    <div style="padding: 2rem;">
+                        <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Global Data Architectures Transformed</h3>
+                        <p style="opacity:0.8; margin-bottom: 1.5rem; font-size: 1.1rem;">How artificial intelligence is rapidly reforming archival structures in real-time.</p>
+                        <a href="blog.html" class="btn-outline-gold" style="display:inline-block; border: 2px solid var(--c-primary); color: var(--c-primary); padding: 0.8rem 2rem; border-radius: 50px; font-weight: 600; text-decoration:none; cursor: pointer; transition: 0.3s;" onmouseover="this.style.background='var(--c-primary)'; this.style.color='#fff';" onmouseout="this.style.background='none'; this.style.color='var(--c-primary)';">Read Full Story</a>
+                    </div>
+                </div>
+            </div>
+            <div class="h2-conn-divider">
+                <i class="fa-solid fa-arrow-right color-gold-text" style="font-size: 2rem;"></i>
+            </div>
+            <div class="h2-conn-right" style="flex:1;">
+                <div class="meta color-burgundy-text">RELATED ARCHIVES</div>
+                <div class="h2-archive-links">
+                    <div class="a-link">
+                        <i class="fa-solid fa-book"></i>
+                        <div>
+                            <h4>AI & Education â€” 2018</h4>
+                            <span class="meta">BOOK</span>
+                        </div>
+                    </div>
+                    <div class="a-link">
+                        <i class="fa-solid fa-newspaper"></i>
+                        <div>
+                            <h4>Digital Learning â€” 2021</h4>
+                            <span class="meta">ARTICLE</span>
+                        </div>
+                    </div>
+                    <div class="a-link">
+                        <i class="fa-solid fa-scroll"></i>
+                        <div>
+                            <h4>Future of Computing â€” 2024</h4>
+                            <span class="meta">PUBLICATION</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- 11. INTERACTIVE DESK (Reading Room Redesign) -->
+    <section class="h2-interactive-desk" style="padding: 8rem 2rem; background: var(--c-surface); position: relative;">
+        <div class="text-center" style="margin-bottom: 4rem; display: flex; flex-direction: column; align-items: center; width: 100%;">
+            <p class="meta color-burgundy-text" style="text-align: center;">YOUR WORKSPACE</p>
+            <h2 style="font-family: 'Newsreader', serif !important; font-size: 3.5rem; text-align: center;"><span style="color: var(--split-c1);">The</span> <span style="color: var(--split-c2);">Reading Desk</span></h2>
+        </div>
+        
+        <div class="desk-container">
+            <div class="desk-surface" id="interactiveDesk" style="transition: 0.5s;">
+                <!-- Objects -->
+                <div class="desk-obj" data-tooltip="Continue Reading" onclick="document.getElementById('continueReadingModal').classList.add('active')">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+                
+                <div class="desk-obj" data-tooltip="Latest News" onclick="window.location.href='blog.html'">
+                    <i class="fa-solid fa-newspaper"></i>
+                </div>
+                
+                <div class="desk-obj" data-tooltip="My Collection" onclick="window.location.href='collection.html'">
+                    <i class="fa-solid fa-id-card"></i>
+                </div>
+                
+
+                
+                <div class="desk-obj" data-tooltip="Read Quote" onclick="document.getElementById('quoteModal').classList.add('active')">
+                    <i class="fa-solid fa-quote-left"></i>
+                </div>
+                
+                <div class="desk-obj" data-tooltip="Take a Break" onclick="openCoffeeModal()">
+                    <i class="fa-solid fa-mug-hot"></i>
+                </div>
+                
+                <div class="desk-obj" data-tooltip="Zoom In" onclick="document.getElementById('interactiveDesk').style.transform='rotateX(10deg) scale(1.1)'">
+                    <i class="fa-solid fa-glasses"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Journey Modals -->
+    <div id="journeyModal1" class="h2-modal">
+        <div class="h2-modal-content" style="text-align: center;">
+            <button class="h2-modal-close" onclick="document.getElementById('journeyModal1').classList.remove('active')"><i class="fa-solid fa-xmark"></i></button>
+            <i class="fa-solid fa-compass" style="font-size: 3rem; color: var(--c-primary); margin-bottom: 1rem;"></i>
+            <h2 style="font-family: var(--font-heading); margin-bottom: 1rem;">Step 1: Discover</h2>
+            <p>Our archive spans centuries of written text. Begin your journey by utilizing the Archive Explorer to pinpoint exactly the manuscript or book you need.</p>
+        </div>
+    </div>
+    <div id="journeyModal2" class="h2-modal">
+        <div class="h2-modal-content" style="text-align: center;">
+            <button class="h2-modal-close" onclick="document.getElementById('journeyModal2').classList.remove('active')"><i class="fa-solid fa-xmark"></i></button>
+            <i class="fa-solid fa-bookmark" style="font-size: 3rem; color: var(--c-primary); margin-bottom: 1rem;"></i>
+            <h2 style="font-family: var(--font-heading); margin-bottom: 1rem;">Step 2: Save</h2>
+            <p>Build your personalized library by saving individual pages, clipping newspaper articles, or bookmarking entire volumes into 'My Collection'.</p>
+        </div>
+    </div>
+    <div id="journeyModal3" class="h2-modal">
+        <div class="h2-modal-content" style="text-align: center;">
+            <button class="h2-modal-close" onclick="document.getElementById('journeyModal3').classList.remove('active')"><i class="fa-solid fa-xmark"></i></button>
+            <i class="fa-solid fa-book-open" style="font-size: 3rem; color: var(--c-primary); margin-bottom: 1rem;"></i>
+            <h2 style="font-family: var(--font-heading); margin-bottom: 1rem;">Step 3: Read</h2>
+            <p>Enter the distraction-free reading mode. Customize fonts, apply a sepia filter, or use night-mode to deeply immerse yourself in the literature.</p>
+        </div>
+    </div>
+    <div id="journeyModal4" class="h2-modal">
+        <div class="h2-modal-content" style="text-align: center;">
+            <button class="h2-modal-close" onclick="document.getElementById('journeyModal4').classList.remove('active')"><i class="fa-solid fa-xmark"></i></button>
+            <i class="fa-solid fa-lightbulb" style="font-size: 3rem; color: var(--c-primary); margin-bottom: 1rem;"></i>
+            <h2 style="font-family: var(--font-heading); margin-bottom: 1rem;">Step 4: Learn</h2>
+            <p>Export citations directly to your research tools. Understand context via author highlights and connect ideas across time periods.</p>
+        </div>
+    </div>
+
+    <!-- Coffee Modal -->
+    <div id="coffeeModal" class="h2-modal">
+        <div class="h2-modal-content coffee-animation" style="text-align: center;">
+            <button class="h2-modal-close" onclick="closeCoffeeModal()"><i class="fa-solid fa-xmark"></i></button>
+            <i class="fa-solid fa-mug-hot" style="font-size: 4rem; color: var(--c-primary); margin-bottom: 1.5rem; display: block;"></i>
+            <h2 style="font-family: var(--font-heading); margin-bottom: 1rem;">Take a Break</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 1rem;">Your progress is saved. Enjoy your tea break and return refreshed for another chapter.</p>
+        </div>
+    </div>
+
+    <!-- Continue Reading Modal -->
+    <div id="continueReadingModal" class="h2-modal">
+        <div class="h2-modal-content" style="text-align: center;">
+            <button class="h2-modal-close" onclick="document.getElementById('continueReadingModal').classList.remove('active')"><i class="fa-solid fa-xmark"></i></button>
+            <i class="fa-solid fa-book-open" style="font-size: 3rem; color: var(--c-primary); margin-bottom: 1rem;"></i>
+            <h2 style="font-family: var(--font-heading); margin-bottom: 1rem;">Resume Journey</h2>
+            <p style="font-size: 1.1rem;">Ready to jump back into The Design of Everyday Things?</p>
+            <a href="book-details.html?title=The%20Design%20of%20Everyday%20Things&author=Don%20Norman&img=assets/modern_minimalist_book_1790272270915.jpg" class="btn-solid-cream" style="display:inline-block; text-decoration:none; margin-top: 1.5rem; background: var(--c-primary); color: var(--c-bg); border: none; padding: 1rem 2rem; border-radius: 50px; font-weight: bold; cursor: pointer;">Resume Reading</a>
+        </div>
+    </div>
+
+    <!-- Quote Modal -->
+    <div id="quoteModal" class="h2-modal">
+        <div class="h2-modal-content" style="text-align: center;">
+            <button class="h2-modal-close" onclick="document.getElementById('quoteModal').classList.remove('active')"><i class="fa-solid fa-xmark"></i></button>
+            <i class="fa-solid fa-quote-left" style="font-size: 3rem; color: var(--c-primary); margin-bottom: 1rem;"></i>
+            <h2 style="font-family: var(--font-heading); margin-bottom: 1rem;">Wisdom of the Day</h2>
+            <p style="font-style: italic; font-size: 1.2rem;">"A room without books is like a body without a soul."</p>
+            <p style="margin-top: 1rem; color: var(--c-text-muted);">- Marcus Tullius Cicero</p>
+        </div>
+    </div>
+
+<!-- MODALS FROM H2 -->
+    <div id="h2BookModal" class="h2-modal">
+        <div class="h2-modal-content" style="max-width: 800px; padding: 3rem;">
+            <button class="h2-modal-close" onclick="closeH2BookModal()"><i class="fa-solid fa-xmark"></i></button>
+            <div class="h2-book-modal-body" style="display:flex; gap: 3rem; align-items: center;">
+                <img id="h2BmImg" src="" alt="Book Cover" style="width:250px; border-radius:8px; box-shadow:0 15px 35px rgba(0,0,0,0.4);">
+                <div style="flex: 1;">
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                        <span id="h2BmGenre" style="background: var(--c-accent); color: #FFF; padding: 0.3rem 0.8rem; border-radius: 50px; font-size: 0.8rem; font-weight: bold;"></span>
+                        <span id="h2BmStatus" style="background: rgba(255,255,255,0.1); border: 1px solid var(--c-border); padding: 0.3rem 0.8rem; border-radius: 50px; font-size: 0.8rem;"></span>
+                    </div>
+                    <h2 id="h2BmTitle" style="font-size:2.8rem; margin-bottom: 0.5rem; font-family: var(--font-heading);"></h2>
+                    <h4 id="h2BmAuthor" style="font-size: 1.4rem; margin-bottom:0.5rem; color: var(--c-text-muted);"></h4>
+                    <p id="h2BmYear" style="margin-bottom: 1.5rem; font-style: italic; opacity: 0.7;"></p>
+                    <p style="margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.6;">An exclusive piece from the archive. Fully digitized for your reading pleasure. Dive into the world of literature and discover new perspectives.</p>
+                    <div style="display:flex; gap:1rem;">
+                        <a id="h2BmReadBtn" href="#" class="btn-solid-cream" style="display:inline-block; text-decoration:none; background: var(--c-primary); color: var(--c-bg); border: none; padding: 1rem 2rem; border-radius: 50px; font-weight: bold; cursor: pointer;">Read Now <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="collection.html" class="btn-outline" style="display:inline-block; text-decoration:none; color:var(--c-text); background: transparent; border: 2px solid var(--c-border); padding: 1rem 2rem; border-radius: 50px; font-weight: bold; cursor: pointer; transition: 0.3s;" onmouseover="this.style.borderColor='var(--c-primary)'; this.style.color='var(--c-primary)';" onmouseout="this.style.borderColor='var(--c-border)'; this.style.color='var(--c-text)';">Add to Shelf</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+    
+    <div id="h2NewsModal" class="h2-modal">
+        <div class="h2-modal-content">
+            <button class="h2-modal-close" onclick="closeH2NewsModal()"><i class="fa-solid fa-xmark"></i></button>
+            <h2 style="margin-bottom: 1rem;">Latest Updates</h2>
+            <p>Here you can read the full article about the global data architectures.</p>
+        </div>
+    </div>
+
+    
+    <!-- 12. FINAL CTA -->
+    <section class="final-cta-section" style="padding: 10rem 2rem; background: var(--c-surface); border-top: 1px solid var(--c-border); position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, rgba(144, 28, 64, 0.05) 0%, transparent 70%);"></div>
+        <div class="cta-content" style="text-align: center; max-width: 800px; position: relative; z-index: 10;">
+            <i class="fa-solid fa-feather-pointed" style="font-size: 3rem; color: var(--c-accent); margin-bottom: 2rem;"></i>
+            <h2 style="font-size: 4.5rem; font-family: var(--font-heading); font-style: italic; color: var(--c-text); margin-bottom: 1.5rem; line-height: 1.1;">
+                <span style="color: var(--split-c1);">Your Next Great</span> <br> <span style="color: var(--split-c2);">Adventure Awaits.</span>
+            </h2>
+            <p style="font-size: 1.2rem; color: var(--c-text-muted); margin-bottom: 3rem; line-height: 1.8;">
+                Step into a world where every page holds a new story. Build your personal archive, explore centuries of knowledge, and immerse yourself in literature like never before.
+            </p>
+            <div class="cta-actions" style="display: flex; gap: 1.5rem; justify-content: center;">
+                <a href="library.html" class="btn-solid-cream" style="background: var(--c-primary); color: var(--c-bg); padding: 1.2rem 3rem; border-radius: 50px; font-weight: bold; text-decoration: none; font-size: 1.1rem; box-shadow: 0 10px 20px rgba(144,28,64,0.2); transition: 0.3s;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 15px 25px rgba(144,28,64,0.3)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 10px 20px rgba(144,28,64,0.2)';">Begin Exploring <i class="fa-solid fa-arrow-right" style="margin-left: 0.5rem;"></i></a>
+                <a href="collection.html" class="btn-outline-gold" style="border: 2px solid var(--c-accent); color: var(--c-accent); background: transparent; padding: 1.2rem 3rem; border-radius: 50px; font-weight: bold; text-decoration: none; font-size: 1.1rem; transition: 0.3s;" onmouseover="this.style.background='var(--c-accent)'; this.style.color='#FFF';" onmouseout="this.style.background='transparent'; this.style.color='var(--c-accent)';">View Collection</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-book-open"></i>
+                        <i class="fa-solid fa-fire logo-flame"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h2>Archivia</h2>
+                        <span>BOOKS &bull; NEWS &bull; IDEAS</span>
+                    </div>
+                </a>
+                <p class="footer-desc">A modern destination for discovering books, exploring ideas and staying informed.</p>
+                <div class="socials">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="home2.html">Home 2</a>
+                <a href="about.html">About Us</a>
+                <a href="library.html">Library</a>
+                <a href="services.html">Services</a>
+                <a href="blog.html">Blog</a>
+                <a href="pricing.html">Pricing</a>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Support</h4>
+                <a href="contact.html">Contact</a>
+                <a href="faq.html">FAQ</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+            
+            <div class="footer-contact">
+                <h4>Get in Touch</h4>
+                <p><i class="fa-regular fa-envelope"></i> hello@Archivia.com</p>
+                <p><i class="fa-solid fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fa-solid fa-location-dot"></i> 123 Literary Lane, NY</p>
+                <p><i class="fa-regular fa-clock"></i> Mon - Sat: 9AM - 6PM</p>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Archivia. All Rights Reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
+    <script src="home2.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
