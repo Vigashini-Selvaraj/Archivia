@@ -1325,16 +1325,28 @@ h1, h2, h3, h4, h5, h6 {
     
     /* Hero Section Fixes for index, home2, about */
     .hero-title, .h2-hero-title {
-        font-size: 3rem !important;
+        font-size: 2.3rem !important;
     }
     .hero-quick-links, .h2-hero-btns {
         flex-direction: column !important;
         width: 100% !important;
+        box-sizing: border-box !important;
     }
     .hero-quick-links a, .h2-hero-btns a {
         width: 100% !important;
         text-align: center !important;
         justify-content: center !important;
+        box-sizing: border-box !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+    
+    /* Pricing Page Mobile Fix */
+    .pricing-grid {
+        grid-template-columns: 1fr !important;
+        padding: 2rem !important;
+        gap: 2rem !important;
+        overflow-x: hidden !important;
     }
     .hero-book-interactive {
         margin: 0 auto !important;
