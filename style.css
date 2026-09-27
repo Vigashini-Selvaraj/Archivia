@@ -1278,6 +1278,12 @@ h1, h2, h3, h4, h5, h6 {
 .pricing-grid, .about-hero-grid {
     grid-template-columns: 1fr 1fr;
 }
+.features-grid {
+    grid-template-columns: repeat(4, 1fr);
+}
+.h2-hero-title {
+    font-size: 5.5rem;
+}
 
 /* Global Modal Mobile Fix */
 @media (max-width: 768px) {
@@ -1351,11 +1357,19 @@ h1, h2, h3, h4, h5, h6 {
     }
     
     /* Grid Mobile Fixes */
-    .pricing-grid, .about-hero-grid {
+    .pricing-grid, .about-hero-grid, .features-grid {
         grid-template-columns: 1fr !important;
         padding: 2rem !important;
         gap: 2rem !important;
         overflow-x: hidden !important;
+    }
+    .h2-hero-container {
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: 2rem !important;
+    }
+    .h2-hero-container .meta {
+        justify-content: center !important;
     }
     .hero-book-interactive {
         margin: 0 auto !important;
