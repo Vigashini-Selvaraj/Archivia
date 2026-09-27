@@ -1322,6 +1322,23 @@ h1, h2, h3, h4, h5, h6 {
         text-align: center !important;
         margin-top: 1rem !important;
     }
+    
+    /* Hero Section Fixes for index, home2, about */
+    .hero-title, .h2-hero-title {
+        font-size: 3rem !important;
+    }
+    .hero-quick-links, .h2-hero-btns {
+        flex-direction: column !important;
+        width: 100% !important;
+    }
+    .hero-quick-links a, .h2-hero-btns a {
+        width: 100% !important;
+        text-align: center !important;
+        justify-content: center !important;
+    }
+    .hero-book-interactive {
+        margin: 0 auto !important;
+    }
 }
 
 /* Modal Inner Body Fix */
