@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
     <!-- NAVBAR -->
@@ -72,7 +73,7 @@
 
     <main>
         <!-- HERO SECTION -->
-        <section class="hero section">
+        <section class="hero section" data-aos="fade-up">
             <div class="hero-bg-texture"></div>
             <div class="container hero-grid">
                 <div class="hero-content">
@@ -142,7 +143,7 @@
         </section>
 
         <!-- CATEGORIES SECTION -->
-        <section class="categories section">
+        <section class="categories section" data-aos="fade-up">
             <div class="container">
                 <div class="section-header categories-header" style="justify-content: center; text-align: center; margin-bottom: 4rem; position: relative;">
     <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
@@ -215,7 +216,7 @@
 </section>
 
         <!-- TRENDING NOW SECTION -->
-        <section class="trending section">
+        <section class="trending section" data-aos="fade-up">
             <div class="container">
                 <div class="section-header trending-header" style="justify-content: center; text-align: center; margin-bottom: 4rem;">
                     <div style="display: flex; flex-direction: column; align-items: center;">
@@ -268,7 +269,7 @@
 
         
         <!-- LATEST NEWS SECTION -->
-        <section class="latest-news-section section" style="background: var(--c-bg);">
+        <section class="latest-news-section section" style="background: var(--c-bg);" data-aos="fade-up">
             <div class="container">
                 <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 4rem; position: relative;">
     <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
@@ -327,7 +328,7 @@
         
         
         <!-- SCROLLING CARDS SECTION -->
-        <section class="scrolling-books section" style="padding-top: 4rem; padding-bottom: 2rem; background: var(--c-bg); overflow: hidden; position: relative;">
+        <section class="scrolling-books section" style="padding-top: 4rem; padding-bottom: 2rem; background: var(--c-bg); overflow: hidden; position: relative;" data-aos="fade-up">
             <div class="container" style="margin-bottom: 2rem;">
                 <h2 style="font-size: 3.5rem; font-family: var(--font-heading); font-style: italic; text-align: center;"><span style="color: var(--split-c1);">Visual</span> <span style="color: var(--split-c2);">Archive</span></h2>
             </div>
@@ -405,7 +406,7 @@
         </section>
 
         <!-- EDITOR'S PICK SECTION - GUESS THE READ -->
-        <section class="editors-pick section" style="background: var(--c-surface); padding-top: 2rem; padding-bottom: 6rem; text-align: center; margin-top: 5rem;">
+        <section class="editors-pick section" style="background: var(--c-surface); padding-top: 2rem; padding-bottom: 6rem; text-align: center; margin-top: 5rem;" data-aos="fade-up">
             <div class="container" style="max-width: 800px;">
                 <h2 style="font-size: 3.5rem; font-family: var(--font-heading); font-style: italic; margin-bottom: 1rem; color: var(--c-heading);"><span style="color: var(--split-c1);">Guess the Read</span> <span style="color: var(--split-c2);">of the Month</span></h2>
                 <p style="color: var(--c-text-muted); font-size: 1.2rem; margin-bottom: 3rem;">We selected a masterpiece that defines this month. Can you unveil it?</p>
@@ -423,7 +424,7 @@
                         <p style="max-width: 600px; opacity: 0.9; margin-bottom: 2rem; line-height: 1.6; font-size: 1.1rem; color: #ffffff;">F. Scott Fitzgerald's magnum opus captures the decadence and excess of the Jazz Age. A brilliant exploration of the American dream.</p>
                         
                         <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
-                            <a href="online-reader.html" class="btn-solid-cream" style="background: var(--c-accent); color: var(--c-bg); border: none; text-decoration: none; padding: 1rem 2.5rem; border-radius: 50px; font-weight: bold; font-size: 1.1rem; transition: 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" onclick="event.stopPropagation()">Start Reading</a>
+                            <a href="online-reader.html?title=The%20Great%20Gatsby&author=F.%20Scott%20Fitzgerald" class="btn-solid-cream" style="background: var(--c-accent); color: var(--c-bg); border: none; text-decoration: none; padding: 1rem 2.5rem; border-radius: 50px; font-weight: bold; font-size: 1.1rem; transition: 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" onclick="event.stopPropagation()">Start Reading</a>
                             <a href="collection.html" class="btn-outline-gold" style="border: 2px solid var(--c-accent); color: var(--c-accent); background: transparent; text-decoration: none; padding: 1rem 2.5rem; border-radius: 50px; font-weight: bold; font-size: 1.1rem; transition: 0.3s;" onmouseover="this.style.background='var(--c-accent)'; this.style.color='var(--c-bg)';" onmouseout="this.style.background='transparent'; this.style.color='var(--c-accent)';" onclick="event.stopPropagation()">Add to Shelf</a>
                         </div>
                     </div>
@@ -454,7 +455,7 @@
         </section>
 
         <!-- BLOGS SECTION -->
-        <section class="blogs section">
+        <section class="blogs section" data-aos="fade-up">
             <div class="container">
                 <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 4rem; position: relative;">
                     <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
@@ -466,7 +467,7 @@
                 </div>
                 
                 <div class="blog-grid">
-                    <div class="blog-card" onclick="window.location.href='blog-details.html'">
+                    <div class="blog-card" onclick="window.location.href='blog-details.html?title=Finding%20Balance%20in%20a%20Busy%20World&cat=Psychology&img=https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=600&q=80'">
                         <div class="blog-img">
                             <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=600&q=80" alt="Blog 1">
                             <div class="blog-tag">Psychology</div>
@@ -476,7 +477,7 @@
                             <div class="blog-meta">Apr 20, 2026 &bull; 5 min read</div>
                         </div>
                     </div>
-                    <div class="blog-card" onclick="window.location.href='blog-details.html'">
+                    <div class="blog-card" onclick="window.location.href='blog-details.html?title=Why%20Classic%20Books%20Still%20Matter&cat=Literature&img=https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=600&q=80'">
                         <div class="blog-img">
                             <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=600&q=80" alt="Blog 2">
                             <div class="blog-tag">Literature</div>
@@ -486,7 +487,7 @@
                             <div class="blog-meta">Apr 18, 2026 &bull; 8 min read</div>
                         </div>
                     </div>
-                    <div class="blog-card" onclick="window.location.href='blog-details.html'">
+                    <div class="blog-card" onclick="window.location.href='blog-details.html?title=The%20Joy%20of%20Slow%20Travel&cat=Travel&img=travel_blog_1790333327544.jpg'">
                         <div class="blog-img">
                             <img src="travel_blog_1790333327544.jpg" alt="Blog 3">
                             <div class="blog-tag">Travel</div>
@@ -503,7 +504,7 @@
         
         
         <!-- INTERACTIVE SECTION -->
-        <section class="interactive-section section" style="padding: 6rem 0;">
+        <section class="interactive-section section" style="padding: 6rem 0;" data-aos="fade-up">
             <div class="container">
                 <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 4rem;">
                     <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
@@ -516,8 +517,8 @@
                     <!-- Reading Challenge -->
                     <div style="background: var(--c-surface); padding: 3rem; border-radius: 16px; border: 1px solid var(--c-border); display: flex; flex-direction: column; justify-content: center; box-shadow: var(--shadow-sm);">
                         <div class="eyebrow" style="color: var(--c-accent); margin-bottom: 0.5rem;"><i class="fa-solid fa-fire"></i> BOOK OF THE WEEK</div>
-                        <h3 style="font-family: var(--font-heading); font-size: 2.2rem; margin-bottom: 1rem;">The Secret History</h3>
-                        <p style="color: var(--c-text-muted); font-size: 1.1rem; margin-bottom: 1rem;">A mesmerizing journey into the dark side of academia, following a group of eccentric classics students whose obsession with ancient Greek rituals leads them down a path of no return.</p>
+                        <h3 style="font-family: var(--font-heading); font-size: 2.2rem; margin-bottom: 1rem;">The Great Gatsby</h3>
+                        <p style="color: var(--c-text-muted); font-size: 1.1rem; margin-bottom: 1rem;">F. Scott Fitzgerald's magnum opus captures the decadence and excess of the Jazz Age. A brilliant exploration of the American dream.</p>
                         
                         <div style="margin-bottom: 1.5rem; display: flex; gap: 1rem; align-items: center;">
                             <div style="display: flex; gap: 0.3rem; color: #D96B32;">
@@ -529,9 +530,9 @@
                         <div style="margin-bottom: 1.5rem;">
                             <strong style="display: block; margin-bottom: 0.5rem;">Key Takeaways:</strong>
                             <ul style="list-style-type: disc; margin-left: 1.5rem; color: var(--c-text-muted);">
-                                <li>The danger of unchecked obsession</li>
-                                <li>A critique of elite academic circles</li>
-                                <li>The blurring lines between beauty and morality</li>
+                                <li>The illusion of the American Dream</li>
+                                <li>The shallowness of the upper class</li>
+                                <li>The destructive power of obsession</li>
                             </ul>
                         </div>
 
@@ -554,7 +555,7 @@
 
         <!-- DIGITAL LIBRARY - THE SHELF -->
 
-        <section class="digital-shelf section" style="background: var(--c-bg); color: var(--c-text); position: relative; padding: 8rem 0; overflow: hidden;">
+        <section class="digital-shelf section" style="background: var(--c-bg); color: var(--c-text); position: relative; padding: 8rem 0; overflow: hidden;" data-aos="fade-up">
             <div class="container" style="position: relative; z-index: 2;">
                 <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 6rem;">
                     <div style="display: flex; flex-direction: column; align-items: center;">
@@ -693,7 +694,7 @@
 
         
         <!-- NEW TESTIMONIALS SECTION -->
-        <section class="testimonials section" style="background: var(--c-bg); padding: 8rem 0;">
+        <section class="testimonials section" style="background: var(--c-bg); padding: 8rem 0;" data-aos="fade-up">
             <div class="container">
                 <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 4rem;">
                     <div style="display: flex; flex-direction: column; align-items: center;">
@@ -751,7 +752,7 @@
                     <span id="tmCat" style="color: var(--c-accent); font-weight: 600; font-size: 0.85rem; text-transform: uppercase;"></span>
                     <h2 id="tmTitle" style="font-size: 2.2rem; margin: 0.5rem 0 1rem; color: var(--c-primary);"></h2>
                     <p id="tmDesc" style="font-size: 1.1rem; color: var(--c-text-muted); line-height: 1.6; margin-bottom: 2rem;"></p>
-                    <button onclick="window.location.href='blog.html'" class="btn-solid-cream" style="background: var(--c-primary); color: var(--c-bg); border-radius: 50px; padding: 0.8rem 2rem; font-weight: 600; border: none; cursor: pointer;">Explore More <i class="fa-solid fa-arrow-right"></i></button>
+                    <button id="tmExploreBtn" onclick="window.location.href='blog.html'" class="btn-solid-cream" style="background: var(--c-primary); color: var(--c-bg); border-radius: 50px; padding: 0.8rem 2rem; font-weight: 600; border: none; cursor: pointer;">Explore More <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </div>
         </div>
@@ -768,7 +769,7 @@
         </div>
 
         <!-- CTA SECTION -->
-        <section class="cta section">
+        <section class="cta section" data-aos="fade-up">
             <div class="cta-banner">
                 <div class="container cta-content">
                     <div class="cta-text">
@@ -1112,5 +1113,13 @@ function toggleScrollInfo(el) {
     });
 </script>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+    </script>
 </body>
 </html>

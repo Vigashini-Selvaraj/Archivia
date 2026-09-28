@@ -103,6 +103,7 @@
 
     </style>
     
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
 <nav class="navbar">
@@ -169,7 +170,7 @@
 
 <main>
     <!-- 1. PROPER HERO SECTION -->
-    <section class="collection-hero">
+    <section class="collection-hero" data-aos="fade-up">
         <div class="container ch-grid">
             <div class="ch-content">
                 <div class="eyebrow" style="margin-bottom: 1rem;"><i class="fa-solid fa-bookmark"></i> CURATED WORLDS</div>
@@ -184,7 +185,7 @@
     </section>
 
     <!-- 2. ERAS OF LITERATURE (Clear Sections) -->
-    <section class="era-section" id="eras">
+    <section class="era-section" id="eras" data-aos="fade-up">
         <div class="container">
             <div class="eyebrow" style="margin-bottom: 1rem; text-align: center; display: flex; justify-content: center;"><i class="fa-solid fa-clock-rotate-left"></i> JOURNEY THROUGH TIME</div>
             <h2 style="font-size: 2.5rem; font-family: var(--font-heading); margin-bottom: 4rem; text-align: center;"><span style="color: #111111;">Eras of</span> <span style="color: #800020;">Literature</span></h2>
@@ -233,7 +234,7 @@
     </section>
 
     <!-- 3. 3D STACK COLLECTIONS -->
-    <section class="stack-section">
+    <section class="stack-section" data-aos="fade-up">
         <div class="container">
             <div class="eyebrow" style="margin-bottom: 1rem; text-align: center; display: flex; justify-content: center;"><i class="fa-solid fa-layer-group"></i> THEMED BUNDLES</div>
             <h2 style="font-size: 2.5rem; font-family: var(--font-heading); margin-bottom: 4rem; text-align: center;"><span style="color: #111111;">Curated</span> <span style="color: #800020;">Stacks</span></h2>
@@ -276,7 +277,7 @@
     </section>
 
     <!-- 4. AWARD WINNERS (6 Gemini-Generated Books) -->
-    <section class="award-section">
+    <section class="award-section" data-aos="fade-up">
         <div class="container">
             <div class="eyebrow" style="margin-bottom: 1rem; text-align: center; display: flex; justify-content: center;"><i class="fa-solid fa-award"></i> HALL OF FAME</div>
             <h2 style="font-size: 2.5rem; font-family: var(--font-heading); margin-bottom: 4rem; text-align: center;"><span style="color: #111111;">Award-Winning</span> <span style="color: #800020;">Books</span></h2>
@@ -317,7 +318,7 @@
     </section>
 
     <!-- 5. AUTHOR SPOTLIGHT (NEW SECTION) -->
-    <section class="author-section">
+    <section class="author-section" data-aos="fade-up">
         <div class="container">
             <div class="eyebrow" style="margin-bottom: 1rem; text-align: center; display: flex; justify-content: center;"><i class="fa-solid fa-pen-nib"></i> THE MINDS BEHIND</div>
             <h2 style="font-size: 2.5rem; font-family: var(--font-heading); margin-bottom: 4rem; text-align: center;"><span style="color: #111111;">Author</span> <span style="color: #800020;">Spotlights</span></h2>
@@ -348,7 +349,7 @@
     </section>
 
     <!-- 6. READING CHALLENGE (NEW SECTION) -->
-    <section class="challenge-section">
+    <section class="challenge-section" data-aos="fade-up">
         <div class="container">
             <div class="challenge-box">
                 <div class="challenge-progress">
@@ -366,7 +367,7 @@
     </section>
 
     <!-- 7. MY COLLECTION (8 Books) -->
-    <section class="my-collection-section">
+    <section class="my-collection-section" data-aos="fade-up">
         <div class="container">
             <div class="eyebrow" style="margin-bottom: 1rem; text-align: center; display: flex; justify-content: center;"><i class="fa-solid fa-heart"></i> PERSONAL</div>
             <h2 style="font-size: 2.5rem; font-family: var(--font-heading); margin-bottom: 4rem; text-align: center;"><span style="color: #111111;">My</span> <span style="color: #800020;">Collection</span></h2>
@@ -444,5 +445,13 @@
     </footer>
 
 <script src="script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+    </script>
 </body>
 </html>

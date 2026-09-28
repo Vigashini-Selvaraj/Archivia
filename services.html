@@ -65,6 +65,7 @@
         }
     </style>
 
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
 
@@ -128,7 +129,7 @@
 
     <main>
         <!-- SERVICES HERO -->
-        <section class="svc-hero" style="background: linear-gradient(135deg, var(--c-surface), var(--c-bg)); padding: 10rem 0 5rem; text-align: left; overflow: hidden;">
+        <section class="svc-hero" style="background: linear-gradient(135deg, var(--c-surface), var(--c-bg)); padding: 10rem 0 5rem; text-align: left; overflow: hidden;" data-aos="fade-up">
             <div class="container grid-responsive-services">
                 <div style="z-index: 1;">
                     <style>
@@ -168,7 +169,7 @@
         </section>
 
         <!-- CORE FEATURES (Alternating Rows) -->
-        <section class="section">
+        <section class="section" data-aos="fade-up">
             <div class="container">
                 <div class="feat-row">
                     <div class="feat-text">
@@ -212,7 +213,7 @@
         </section>
 
         <!-- THE 8 CARD GRID (Replaces the 4-card grid from previous version) -->
-        <section class="section" style="background: var(--c-surface);">
+        <section class="section" style="background: var(--c-surface);" data-aos="fade-up">
             <div class="container">
                 <div class="section-header" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin-bottom: 4rem;">
                     <div class="eyebrow" style="color: var(--c-accent); justify-content: center;">THE PLATFORM</div>
@@ -289,7 +290,7 @@
         </section>
 
         <!-- PREMIUM READING ACCESS -->
-        <section class="section">
+        <section class="section" data-aos="fade-up">
             <div class="container" style="max-width: 900px;">
                 <div style="background: var(--c-deep); color: var(--c-bg); padding: 4rem; border-radius: 16px; text-align: center; position: relative; overflow: hidden;">
                     <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1920&q=80'); background-size: cover; opacity: 0.1; mix-blend-mode: overlay;"></div>
@@ -307,7 +308,7 @@
         </section>
 
         <!-- HOW Archivia WORKS -->
-        <section class="section" style="background: var(--c-surface);">
+        <section class="section" style="background: var(--c-surface);" data-aos="fade-up">
             <div class="container">
                 <div class="section-header" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin-bottom: 3rem;">
                     <div class="eyebrow" style="color: var(--c-accent); justify-content: center;">USER JOURNEY</div>
@@ -361,7 +362,7 @@
         </section>
 
         <!-- FOR AUTHORS & PUBLISHERS -->
-        <section class="section">
+        <section class="section" data-aos="fade-up">
             <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
                 <div style="border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-lg); height: 400px; order: 1;">
                     <img src="https://images.unsplash.com/photo-1455849318743-b2233052fcff?auto=format&fit=crop&w=800&q=80" alt="Publishing" style="width: 100%; height: 100%; object-fit: cover;">
@@ -378,7 +379,7 @@
         </section>
 
         <!-- INTERACTIVE FEEDBACK -->
-        <section class="section" style="background: linear-gradient(135deg, var(--c-surface), var(--c-bg));">
+        <section class="section" style="background: linear-gradient(135deg, var(--c-surface), var(--c-bg));" data-aos="fade-up">
             <div class="container">
                 <div class="grid-responsive-services">
                     <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.15); height: 450px; position: relative;">
@@ -446,7 +447,7 @@
         </section>
 
         <!-- CTA -->
-        <section class="section" style="background: var(--c-deep); color: #fff; text-align: center;">
+        <section class="section" style="background: var(--c-deep); color: #fff; text-align: center;" data-aos="fade-up">
             <div class="container">
                 <h2 style="font-size: 4rem; font-family: var(--font-heading); margin-bottom: 1.5rem; line-height: 1.1; color: #fff;">Start Your Reading Journey.</h2>
                 <p style="font-size: 1.2rem; color: #fff; margin-bottom: 3rem; opacity: 0.9;">Ready to dive in? Explore the library or choose a plan today.</p>
@@ -584,6 +585,14 @@
                 showJourney(currentJourney - 1);
             }
         }
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
     </script>
 </body>
 </html>

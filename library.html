@@ -34,6 +34,7 @@
             .lib-grid-4, .lib-grid-3 { grid-template-columns: 1fr; }
         }
     </style>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
 
@@ -97,7 +98,7 @@
 
     <main>
         <!-- 01. LIBRARY HERO -->
-        <section class="section" style="height: 100vh; padding-top: 8rem; position: relative; overflow: hidden; text-align: center; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--c-border);">
+        <section class="section" style="height: 100vh; padding-top: 8rem; position: relative; overflow: hidden; text-align: center; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--c-border);" data-aos="fade-up">
             <!-- Full Screen Background Image -->
             <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center; background-attachment: fixed; z-index: 0;"></div>
             
@@ -120,7 +121,7 @@
         </section>
 
         <!-- 02. EXPLORE THE LIBRARY -->
-        <section id="explore" class="section">
+        <section id="explore" class="section" data-aos="fade-up">
             <div class="container">
                 <div class="section-header" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin-bottom: 3rem; width: 100%;">
                     <h2 style="font-size: 3rem; font-family: var(--font-heading);"><span style="color: var(--split-c1);">Explore the</span> <span style="color: var(--split-c2);">Library</span></h2>
@@ -298,7 +299,7 @@
         </section>
 
         <!-- 03. FEATURED COLLECTIONS -->
-        <section class="section" style="background: var(--c-surface);">
+        <section class="section" style="background: var(--c-surface);" data-aos="fade-up">
             <div class="container">
                 <div class="section-header" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin-bottom: 3rem; width: 100%;">
                     <div>
@@ -340,7 +341,7 @@
         </section>
 
         <!-- 04. FIND YOUR NEXT BOOK -->
-        <section class="section">
+        <section class="section" data-aos="fade-up">
             <div class="container">
                 <div style="background: var(--c-deep); color: var(--c-bg); padding: 4rem 2rem; border-radius: 12px; text-align: center; display: flex; flex-direction: column; align-items: center; box-shadow: var(--shadow-md);">
                     <div class="eyebrow" style="color: var(--c-accent); margin-bottom: 1rem;">INTERACTIVE DISCOVERY</div>
@@ -374,19 +375,19 @@
                                 <div class="lib-img-box"><img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
                                 <h4 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">The Midnight Library</h4>
                                 <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Matt Haig</p>
-                                <a href="book-details.html?title=Timeless%20Classics&author=Author&img=https%3A//images.unsplash.com/photo-1481627834876-b7833e8f5570%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" style="color: var(--c-primary); font-weight: bold;">Read Now</a>
+                                <a href="book-details.html?title=The%20Midnight%20Library&author=Matt%20Haig&img=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1544947950-fa07a98d237f%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" style="color: var(--c-primary); font-weight: bold;">Read Now</a>
                             </div>
                             <div class="lib-card" style="background: var(--c-surface); color: var(--c-text);">
                                 <div class="lib-img-box"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
                                 <h4 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">Dune</h4>
                                 <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Frank Herbert</p>
-                                <a href="book-details.html?title=${encodeURIComponent(b.title)}&author=${encodeURIComponent(b.author)}&img=${encodeURIComponent(b.img)}" style="color: var(--c-primary); font-weight: bold;">Read Now</a>
+                                <a href="book-details.html?title=Dune&author=Frank%20Herbert&img=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1518770660439-4636190af475%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" style="color: var(--c-primary); font-weight: bold;">Read Now</a>
                             </div>
                             <div class="lib-card" style="background: var(--c-surface); color: var(--c-text);">
                                 <div class="lib-img-box"><img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=400&q=80" alt="Book"></div>
                                 <h4 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.2rem;">Sapiens</h4>
                                 <p style="color: var(--c-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Yuval Noah Harari</p>
-                                <a href="book-details.html?title=${encodeURIComponent(b.title)}&author=${encodeURIComponent(b.author)}&img=${encodeURIComponent(b.img)}" style="color: var(--c-primary); font-weight: bold;">Read Now</a>
+                                <a href="book-details.html?title=Sapiens&author=Yuval%20Noah%20Harari&img=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1532012197267-da84d127e765%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80" style="color: var(--c-primary); font-weight: bold;">Read Now</a>
                             </div>
                         </div>
                     </div>
@@ -395,7 +396,7 @@
         </section>
 
         <!-- 05. BROWSE BY GENRE -->
-        <section class="section" style="background: var(--c-surface);">
+        <section class="section" style="background: var(--c-surface);" data-aos="fade-up">
             <div class="container">
                 <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 3rem;">
                     <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
@@ -419,7 +420,7 @@
         </section>
 
         <!-- 06. NEW ARRIVALS -->
-        <section class="section">
+        <section class="section" data-aos="fade-up">
             <div class="container">
                 <div class="section-header" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin-bottom: 3rem; width: 100%;">
                     <div>
@@ -458,7 +459,7 @@
         </section>
 
         <!-- 07. MEET THE AUTHORS -->
-        <section class="section" style="background: var(--c-surface);">
+        <section class="section" style="background: var(--c-surface);" data-aos="fade-up">
             <div class="container">
                 <div class="section-header" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin-bottom: 3rem; width: 100%;">
                     <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
@@ -491,7 +492,7 @@
         </section>
 
         <!-- 08. THE ARCHIVE -->
-        <section class="section">
+        <section class="section" data-aos="fade-up">
             <div class="container">
                 <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 4rem;">
                     <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
@@ -538,7 +539,7 @@
         </section>
 
         <!-- 09. POPULAR AMONG READERS -->
-        <section class="section" style="background: var(--c-surface);">
+        <section class="section" style="background: var(--c-surface);" data-aos="fade-up">
             <div class="container">
                 <div class="section-header" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin-bottom: 3rem; width: 100%;">
                     <div>
@@ -580,7 +581,7 @@
         </section>
 
         <!-- 10. YOUR SHELF AWAITS -->
-        <section class="section" style="background: var(--c-surface); color: var(--c-text); position: relative; overflow: hidden;">
+        <section class="section" style="background: var(--c-surface); color: var(--c-text); position: relative; overflow: hidden;" data-aos="fade-up">
             <div class="container" style="max-width: 1000px;">
                 <div style="background: var(--bg-main); border-radius: 20px; box-shadow: var(--shadow-lg); display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--c-border);">
                     <div style="display: flex; flex-wrap: wrap;">
@@ -782,5 +783,13 @@
         });
     </script>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+    </script>
 </body>
 </html>

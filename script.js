@@ -91,6 +91,14 @@ window.openTrendingModal = function(title, cat, imgUrl, desc) {
     document.getElementById('tmCat').innerText = cat;
     document.getElementById('tmImg').src = imgUrl;
     document.getElementById('tmDesc').innerText = desc;
+    
+    let btn = document.getElementById('tmExploreBtn');
+    if(btn) {
+        btn.onclick = function() {
+            window.location.href = `blog-details.html?title=${encodeURIComponent(title)}&cat=${encodeURIComponent(cat)}&img=${encodeURIComponent(imgUrl)}`;
+        };
+    }
+    
     document.getElementById('trendingModal').style.display = 'flex';
 };
 window.closeTrendingModal = function() {

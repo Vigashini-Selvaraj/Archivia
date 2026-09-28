@@ -66,6 +66,7 @@
             .form-box { padding: 2rem; }
         }
     </style>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
 
@@ -129,7 +130,7 @@
 
     <main>
         <!-- 01. CONTACT HERO -->
-        <section class="contact-hero">
+        <section class="contact-hero" data-aos="fade-up">
             <div class="container position-relative" style="z-index: 1;">
                 <div class="eyebrow" style="color: var(--c-accent); justify-content: center; margin-bottom: 1rem;"><i class="fa-solid fa-paper-plane"></i> CONTACT US</div>
                 <h1 style="font-size: 4rem; font-family: var(--font-heading); line-height: 1.1; margin-bottom: 1.5rem; color: var(--c-bg);">We'd love to hear from you.</h1>
@@ -141,7 +142,7 @@
         </section>
 
         <!-- 02. CONTACT INFO & 03. CONTACT FORM -->
-        <section class="section" style="padding-top: 0; padding-bottom: 4rem;">
+        <section class="section" style="padding-top: 0; padding-bottom: 4rem;" data-aos="fade-up">
             <div class="container">
                 <div class="contact-grid">
                     
@@ -219,7 +220,7 @@
         </section>
 
         <!-- 04. QUICK HELP TOPICS -->
-        <section class="section" style="background: var(--c-surface);">
+        <section class="section" style="background: var(--c-surface);" data-aos="fade-up">
             <div class="container">
                 <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 3rem;">
                     <h2 style="font-size: 3rem; font-family: var(--font-heading);"><span style="color: var(--split-c1);">Quick Help</span> <span style="color: var(--split-c2);">Topics</span></h2>
@@ -247,7 +248,7 @@
         </section>
 
         <!-- 05. FAQ SECTION -->
-        <section class="section" id="faq-section">
+        <section class="section" id="faq-section" data-aos="fade-up">
             <div class="container" style="max-width: 800px;">
                 <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 3rem;">
                     <h2 style="font-size: 3rem; font-family: var(--font-heading);"><span style="color: var(--split-c1);">Frequently</span> <span style="color: var(--split-c2);">Asked Questions</span></h2>
@@ -275,7 +276,7 @@
         </section>
 
         <!-- 06. FIND OUR LIBRARY (Map) -->
-        <section class="section" style="background: var(--c-surface);">
+        <section class="section" style="background: var(--c-surface);" data-aos="fade-up">
             <div class="container">
                 <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 3rem;">
                     <h2 style="font-size: 3rem; font-family: var(--font-heading);"><span style="color: var(--split-c1);">Find Our</span> <span style="color: var(--split-c2);">Physical Archives</span></h2>
@@ -293,7 +294,7 @@
         </section>
 
         <!-- 07. BOOK RECOMMENDATION REQUEST -->
-        <section class="section">
+        <section class="section" data-aos="fade-up">
             <div class="container" style="max-width: 900px;">
                 <div class="suggestion-box">
                     <div style="position: relative; z-index: 1;">
@@ -311,7 +312,7 @@
         </section>
 
         <!-- 08. NEWSLETTER SIGNUP -->
-        <section class="section" style="padding-top: 0;">
+        <section class="section" style="padding-top: 0;" data-aos="fade-up">
             <div class="container" style="max-width: 1000px;">
                 <div class="newsletter-split">
                     <div class="ns-left">
@@ -329,7 +330,7 @@
         </section>
 
         <!-- 09. SOCIAL / COMMUNITY SECTION -->
-        <section class="section" style="background: var(--c-surface);">
+        <section class="section" style="background: var(--c-surface);" data-aos="fade-up">
             <div class="container" style="text-align: center;">
                 <h2 style="font-size: 2.5rem; font-family: var(--font-heading); margin-bottom: 1rem;"><span style="color: var(--split-c1);">Join the</span> <span style="color: var(--split-c2);">Conversation</span></h2>
                 <p style="color: var(--c-text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto;">Follow us on social media for daily quotes, reading challenges, and behind-the-scenes looks at our physical archives.</p>
@@ -345,7 +346,7 @@
         </section>
 
         <!-- 10. FINAL CTA -->
-        <section class="section" style="text-align: center; border-top: 1px solid var(--c-border);">
+        <section class="section" style="text-align: center; border-top: 1px solid var(--c-border);" data-aos="fade-up">
             <div class="container" style="max-width: 800px;">
                 <h2 style="font-size: 3.5rem; font-family: var(--font-heading); margin-bottom: 1.5rem; line-height: 1.1;"><span style="color: var(--split-c1);">Ready to</span> <span style="color: var(--split-c2);">Start Reading?</span></h2>
                 <p style="font-size: 1.2rem; color: var(--c-text-muted); margin-bottom: 3rem;">Dive into thousands of curated books or explore our latest editorial articles.</p>
@@ -417,5 +418,13 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+    </script>
 </body>
 </html>
